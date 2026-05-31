@@ -2,7 +2,7 @@
 
 ## Current Stage
 
-This repository is in `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`.
+This repository is in `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`.
 
 ## Execution Rule
 

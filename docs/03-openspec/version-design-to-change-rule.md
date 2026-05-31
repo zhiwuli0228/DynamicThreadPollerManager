@@ -44,3 +44,4 @@ After a future change is implemented and verified:
 - Do not treat a verification report as complete if requirement wording and implementation semantics diverge.
 - Do not treat tests as sufficient if they only prove lifecycle shape and do not prove the semantic intent of the requirement.
 - Do not record summary or archive evidence with stronger claims than the implementation actually supports.
+- After finalize, restore the repository to the original branch or workspace state that existed before the change execution began.

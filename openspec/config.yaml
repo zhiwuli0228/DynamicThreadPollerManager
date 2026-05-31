@@ -3,7 +3,7 @@ schema: superspec
 context: |
   Project: DynamicThreadPollerManager, a Java 21 and Spring Boot exploratory project.
   Authoritative branch: claude_master.
-  Current authorized stage: DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY.
+  Current authorized stage: CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED.
   Current state source of truth: docs/00-project/current-state.md.
   Documentation context hub: docs/README.md.
 
@@ -20,10 +20,9 @@ context: |
   - Historical, retired or rejected material is non-authoritative and must not be treated as current authorization.
 
   Current prohibitions:
-  - No version design is authorized.
-  - No openspec/changes/** capability change may be created.
+  - No unreviewed capability expansion may be created.
   - No openspec/specs/** may be populated with unimplemented behavior.
-  - No Java source, test or dependency change is authorized.
+  - No Java source, test or dependency change may be introduced without a reviewed change.
   - Archived V1 or implementation mission material must not be executed.
 
   Future authorization sequence:
@@ -58,3 +57,4 @@ rules:
     - After verified implementation in a future authorized stage, record whether implemented behavior was synchronized to openspec/specs/** and whether architecture or ADR updates were required.
     - Do not finalize if docs/00-project/current-state.md has not been synchronized to the actual repository state.
     - Do not finalize if the archive receipt or verification report claims stronger semantics than the implementation actually provides.
+    - Restore the original branch or workspace after finalize so the repository returns to the pre-change branch state.
