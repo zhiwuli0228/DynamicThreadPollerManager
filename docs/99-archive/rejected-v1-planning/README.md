@@ -11,6 +11,7 @@ V1 is the first bounded executable experiment, not the full roadmap. It defines 
 - V1 scope: decided in this package.
 - V1 implementation: not started in this phase.
 - V1 autonomous implementation mission: drafted for future authorization only.
+- This package is archived and does not authorize execution in the current repository state.
 
 ## Reading Order
 
@@ -27,3 +28,4 @@ V1 is the first bounded executable experiment, not the full roadmap. It defines 
 - Read this package after the Harness, Architecture, and Delivery Framework documents when planning or executing V1 work.
 - The design package is the source of truth for the authorized V1 scope.
 - The mission draft is not the implementation itself.
+- The package is retained as historical evidence and does not override `docs/00-project/current-state.md`.

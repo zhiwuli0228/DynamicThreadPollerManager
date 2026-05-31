@@ -5,3 +5,4 @@ This subdirectory holds the historical bootstrap record and retired task attachm
 ## Rule
 
 - These files are evidence, not authority.
+- They do not authorize version design, OpenSpec changes, or implementation work.
