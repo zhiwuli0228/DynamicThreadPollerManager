@@ -1,0 +1,10 @@
+schema: superspec
+
+context: |
+  Project: DynamicThreadPollerManager, an exploratory Spring Boot demo for dynamic thread-pool management.
+  Baseline: Java 21, Maven, Spring Boot 4.0.6 at project initialization.
+  Delivery model: Codex/ChatGPT design approved changes; Claude Code implements and verifies approved tasks.
+  Scope boundary: initial capabilities are single-node and in-memory; Redis, Kafka, database, frontend, authentication and distributed execution require explicit later changes.
+  Architecture: api -> application -> domain; infrastructure supplies concrete integrations; domain must not depend on transport DTOs or infrastructure clients.
+  Engineering: JUnit 5 and Mockito; no PowerMock; each functional change includes tests; no unrelated refactoring.
+  Reference: read docs/harness/project-harness.md for durable project rules.
