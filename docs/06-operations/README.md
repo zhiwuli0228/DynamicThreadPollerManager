@@ -5,3 +5,7 @@ This directory is reserved for runtime and operational notes that may be authore
 ## Current Rule
 
 - No operations runbook is required for the documentation framework construction stage unless a later task explicitly asks for one.
+
+## Documents
+
+1. `docs/06-operations/change-delivery-governance-analysis.md`

@@ -5,8 +5,8 @@
 - Current stage: `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: exploratory draft exists in `docs/04-development/versions/v0.1.0/`
-- OpenSpec capability changes: not authorized
+- Version design status: `v0.1.0` is ready for change decomposition
+- OpenSpec capability changes: `openspec/changes/experiment-foundation/` exists; implementation not started
 - Java implementation status: not started and not authorized
 
 ## What Is Allowed Now

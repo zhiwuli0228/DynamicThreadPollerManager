@@ -15,3 +15,5 @@ This document states the limits that future work should respect.
 - Any runtime operation must be intentionally bounded.
 - Any destructive operation must have explicit safety semantics.
 - Any future change must remain traceable to an approved version design.
+- Every archive, finalize, or delivery-closeout step must synchronize `docs/00-project/current-state.md` to the actual repository state before the change is considered complete.
+- Verification, summary, and archive evidence must not claim stronger semantic coverage than the implementation and tests actually prove.
