@@ -1,10 +1,36 @@
 schema: superspec
 
 context: |
-  Project: DynamicThreadPollerManager, an exploratory Spring Boot demo for dynamic thread-pool management.
-  Baseline: Java 21, Maven, Spring Boot 4.0.6 at project initialization.
-  Delivery model: Codex/ChatGPT design approved changes; Claude Code implements and verifies approved tasks.
-  Scope boundary: initial capabilities are single-node and in-memory; Redis, Kafka, database, frontend, authentication and distributed execution require explicit later changes.
-  Architecture: api -> application -> domain; infrastructure supplies concrete integrations; domain must not depend on transport DTOs or infrastructure clients.
-  Engineering: JUnit 5 and Mockito; no PowerMock; each functional change includes tests; no unrelated refactoring.
-  Reference: read docs/harness/project-harness.md for durable project rules.
+  Project: DynamicThreadPollerManager, a benchmark-oriented Java 21 and Spring Boot 4.0.6 exploratory project for dynamic thread-pool and scheduling design.
+  Authoritative branch: claude_master is the reviewed governance and integration baseline.
+  Current state: Harness Constitution and Living Architecture are established; Delivery Framework is being aligned; V1 unified design and business implementation have not started.
+  Delivery roles: ChatGPT provides master design and remote review; Codex creates approved design/governance artifacts; Claude Code implements only approved bounded changes.
+  Design boundary: target capabilities include managed executors, scheduling reconfiguration, observation and experiment scenarios, but no V1 scope is approved until unified design review.
+  Technology boundary: Redis, Kafka, database, frontend, authentication, multi-node deployment and virtual-thread mode require explicit future approval.
+  Architecture boundary: api -> application -> domain; infrastructure supplies adapters; domain must not depend on transport DTOs or infrastructure clients.
+  Engineering boundary: Java 21, Maven Wrapper, JUnit 5 and Mockito, no PowerMock, deterministic concurrency testing, no unrelated refactoring.
+  Required references: read docs/harness/project-harness.md, docs/architecture/README.md and docs/delivery/README.md before creating or applying an approved change.
+
+rules:
+  brainstorm:
+    - State whether the work is framework-only, V1 unified design, or an approved bounded capability change.
+    - Do not infer approved V1 scope from the architecture roadmap.
+  proposal:
+    - Declare included scope, excluded scope, affected architecture documents, and whether any dependency or boundary change is proposed.
+    - Reject proposals that silently combine unrelated capabilities.
+  design:
+    - Reference relevant Harness and Living Architecture documents.
+    - Identify any long-lived architecture decision requiring documentation update or ADR evaluation.
+  specs:
+    - Define observable and testable scenarios, including negative or failure cases for concurrency-sensitive behavior.
+  tasks:
+    - Keep tasks within approved capability scope; do not include unapproved middleware, frontend, authentication, or unrelated refactoring.
+  plan:
+    - Include verification commands and scope checks before implementation completion.
+  apply:
+    - Implement only approved tasks and read the relevant Architecture and Delivery documents before work begins.
+    - Do not create or expand capability scope without a reviewed change.
+  verify:
+    - Confirm file scope, validation results, and absence of unapproved dependency changes.
+  finalize:
+    - Record actual branch and remote review status when closeout is authorized.

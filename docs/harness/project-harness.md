@@ -14,16 +14,25 @@ This file is the stable compatibility entrypoint for project governance. The aut
 ## Current Governance Baseline
 
 - Authoritative branch: `claude_master`.
-- Current state: OpenSpec/SuperSpec minimal bootstrap completed; benchmark harness expansion established; Living Architecture remains a subsequent documentation phase.
-- Living Architecture baseline: established in Phase 02.
-- First-version design: pending unified planning after framework completion.
+- OpenSpec / SuperSpec toolchain bootstrap: completed.
+- Harness Constitution: established.
+- Living Architecture baseline: established in Phase 02 and authoritative for subsequent design planning.
+- Delivery Framework alignment: established in Phase 03 once this task passes validation and push.
+- First-version unified design: not started.
 - Current implementation status: no dynamic thread-pool capability has been implemented yet.
+
+## Delivery Framework Reading
+
+Operational toolchain and review workflow guidance is maintained under:
+
+- `docs/delivery/README.md`
 
 ## Rule of Precedence
 
 For project work:
 
-1. Active approved OpenSpec/SuperSpec change artifacts define the bounded delivery scope of a specific change.
-2. Harness documents define durable project governance and boundary rules.
-3. Architecture documents, once created, define the living system design.
-4. No agent may infer implemented behavior solely from roadmap documentation.
+1. Harness defines durable governance.
+2. Architecture defines living target-system design.
+3. Delivery Framework defines toolchain and review mechanics.
+4. A future approved OpenSpec/SuperSpec change defines bounded delivery scope.
+5. Roadmaps and candidate capability lists do not prove implementation.
