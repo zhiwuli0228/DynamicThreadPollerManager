@@ -30,6 +30,8 @@ Every meaningful change should leave a validation trail and a commit trail. The 
 
 ## 6. Current Planned Capability Changes
 
+Candidate capability sequence pending first-version unified planning:
+
 `establish-springboot-technical-foundation`
 `establish-local-managed-executor-registry`
 `expose-executor-runtime-metrics-and-workloads`
@@ -38,4 +40,4 @@ Every meaningful change should leave a validation trail and a commit trail. The 
 `coordinate-single-execution-across-nodes`
 `evaluate-virtual-thread-execution-mode`
 
-Only one change should be the main design/implementation focus at a time.
+Only one approved change should be the main design/implementation focus at a time. Until the first-version unified planning phase completes, the sequence above remains a planning reference rather than a committed delivery order.

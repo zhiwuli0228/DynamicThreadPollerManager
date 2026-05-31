@@ -83,12 +83,16 @@
   - `docs/harness/04-ai-delivery-workflow.md`
   - `docs/harness/05-change-classification-and-gates.md`
 
+### Phase 01 Remediation Closure
+
+- Status: completed in Phase 02 after validation and push.
+- Reason: Phase 01 left the harness index and roadmap wording partially open while the benchmark framework was still being established.
+- Output:
+  - `docs/harness/project-harness.md`
+- Remediation completed in Phase 02:
+  - Corrected the governance framing so the repository does not imply an immediate feature change.
+  - Recast the roadmap as candidate capability sequencing pending first-version unified planning.
+
 ## Roadmap Correction
 
-For benchmark-quality development, the first formal capability design change will be:
-
-`establish-springboot-technical-foundation`
-
-Only after it is designed, approved, implemented, and verified should the project proceed to:
-
-`establish-local-managed-executor-registry`
+For benchmark-quality development, capability selection will be decided during the first-version unified design planning phase. The earlier candidate sequencing remains a planning reference only and is not yet an approved change order.

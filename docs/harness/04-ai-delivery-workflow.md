@@ -15,7 +15,7 @@ The minimum trustworthy inputs are the harness documents, current approved chang
 
 ## 3. Delivery Workflow
 
-Harness / Architecture baseline -> Codex creates bounded SuperSpec design artifacts -> ChatGPT reviews pushed design artifacts from GitHub -> Claude Code implements approved change -> Claude Code verifies and pushes evidence -> ChatGPT reviews remote implementation and authorizes the next change.
+Harness / Architecture baseline -> Codex creates bounded SuperSpec design artifacts for the next approved change or framework decision -> ChatGPT reviews pushed design artifacts from GitHub -> Claude Code implements approved change -> Claude Code verifies and pushes evidence -> ChatGPT reviews remote implementation and authorizes the next change.
 
 ## 4. Context Minimization Rules
 
@@ -24,6 +24,7 @@ Harness / Architecture baseline -> Codex creates bounded SuperSpec design artifa
 - One change should map to one capability.
 - Long-term rules should not be copied into every change.
 - The remote GitHub branch is the review source of truth; the current governance baseline is `claude_master`.
+- First-version capability selection is deferred until the framework baseline is complete.
 
 ## 5. Remote Review and Git Rules
 

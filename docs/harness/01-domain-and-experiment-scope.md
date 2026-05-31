@@ -6,7 +6,7 @@ The domain concerns managing thread-pool and scheduling capabilities as explicit
 
 ## 2. Experiment Strategy
 
-The roadmap is staged. First establish the Spring Boot technical foundation that can host API, validation, observability, and test boundaries. Then introduce local managed executor behavior, then metrics and workload simulation, then scheduled task reconfiguration, then stalled-chain recovery, then cross-node coordination, and finally virtual-thread mode evaluation.
+The roadmap is staged. The current candidate capability decomposition begins with a Spring Boot technical foundation that can host API, validation, observability, and test boundaries. After the first-version framework is unified, the project can decide whether to proceed with local managed executor behavior, metrics and workload simulation, scheduled task reconfiguration, stalled-chain recovery, cross-node coordination, and virtual-thread mode evaluation.
 
 ## 3. Ubiquitous Language
 
@@ -24,6 +24,8 @@ The roadmap is staged. First establish the Spring Boot technical foundation that
 
 ## 4. Capability Roadmap
 
+Candidate capability sequencing:
+
 0. `establish-springboot-technical-foundation`
 1. `establish-local-managed-executor-registry`
 2. `expose-executor-runtime-metrics-and-workloads`
@@ -32,7 +34,7 @@ The roadmap is staged. First establish the Spring Boot technical foundation that
 5. `coordinate-single-execution-across-nodes`
 6. `evaluate-virtual-thread-execution-mode`
 
-The first step establishes the Web/API, validation, observability, and test-bearing foundation. The second step introduces the first thread-pool capability. Each capability must be handled as an independent change. If a change causes the route to shift, Architecture and Harness must be updated in sync.
+This sequence is a planning reference only. The first step is a candidate framework foundation, not an immediately approved change. The first-version unified design phase will decide whether the sequence changes, which capabilities are grouped, and which capabilities are deferred. Until then, no capability is treated as committed scope.
 
 ## 5. Current Scope
 
@@ -54,3 +56,4 @@ The current scope is limited to governance and bootstrap assets plus future desi
 - Do not introduce a new technology or dependency without a specific approved change.
 - Keep each change to one capability.
 - Revisit scope only through approved design artifacts and review.
+- The candidate sequencing above is not an execution commitment until first-version unified planning approves it.

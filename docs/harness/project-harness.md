@@ -15,6 +15,8 @@ This file is the stable compatibility entrypoint for project governance. The aut
 
 - Authoritative branch: `claude_master`.
 - Current state: OpenSpec/SuperSpec minimal bootstrap completed; benchmark harness expansion established; Living Architecture remains a subsequent documentation phase.
+- Living Architecture baseline: established in Phase 02.
+- First-version design: pending unified planning after framework completion.
 - Current implementation status: no dynamic thread-pool capability has been implemented yet.
 
 ## Rule of Precedence

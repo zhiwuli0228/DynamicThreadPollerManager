@@ -43,4 +43,4 @@ This is a verification-oriented demo, not a production platform. The goal is to 
 
 ## 8. Current Status Declaration
 
-The project is in a governance asset enhancement phase. OpenSpec/SuperSpec tooling is initialized. Dynamic thread-pool business capabilities are not implemented yet. Architecture documentation will be established in the next phase.
+The project is in a governance asset enhancement and living-architecture baseline phase. OpenSpec/SuperSpec tooling is initialized. Dynamic thread-pool business capabilities are not implemented yet. First-version design will be planned only after the framework and architecture baselines are complete.
