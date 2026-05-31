@@ -23,3 +23,34 @@ This directory carries the long-lived target-system design for the repository. I
 
 - Read this directory after `docs/00-project/current-state.md`.
 - Use this directory to understand target boundaries before any future version design.
+
+## What Belongs Here
+
+`docs/01-architecture/` carries long-lived architecture design shared across
+future versions, including system context, package boundaries, domain models,
+observability principles and evolution boundaries.
+
+It does not carry:
+
+- a concrete version scope;
+- implementation tasks;
+- OpenSpec change artifacts;
+- implementation receipts.
+
+## Naming Rule
+
+Living architecture documents use stable semantic kebab-case names:
+
+- `system-context-and-quality-attributes.md`
+- `logical-architecture-and-package-boundaries.md`
+- `managed-executor-domain-model.md`
+- `scheduling-reconfiguration-and-recovery-model.md`
+- `observability-and-experiment-strategy.md`
+- `operational-and-evolution-boundaries.md`
+
+Do not create version-suffixed copies such as `architecture-v1-final.md`.
+Accepted long-lived changes update the living document; Git preserves history.
+
+## Decision Records
+
+Long-lived architectural decisions belong under `docs/01-architecture/decisions/`.

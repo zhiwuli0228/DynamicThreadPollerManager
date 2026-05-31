@@ -12,6 +12,7 @@ V1 is the first bounded executable experiment, not the full roadmap. It defines 
 - V1 implementation: not started in this phase.
 - V1 autonomous implementation mission: drafted for future authorization only.
 - This package is archived and does not authorize execution in the current repository state.
+- Status: `REJECTED_NOT_AUTHORIZED_FOR_EXECUTION`.
 
 ## Reading Order
 
@@ -29,3 +30,4 @@ V1 is the first bounded executable experiment, not the full roadmap. It defines 
 - The design package is the source of truth for the authorized V1 scope.
 - The mission draft is not the implementation itself.
 - The package is retained as historical evidence and does not override `docs/00-project/current-state.md`.
+- This archive must not authorize version scope, OpenSpec/SuperSpec changes, implementation missions, or code or dependency modifications.

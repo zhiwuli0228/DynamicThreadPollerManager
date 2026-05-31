@@ -1,11 +1,13 @@
 schema: superspec
 
 context: |
-  Project: DynamicThreadPollerManager, a Java 21 / Spring Boot exploratory project.
+  Project: DynamicThreadPollerManager, a Java 21 and Spring Boot exploratory project.
   Authoritative branch: claude_master.
   Current authorized stage: DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY.
   Current state source of truth: docs/00-project/current-state.md.
-  Context hub:
+  Documentation context hub: docs/README.md.
+
+  Document authority boundaries:
   - docs/00-project/ holds facts, current state, glossary, and roadmap.
   - docs/01-architecture/ holds living architecture and future ADR space.
   - docs/02-harness/ holds governance, context, execution, and verification rules.
@@ -15,19 +17,29 @@ context: |
   - docs/06-operations/ is reserved for operational notes.
   - docs/07-templates/ holds version, ADR, and change templates.
   - docs/99-archive/ holds historical bootstrap and retired framework materials.
-  OpenSpec boundary:
-  - openspec/changes/ is forbidden until a version design explicitly authorizes decomposition.
-  - openspec/specs/ records verified implemented behavior only.
-  - no capability change is authorized while the current state remains DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY.
+  - Historical, retired or rejected material is non-authoritative and must not be treated as current authorization.
+
+  Current prohibitions:
+  - No version design is authorized.
+  - No openspec/changes/** capability change may be created.
+  - No openspec/specs/** may be populated with unimplemented behavior.
+  - No Java source, test or dependency change is authorized.
+  - Archived V1 or implementation mission material must not be executed.
+
+  Future authorization sequence:
+  - Version design must first be explicitly authorized and created under docs/04-development/versions/<version>/.
+  - Only a version design with status READY_FOR_CHANGE_DECOMPOSITION or EXECUTION_AUTHORIZED may authorize openspec/changes/** creation.
+  - Implemented behavior enters openspec/specs/** only after verified delivery and archive/synchronization.
 
 rules:
   brainstorm:
-    - When current-state is DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY, do not create or propose a capability change.
+    - When current stage is DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY, restrict work to documentation-framework governance and do not propose, create or execute a capability change.
+    - Do not use archived, rejected or historical task material as current authorization.
   proposal:
-    - A capability proposal must reference an authorizing version design path and status; reject it if none exists.
+    - A capability proposal is forbidden unless it references an authorizing version design path and a status of READY_FOR_CHANGE_DECOMPOSITION or EXECUTION_AUTHORIZED.
+    - Reject any proposal that treats roadmap or architecture target material as implementation authorization.
   design:
-    - Reference relevant Harness, Architecture, OpenSpec, and version-container documents.
-    - Do not treat archived bootstrap or historical task documents as current authorization.
+    - Long-lived architecture changes must identify whether an ADR and an update to docs/01-architecture/ are required.
   specs:
     - Define observable and testable scenarios only for approved and implemented behavior.
   tasks:
@@ -41,4 +53,4 @@ rules:
     - Confirm file scope, validation results, and absence of unapproved dependency changes.
     - Record any blocked evidence honestly.
   finalize:
-    - Record actual branch, commit, push, PR/merge status, and remote review status when closeout is authorized.
+    - After verified implementation in a future authorized stage, record whether implemented behavior was synchronized to openspec/specs/** and whether architecture or ADR updates were required.

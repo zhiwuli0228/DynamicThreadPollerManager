@@ -8,6 +8,7 @@ This directory preserves bootstrap history and retired framework materials.
 - Prior framework directories that were replaced by the numbered Context Hub.
 - Task attachments that are no longer current authority.
 - Archived planning packages such as `rejected-v1-planning/` are retained for evidence only and do not authorize execution.
+- Legacy bootstrap, architecture, harness, delivery, and V1 planning material live here only as non-authoritative records.
 
 ## Rule
 
