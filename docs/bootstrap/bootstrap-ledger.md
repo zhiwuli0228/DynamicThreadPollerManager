@@ -107,6 +107,17 @@
   - updated `openspec/config.yaml`
   - root `README.md`
 
+## Phase 04 - Claude Runtime Readiness and Framework Freeze
+
+- Status: completed after validation and push.
+- Verification executor: Claude Code runtime.
+- Superpowers readiness: `VERIFIED_PRESENT`.
+- Framework gate decision: `FRAMEWORK_BASELINE_ESTABLISHED`.
+- Boundary retained:
+  - No V1 unified design was started.
+  - No OpenSpec capability change was created.
+  - No application code or dependency was modified.
+
 ### Phase 01 Remediation Closure
 
 - Status: completed in Phase 02 after validation and push.

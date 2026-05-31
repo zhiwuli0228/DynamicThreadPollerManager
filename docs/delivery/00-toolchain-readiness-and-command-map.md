@@ -38,9 +38,12 @@ This phase only records whether the Codex-visible environment can confirm the pr
 ### Superpowers evidence from the current environment
 
 - `C:\Users\18811\.claude\settings.json` shows `superpowers@claude-plugins-official` enabled.
-- `C:\Users\18811\.claude\skills\` does not contain the named Superpowers apply-related skills.
-- `C:\Users\18811\.codex\skills\` does not contain the named Superpowers apply-related skills.
-- Result for the required apply skills: `NOT_VERIFIABLE_FROM_CODEX_ENVIRONMENT`.
+- `C:\Users\18811\.claude\plugins\cache\claude-plugins-official\superpowers\5.1.0\skills\using-git-worktrees\SKILL.md` exists.
+- `C:\Users\18811\.claude\plugins\cache\claude-plugins-official\superpowers\5.1.0\skills\subagent-driven-development\SKILL.md` exists.
+- `C:\Users\18811\.claude\plugins\cache\claude-plugins-official\superpowers\5.1.0\skills\test-driven-development\SKILL.md` exists.
+- `C:\Users\18811\.claude\plugins\cache\claude-plugins-official\superpowers\5.1.0\skills\requesting-code-review\SKILL.md` exists.
+- `C:\Users\18811\.claude\plugins\cache\claude-plugins-official\superpowers\5.1.0\skills\executing-plans\SKILL.md` exists.
+- Result for the required apply skills: `VERIFIED_PRESENT`.
 
 ## Command Map
 
@@ -63,3 +66,15 @@ OpenSpec slash commands are recorded for reference only:
 /opsx:verify
 /opsx:archive
 ```
+
+## Claude Code Runtime Verification - Phase 04
+
+- Verification executor: Claude Code runtime.
+- Result: `VERIFIED_PRESENT`.
+- Evidence:
+  - `C:\Users\18811\.claude\settings.json` has `superpowers@claude-plugins-official` enabled.
+  - The required Superpowers skill files exist in `C:\Users\18811\.claude\plugins\cache\claude-plugins-official\superpowers\5.1.0\skills\`.
+  - `gh auth status` and remote API reads for `claude_master` succeeded.
+  - `.\mvnw.cmd test`, `openspec.cmd validate --all --json`, and `openspec.cmd schema validate superspec` all passed.
+- No fake change, apply execution, dependency modification, or generated-asset regeneration was performed during verification.
+- Generated asset refresh after config change: `NOT_REQUIRED`.

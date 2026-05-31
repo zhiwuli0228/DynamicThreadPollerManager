@@ -3,9 +3,9 @@
 ## Status
 
 - Project type: benchmark-oriented exploratory Spring Boot demo.
-- Current stage: project framework baseline construction.
+- Current stage: framework baseline established; V1 unified design pending authorization.
 - Implemented business capabilities: none.
-- V1 unified design: pending after framework gate review.
+- V1 unified design: not started.
 - Authoritative review branch: `claude_master`.
 
 ## Purpose

@@ -17,8 +17,8 @@ This file is the stable compatibility entrypoint for project governance. The aut
 - OpenSpec / SuperSpec toolchain bootstrap: completed.
 - Harness Constitution: established.
 - Living Architecture baseline: established in Phase 02 and authoritative for subsequent design planning.
-- Delivery Framework alignment: established in Phase 03 once this task passes validation and push.
-- First-version unified design: not started.
+- Delivery Framework alignment and runtime readiness: established through Phase 04.
+- First-version unified design: not started; may begin only by explicit design authorization.
 - Current implementation status: no dynamic thread-pool capability has been implemented yet.
 
 ## Delivery Framework Reading

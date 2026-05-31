@@ -3,7 +3,7 @@ schema: superspec
 context: |
   Project: DynamicThreadPollerManager, a benchmark-oriented Java 21 and Spring Boot 4.0.6 exploratory project for dynamic thread-pool and scheduling design.
   Authoritative branch: claude_master is the reviewed governance and integration baseline.
-  Current state: Harness Constitution and Living Architecture are established; Delivery Framework is being aligned; V1 unified design and business implementation have not started.
+  Current state: Harness Constitution, Living Architecture and Delivery Framework are established; V1 unified design and business implementation have not started.
   Delivery roles: ChatGPT provides master design and remote review; Codex creates approved design/governance artifacts; Claude Code implements only approved bounded changes.
   Design boundary: target capabilities include managed executors, scheduling reconfiguration, observation and experiment scenarios, but no V1 scope is approved until unified design review.
   Technology boundary: Redis, Kafka, database, frontend, authentication, multi-node deployment and virtual-thread mode require explicit future approval.
