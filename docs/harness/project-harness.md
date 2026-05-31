@@ -1,40 +1,27 @@
-# Project Harness
+# Project Harness Index
 
-## Project Purpose
+This file is the stable compatibility entrypoint for project governance. The authoritative harness rules are organized in the following documents.
 
-DynamicThreadPollerManager is a Java 21 + Spring Boot exploratory demo for validating dynamic thread-pool management. The project exists to test runtime registration and adjustment of managed executors, execution metrics, simulated load, and later distributed recovery strategies.
+## Mandatory Reading for Design Work
 
-## Delivery Boundary
+1. `docs/harness/00-project-constitution.md`
+2. `docs/harness/01-domain-and-experiment-scope.md`
+3. `docs/harness/02-architecture-and-dependency-rules.md`
+4. `docs/harness/03-engineering-and-testing-rules.md`
+5. `docs/harness/04-ai-delivery-workflow.md`
+6. `docs/harness/05-change-classification-and-gates.md`
 
-- Start with single-node in-memory behavior only.
-- Add Redis, Kafka, multi-node coordination, frontend, and authentication only through later explicit changes.
-- Keep the demo lightweight; do not add production-grade governance too early.
+## Current Governance Baseline
 
-## Architecture Rules
+- Authoritative branch: `claude_master`.
+- Current state: OpenSpec/SuperSpec minimal bootstrap completed; benchmark harness expansion established; Living Architecture remains a subsequent documentation phase.
+- Current implementation status: no dynamic thread-pool capability has been implemented yet.
 
-- `api -> application -> domain`.
-- `infrastructure` provides concrete implementations for domain needs.
-- Domain code must not depend on Web DTOs, Redis/Kafka clients, or Spring MVC details.
-- Do not expand scope or stack across changes without approval.
+## Rule of Precedence
 
-## Engineering Rules
+For project work:
 
-- Java 21 and Maven.
-- JUnit 5 and Mockito only; no PowerMock.
-- Every functional change must include tests.
-- Avoid unrelated refactoring.
-- Concurrency state transitions and thread-pool configuration validation must be testable.
-
-## AI Collaboration Model
-
-- Codex and ChatGPT handle requirements analysis, design, OpenSpec/SuperSpec artifacts, and scope review.
-- Claude Code implements approved tasks, tests, verification, and commits.
-- Claude Code must not expand beyond the approved change.
-
-## Roadmap
-
-1. Local managed executor registry.
-2. Runtime metrics and workload simulation.
-3. Dynamic scheduled task reconfiguration.
-4. Stalled task detection and recovery.
-5. Distributed coordination experiment.
+1. Active approved OpenSpec/SuperSpec change artifacts define the bounded delivery scope of a specific change.
+2. Harness documents define durable project governance and boundary rules.
+3. Architecture documents, once created, define the living system design.
+4. No agent may infer implemented behavior solely from roadmap documentation.

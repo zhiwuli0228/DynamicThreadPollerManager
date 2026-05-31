@@ -3,7 +3,7 @@
 ## Baseline Observed
 
 - Repository: `DynamicThreadPollerManager`
-- Branch: `main`
+- Branch: `claude_master`
 - Starting commit: `55e3203def02617c27ed013ab409ac771e84dc77`
 - Spring Boot version: `4.0.6`
 - Java version: `21`
@@ -63,3 +63,32 @@
 - No business change was created.
 - No Redis, Kafka, database, frontend, or authentication dependency was added.
 - No `/opsx:apply` flow was run.
+
+## Governance Baseline
+
+- The authoritative branch for current bootstrap, governance enhancement, OpenSpec change review, and subsequent implementation acceptance is `claude_master`.
+- The earlier minimal bootstrap is preserved as historical initialization evidence, but it is no longer the complete governance target for this benchmark-oriented demo.
+
+## Benchmark Enhancement Progress
+
+### Harness Constitution Expansion
+
+- Status: completed in Phase 01 after validation and push.
+- Reason: the minimal single-file harness was sufficient for toolchain bootstrap, but insufficient for a benchmark project intended to preserve architecture and AI-assisted delivery practices.
+- Output:
+  - `docs/harness/00-project-constitution.md`
+  - `docs/harness/01-domain-and-experiment-scope.md`
+  - `docs/harness/02-architecture-and-dependency-rules.md`
+  - `docs/harness/03-engineering-and-testing-rules.md`
+  - `docs/harness/04-ai-delivery-workflow.md`
+  - `docs/harness/05-change-classification-and-gates.md`
+
+## Roadmap Correction
+
+For benchmark-quality development, the first formal capability design change will be:
+
+`establish-springboot-technical-foundation`
+
+Only after it is designed, approved, implemented, and verified should the project proceed to:
+
+`establish-local-managed-executor-registry`
