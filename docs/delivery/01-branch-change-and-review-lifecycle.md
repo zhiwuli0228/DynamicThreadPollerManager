@@ -15,23 +15,22 @@ This flow applies to Harness, Architecture, Delivery Framework, Agent/OpenSpec c
 
 ## B. Future V1 Capability Work
 
-SuperSpec v4 recommends a feature branch as the normal starting point for future approved changes. A future approved V1 design would therefore use a branch-oriented flow such as:
+The V1 plan selects a single implementation branch for traceability and low automation cost:
 
 ```text
-Approved V1 unified design
-  -> create a dedicated feature/spec branch from claude_master
-  -> Codex produces bounded SuperSpec design artifacts on that branch
-  -> optional pre-review PR using gh
-  -> ChatGPT/user approves design
-  -> Claude Code executes apply in SuperSpec-managed worktree
-  -> verify and finalize
-  -> gh-backed PR/review or approved closeout path
-  -> merge accepted result toward claude_master
+Approved V1 autonomous implementation mission
+  -> create `ai/v1-implementation` from `claude_master`
+  -> Claude Code produces bounded SuperSpec artifacts in the authorized sequence
+  -> Claude Code implements, tests, verifies and commits continuously
+  -> Claude Code pushes evidence after each verified change
+  -> Claude Code may use `gh` for PR creation, review, and merge if the mission selects that closeout path
+  -> accepted results integrate back toward `claude_master`
+  -> automation pauses only on documented BLOCKED conditions
 ```
 
 ## Lifecycle Rules
 
 - `claude_master` is the integration and review baseline for framework work.
-- The future feature branch naming, PR policy, and merge policy for V1 are not decided in this phase.
-- `gh` may be used for remote inspection, branch verification, and future PR operations.
+- The V1 branch naming, PR policy, and merge policy are decided by the V1 mission rather than by phase-by-phase human approval.
+- `gh` may be used for remote inspection, branch verification, PR operations, and merge operations when the active mission allows it.
 - This document describes process mechanics only; it does not create branches or PRs.

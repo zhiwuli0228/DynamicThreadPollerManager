@@ -3,34 +3,36 @@ schema: superspec
 context: |
   Project: DynamicThreadPollerManager, a benchmark-oriented Java 21 and Spring Boot 4.0.6 exploratory project for dynamic thread-pool and scheduling design.
   Authoritative branch: claude_master is the reviewed governance and integration baseline.
-  Current state: Harness Constitution, Living Architecture and Delivery Framework are established; V1 unified design and business implementation have not started.
-  Delivery roles: ChatGPT provides master design and remote review; Codex creates approved design/governance artifacts; Claude Code implements only approved bounded changes.
-  Design boundary: target capabilities include managed executors, scheduling reconfiguration, observation and experiment scenarios, but no V1 scope is approved until unified design review.
-  Technology boundary: Redis, Kafka, database, frontend, authentication, multi-node deployment and virtual-thread mode require explicit future approval.
+  Current state: Harness Constitution, Living Architecture, Delivery Framework, and Autonomous AI Delivery policy are established; V1 unified design is in progress; business implementation has not started.
+  Delivery model: ChatGPT defines and reviews mission boundaries and remote results; Codex produces governance and V1 design artifacts; Claude Code may continuously implement, verify, commit and push all changes authorized by a future V1 autonomous implementation mission without per-change human pause.
+  Automation boundary: AI execution stops only for external authorization barriers, unsafe conflicts, unresolvable validation failures, or scope changes outside the active mission.
   Architecture boundary: api -> application -> domain; infrastructure supplies adapters; domain must not depend on transport DTOs or infrastructure clients.
   Engineering boundary: Java 21, Maven Wrapper, JUnit 5 and Mockito, no PowerMock, deterministic concurrency testing, no unrelated refactoring.
-  Required references: read docs/harness/project-harness.md, docs/architecture/README.md and docs/delivery/README.md before creating or applying an approved change.
+  Required references: read docs/harness/project-harness.md, docs/architecture/README.md, docs/delivery/README.md and docs/v1/README.md before creating or applying an approved change.
 
 rules:
   brainstorm:
     - State whether the work is framework-only, V1 unified design, or an approved bounded capability change.
+    - State whether the work is inside an active autonomous mission.
     - Do not infer approved V1 scope from the architecture roadmap.
   proposal:
     - Declare included scope, excluded scope, affected architecture documents, and whether any dependency or boundary change is proposed.
     - Reject proposals that silently combine unrelated capabilities.
   design:
-    - Reference relevant Harness and Living Architecture documents.
+    - Reference relevant Harness, Living Architecture, Delivery Framework, and V1 documents.
     - Identify any long-lived architecture decision requiring documentation update or ADR evaluation.
   specs:
     - Define observable and testable scenarios, including negative or failure cases for concurrency-sensitive behavior.
   tasks:
     - Keep tasks within approved capability scope; do not include unapproved middleware, frontend, authentication, or unrelated refactoring.
   plan:
-    - Include verification commands and scope checks before implementation completion.
+    - Include verification commands, scope checks, and the autonomous continuation rule before implementation completion.
   apply:
-    - Implement only approved tasks and read the relevant Architecture and Delivery documents before work begins.
+    - Implement only approved tasks and read the relevant Architecture, Delivery, and V1 documents before work begins.
     - Do not create or expand capability scope without a reviewed change.
+    - Within an active mission, continue from one authorized change to the next without per-change human approval.
   verify:
     - Confirm file scope, validation results, and absence of unapproved dependency changes.
+    - Record any blocked evidence honestly.
   finalize:
-    - Record actual branch and remote review status when closeout is authorized.
+    - Record actual branch, commit, push, PR/merge status, and remote review status when closeout is authorized.

@@ -14,6 +14,8 @@ Before first-version unified design begins, the project should have:
 - SuperSpec apply prerequisites understood for Claude Code and the supporting skills;
 - GitHub `claude_master` confirmed as the review source of truth.
 
+The concrete V1 design package lives in `docs/v1/`. This framework remains the durable planning baseline that explains how the V1 design was assembled.
+
 ## 3. Questions V1 Design Must Resolve
 
 1. Is V1 only managed executor support, or does it also include scheduling reconfiguration?
@@ -67,4 +69,4 @@ Candidate only; no scope is approved until the V1 unified design is reviewed.
 
 ## 8. Gate Before Implementation
 
-No implementation change should begin until the V1 unified design has been reviewed and approved.
+No implementation change should begin until the V1 unified design has been reviewed and approved and the authorized mission draft has been issued.

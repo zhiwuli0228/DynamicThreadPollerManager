@@ -18,12 +18,21 @@
 - [x] Superpowers readiness is recorded truthfully and verified from the Claude Code runtime for future approved apply execution.
 - [x] GitHub/gh remote review method is documented.
 
-## Gate D - V1 Entry Decision
+## Autonomous Delivery Policy Amendment
+
+- Status: aligned in Phase 05.
+- The completed framework does not require phase-by-phase human approval for future V1 execution.
+- A bounded V1 autonomous execution mission may authorize AI to create required changes, implement them, verify, commit, push, and continue through the approved V1 sequence.
+- Oversight reviews remain available but are not default blocking gates.
+- Automation must stop only on documented BLOCKED conditions.
+
+## Gate D - V1 Autonomous Entry Decision
 - [x] No product capability change exists before V1 design authorization.
-- [x] V1 unified design task may be issued only after Gates A-C are reviewed from the remote `claude_master` branch.
+- [x] V1 unified design has been produced under an explicit autonomous delivery boundary.
+- [x] A V1 autonomous execution mission draft has been produced and is ready for execution authorization.
 
 ## Framework Baseline Decision
 
 - Result: `FRAMEWORK_BASELINE_ESTABLISHED`.
-- V1 unified design may be initiated only through a separately authorized Codex design task.
+- V1 unified design is documented in `docs/v1/`.
 - This gate does not approve any capability implementation or OpenSpec change.

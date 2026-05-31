@@ -3,10 +3,11 @@
 ## Project State
 
 - Authoritative branch: `claude_master`.
-- Current phase: framework construction and alignment.
+- Current phase: autonomous delivery policy alignment and V1 unified design planning.
 - Harness Constitution and Living Architecture are established.
-- V1 unified design has not started.
-- No capability change may be created unless explicitly authorized by a later task document.
+- The Phase 05 task authorizes V1 unified design documentation only.
+- No capability implementation may occur outside an active authorized mission.
+- A future autonomous implementation mission may authorize continuous change creation and implementation without per-change manual pauses.
 
 ## Mandatory Reading Order
 
@@ -23,7 +24,8 @@ For V1 unified design work, only after explicitly authorized:
 3. `docs/architecture/README.md`
 4. all detailed `docs/architecture/*.md`
 5. `docs/delivery/README.md`
-6. `openspec/config.yaml`
+6. `docs/v1/README.md`
+7. `openspec/config.yaml`
 
 For a future bounded change design:
 
@@ -41,7 +43,7 @@ For a future bounded change design:
 
 ## Scope Guardrails
 
-- Do not begin V1 unified design during framework-alignment tasks.
+- Do not begin capability implementation outside an active authorized mission.
 - Do not create OpenSpec changes without explicit authorization.
 - Do not combine multiple roadmap capabilities implicitly.
 - Do not add dependencies or application code during documentation/tooling work.

@@ -131,3 +131,14 @@
 ## Roadmap Correction
 
 For benchmark-quality development, capability selection will be decided during the first-version unified design planning phase. The earlier candidate sequencing remains a planning reference only and is not yet an approved change order.
+
+## Phase 05 - Autonomous Delivery Policy and V1 Unified Design
+
+- Trigger: user explicitly requested removal of phase-by-phase automation restrictions and asked for autonomous AI delivery within a bounded V1 mission.
+- Decision:
+  - human review is not a default blocking gate between already-authorized steps,
+  - AI may continuously design, implement, verify, commit, and push within a bounded mission,
+  - architecture, scope, evidence, and external-risk boundaries remain enforced.
+- Framework baseline reviewed: `91c35cda6d5e0cc55cb2bc674bcbd992068645c8`.
+- V1 design output: `docs/v1/`.
+- No business implementation or OpenSpec capability change was created in this design-only phase.
