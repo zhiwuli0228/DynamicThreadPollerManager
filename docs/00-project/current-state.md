@@ -5,7 +5,7 @@
 - Current stage: `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: not started
+- Version design status: exploratory draft exists in `docs/04-development/versions/v0.1.0/`
 - OpenSpec capability changes: not authorized
 - Java implementation status: not started and not authorized
 
@@ -21,7 +21,6 @@
 - No `openspec/specs/**`
 - No code or test changes
 - No dependency changes
-- No version design work
 - No implementation mission execution
 - No capability change decomposition
 

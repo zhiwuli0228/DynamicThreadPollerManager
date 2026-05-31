@@ -4,9 +4,9 @@ This folder is reserved for future version design packages.
 
 ## Current Status
 
-- No active version directory exists yet.
+- One exploratory version package exists: `v0.1.0`.
 - No version is currently authorized for change decomposition.
-- The repository is in `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`.
+- The repository is still in `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`.
 
 ## Lifecycle
 
@@ -46,5 +46,5 @@ docs/04-development/versions/<version>/
 ## Rule
 
 - Create a version directory only after a task explicitly authorizes a version design.
-- No concrete version directory may be created while current stage is `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`.
+- Do not create additional concrete version directories unless the current state explicitly allows it.
 - Do not create `openspec/changes/**` from this directory unless the version design authorizes it.
