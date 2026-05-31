@@ -3,54 +3,51 @@
 ## Project State
 
 - Authoritative branch: `claude_master`.
-- Current phase: autonomous delivery policy alignment and V1 unified design planning.
-- Harness Constitution and Living Architecture are established.
-- The Phase 05 task authorizes V1 unified design documentation only.
-- No capability implementation may occur outside an active authorized mission.
-- A future autonomous implementation mission may authorize continuous change creation and implementation without per-change manual pauses.
+- Current authorized work type: `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`.
+- Current source of truth: `docs/00-project/current-state.md`.
+- Archived task documents are non-authoritative.
+- Do not create version designs, OpenSpec capability changes, or application code unless a later explicit task updates `docs/00-project/current-state.md`.
 
 ## Mandatory Reading Order
 
-For governance or framework work:
+For governance or documentation-framework work:
 
-1. `docs/harness/project-harness.md`
-2. `docs/delivery/README.md`
-3. Task-specific referenced files.
+1. `docs/README.md`
+2. `docs/00-project/current-state.md`
+3. `docs/02-harness/context-policy.md`
 
-For V1 unified design work, only after explicitly authorized:
+For long-lived architecture work:
 
-1. `docs/harness/project-harness.md`
-2. all `docs/harness/00-*.md` through `05-*.md`
-3. `docs/architecture/README.md`
-4. all detailed `docs/architecture/*.md`
-5. `docs/delivery/README.md`
-6. `docs/v1/README.md`
-7. `openspec/config.yaml`
+1. `docs/01-architecture/README.md`
+2. relevant documents under `docs/01-architecture/`
 
-For a future bounded change design:
+For future version design work only after explicit authorization:
 
-1. Harness rules relevant to scope and gates.
-2. Architecture documents relevant to the capability.
-3. Delivery workflow rules.
-4. `openspec/config.yaml`.
-5. Existing specs and active change artifacts, if any.
+1. `docs/04-development/versions/README.md`
+2. the authorized version design files under `docs/04-development/versions/<version>/`
+
+For OpenSpec work only after version design status allows decomposition:
+
+1. `docs/03-openspec/README.md`
+2. `docs/03-openspec/version-design-to-change-rule.md`
+3. the authorizing version design files
 
 ## Codex Responsibility
 
 - Codex is the design and governance execution agent.
-- Codex may create or revise architecture, workflow, and future approved SuperSpec design artifacts only within an explicit task authorization.
+- Codex may revise documentation framework artifacts only within explicit task authorization.
 - Codex does not implement application code by default.
 
 ## Scope Guardrails
 
-- Do not begin capability implementation outside an active authorized mission.
+- Do not begin version design during documentation-framework-only tasks.
 - Do not create OpenSpec changes without explicit authorization.
 - Do not combine multiple roadmap capabilities implicitly.
-- Do not add dependencies or application code during documentation/tooling work.
+- Do not add dependencies or application code during documentation work.
 - Do not modify generated OpenSpec/agent assets unless a task explicitly authorizes regeneration.
 
 ## GitHub and Review Source
 
 - GitHub branch `claude_master` is the review source of truth.
-- `gh` CLI may be used for remote inspection, branch verification and future PR operations.
+- `gh` CLI may be used for remote inspection, branch verification, and future PR operations.
 - Push completed bounded documentation work directly to `claude_master` only when the task authorizes it.

@@ -3,30 +3,28 @@
 ## Project State
 
 - Authoritative branch for reviewed framework assets: `claude_master`.
-- Current repository state: governance framework, architecture baseline, delivery framework, and Phase 05 autonomous delivery policy alignment.
-- V1 unified design is in progress and documented separately.
-- No V1 capability implementation is currently approved by this Phase 05 task.
-- Do not implement dynamic thread-pool behavior without an active authorized V1 autonomous implementation mission.
+- Current repository state: documentation framework construction only.
+- Current implementation authorization: NONE.
+- Do not implement code, modify dependencies, create capability changes, or execute an old implementation mission.
+- Only `docs/00-project/current-state.md` and a future active authorized task may permit implementation.
 
 ## Mandatory Reading Before Any Future Implementation
 
-1. `docs/harness/project-harness.md`
-2. `docs/harness/02-architecture-and-dependency-rules.md`
-3. `docs/harness/03-engineering-and-testing-rules.md`
-4. `docs/harness/04-ai-delivery-workflow.md`
-5. `docs/harness/05-change-classification-and-gates.md`
-6. `docs/delivery/README.md`
-7. `docs/v1/README.md` and the active V1 mission draft when mission execution is authorized.
-8. Relevant `docs/architecture/*.md` documents referenced by the approved change.
-9. All approved artifacts under the active `openspec/changes/<change-name>/`.
+1. `docs/README.md`
+2. `docs/00-project/current-state.md`
+3. `docs/02-harness/context-policy.md`
+4. `docs/02-harness/task-execution-policy.md`
+5. `docs/03-openspec/version-design-to-change-rule.md`
+6. `docs/04-development/versions/README.md`
+7. the active version design files, if and only if a future task authorizes them
 
 ## Implementation Gate
 
 Implementation is authorized only when all are true:
 
-- A bounded V1 autonomous implementation mission exists.
-- The mission explicitly authorizes Claude Code to run the implementation flow continuously.
-- The mission scope, exclusions, verification commands, and closeout path are documented.
+- `docs/00-project/current-state.md` explicitly authorizes a later implementation stage.
+- A bounded version design exists and is marked ready for change decomposition or execution.
+- The task explicitly instructs Claude Code to run the implementation flow.
 - Required SuperSpec/Superpowers skills have been verified as available or an approved fallback path is documented.
 
 ## Execution Rules
@@ -44,4 +42,4 @@ Implementation is authorized only when all are true:
 - Maven Wrapper
 - JUnit 5 and Mockito
 - No PowerMock
-- Deterministic concurrency testing rules are defined in `docs/harness/03-engineering-and-testing-rules.md`.
+- Deterministic concurrency testing rules are defined in `docs/04-development/testing-guide.md`.
