@@ -3,7 +3,7 @@
 ## Header
 
 - Version name: `v0.1.0`
-- Status: `EXECUTION_AUTHORIZED`
+- Status: `BASELINE_DELIVERED`
 - Package purpose: first exploratory runtime design for a thread-pool dynamic control research platform
 - Authoritative branch: `claude_master`
 
@@ -21,6 +21,6 @@
 ## Status Notes
 
 - This package defines the first research-oriented version baseline.
-- It authorizes OpenSpec change decomposition and execution for the bounded v0.1.0 increments.
-- The active authorized change is `metrics-snapshot-and-recording`.
+- All bounded v0.1.0 increments have been executed: `experiment-foundation` and `metrics-snapshot-and-recording` are both archived, verified, and synchronized into `openspec/specs/`.
+- The capability baseline (experiment lifecycle + metrics observation layer) is present on `claude_master`.
 - It keeps the design focused on reproducible experiments, metrics, and strategy comparison.
