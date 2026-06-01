@@ -3,7 +3,7 @@
 ## Header
 
 - Version name: `v0.1.0`
-- Status: `READY_FOR_CHANGE_DECOMPOSITION`
+- Status: `EXECUTION_AUTHORIZED`
 - Package purpose: first exploratory runtime design for a thread-pool dynamic control research platform
 - Authoritative branch: `claude_master`
 
@@ -21,5 +21,6 @@
 ## Status Notes
 
 - This package defines the first research-oriented version baseline.
-- It authorizes the first bounded OpenSpec change decomposition path for `v0.1.0`.
+- It authorizes OpenSpec change decomposition and execution for the bounded v0.1.0 increments.
+- The active authorized change is `metrics-snapshot-and-recording`.
 - It keeps the design focused on reproducible experiments, metrics, and strategy comparison.

@@ -4,11 +4,9 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`
-- No version design is started.
-- No `openspec/changes/**` directory is authorized.
-- No implementation mission is active.
-- No source code or dependency change is authorized by this documentation frame.
+- `EXECUTION_AUTHORIZED` for the `metrics-snapshot-and-recording` change.
+- Authoritative source: `docs/00-project/current-state.md`.
+- `v0.1.0` version design is `EXECUTION_AUTHORIZED`; later work packages require a future change to reach `EXECUTION_AUTHORIZED`.
 
 ## Reading Order
 

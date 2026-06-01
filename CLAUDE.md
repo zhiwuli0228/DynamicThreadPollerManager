@@ -3,10 +3,10 @@
 ## Project State
 
 - Authoritative branch for reviewed framework assets: `claude_master`.
-- Current repository state: documentation framework construction only.
-- Current implementation authorization: NONE.
-- Do not implement code, modify dependencies, create capability changes, or execute an old implementation mission.
-- Only `docs/00-project/current-state.md` and a future active authorized task may permit implementation.
+- Current repository state: `EXECUTION_AUTHORIZED` for the `metrics-snapshot-and-recording` change.
+- Current implementation authorization: `metrics-snapshot-and-recording` only; do not begin a neighboring capability.
+- Do not implement code outside the active authorized change, modify dependencies, or create new capability changes without updating the version design and `docs/00-project/current-state.md`.
+- Only `docs/00-project/current-state.md` and an active authorized task may permit implementation.
 
 ## Mandatory Reading Before Any Future Implementation
 

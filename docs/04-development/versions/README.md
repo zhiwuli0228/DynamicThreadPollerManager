@@ -1,12 +1,12 @@
 # Version Designs
 
-This folder is reserved for future version design packages.
+This folder is reserved for version design packages.
 
 ## Current Status
 
 - One exploratory version package exists: `v0.1.0`.
-- No version is currently authorized for change decomposition.
-- The repository is still in `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`.
+- `v0.1.0` is `EXECUTION_AUTHORIZED`; the active authorized OpenSpec change is `metrics-snapshot-and-recording`.
+- See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle
 
@@ -15,7 +15,7 @@ Version designs should move through these states:
 1. `DRAFT`
 2. `BASELINED`
 3. `READY_FOR_CHANGE_DECOMPOSITION`
-4. `EXECUTION_AUTHORIZED`
+4. `EXECUTION_AUTHORIZED` ← `v0.1.0` is here
 5. `IMPLEMENTED`
 6. `SUPERSEDED`
 

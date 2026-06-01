@@ -11,6 +11,8 @@
 ## Current Stage Rule
 
 - If the current state is `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`, do not create version design or capability changes.
+- The current stage is `EXECUTION_AUTHORIZED` for the `metrics-snapshot-and-recording` change; only that change and its bounded tasks may be implemented.
+- A new capability change requires a new OpenSpec change, a new authorization stage in `docs/00-project/current-state.md`, and an updated version design entry.
 
 ## Context Hygiene
 

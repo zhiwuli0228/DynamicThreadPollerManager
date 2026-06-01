@@ -3,9 +3,9 @@
 ## Header
 
 - Version name: `v0.1.0`
-- Document purpose: outline how the version could later be split into bounded work packages
-- Status: `DRAFT`
-- Authorization status: `NOT AUTHORIZED`
+- Document purpose: outline how the version is split into bounded work packages
+- Status: `AUTHORIZED`
+- Authorization status: `AUTHORIZED` (work package 2 in execution)
 
 ## 1. Decomposition principles
 
@@ -14,10 +14,10 @@
 - Separate observation from control.
 - Keep queue behavior isolated from policy behavior.
 
-## 2. Suggested work packages
+## 2. Work packages
 
 1. Scenario generator and experiment runner.
-2. Runtime snapshot collector.
+2. Runtime snapshot collector. ← active authorized change: `metrics-snapshot-and-recording`
 3. Policy abstraction and baseline policy.
 4. Adaptive policy implementation.
 5. Executor mutation adapter.
@@ -34,4 +34,4 @@
 
 ## 4. Authorization note
 
-This is a planning-only decomposition. It is not an execution authorization and does not create an OpenSpec change.
+This decomposition is now execution-authorized for the bounded v0.1.0 increments that fall within the active OpenSpec change. The currently active change is `metrics-snapshot-and-recording`; later work packages remain authorized only when a future change reaches `EXECUTION_AUTHORIZED`.
