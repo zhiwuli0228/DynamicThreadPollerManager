@@ -12,7 +12,7 @@
 
 - If the current state is `DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY`, do not create version design or capability changes.
 - The current stage is defined only by `docs/00-project/current-state.md`.
-- At the current `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED` stage, maintenance of documentation and verification records is allowed, but new capability implementation is not.
+- At the current `EXECUTION_AUTHORIZED` stage, only the change named in `docs/00-project/current-state.md` may be implemented.
 - A new capability change requires a successor version design, a new OpenSpec change, a new authorization stage in `docs/00-project/current-state.md`, and an updated version design entry.
 
 ## Context Hygiene

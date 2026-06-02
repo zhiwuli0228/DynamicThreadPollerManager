@@ -4,8 +4,9 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- One exploratory version package exists: `v0.1.0`.
-- `v0.1.0` is `EXECUTION_AUTHORIZED`; the active authorized OpenSpec change is `metrics-snapshot-and-recording`.
+- Two version packages exist: `v0.1.0` and `v0.2.0`.
+- `v0.1.0` is `BASELINE_DELIVERED`.
+- `v0.2.0` is `EXECUTION_AUTHORIZED`; the active authorized OpenSpec change is `scenario-runner-and-baseline`.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

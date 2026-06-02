@@ -4,9 +4,9 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `EXECUTION_AUTHORIZED` for the `metrics-snapshot-and-recording` change.
+- `EXECUTION_AUTHORIZED` for the `scenario-runner-and-baseline` change.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.1.0` version design is `EXECUTION_AUTHORIZED`; later work packages require a future change to reach `EXECUTION_AUTHORIZED`.
+- `v0.2.0` version design is `EXECUTION_AUTHORIZED` for the third bounded capability change.
 
 ## Reading Order
 
