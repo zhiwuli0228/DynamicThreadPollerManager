@@ -4,7 +4,7 @@
 
 - Version name: `v0.2.0`
 - Authoring date: `2026-06-02`
-- Status: `EXECUTION_AUTHORIZED`
+- Status: `BASELINE_DELIVERED`
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -27,7 +27,7 @@ The version intentionally does not authorize adaptive policy, executor mutation,
 
 - OpenSpec change: `scenario-runner-and-baseline`
 - Schema: `superspec`
-- Authorization: `EXECUTION_AUTHORIZED`
+- Authorization: `BASELINE_DELIVERED` (archived 2026-06-03)
 
 ## Boundary Summary
 

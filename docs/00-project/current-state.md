@@ -2,45 +2,44 @@
 
 ## Authoritative Status
 
-- Current stage: `EXECUTION_AUTHORIZED`
+- Current stage: `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.2.0` is `EXECUTION_AUTHORIZED` for `scenario-runner-and-baseline`
-- OpenSpec capability changes: `experiment-foundation` and `metrics-snapshot-and-recording` have been archived; `scenario-runner-and-baseline` is authorized for superspec artifact creation and later implementation
-- Java implementation status: the experiment foundation package and the metrics observation layer (sampling, normalization, append-only recording, summary) are present on the main working branch; scenario runner implementation is not present yet
+- Version design status: `v0.2.0` is `BASELINE_DELIVERED`
+- OpenSpec capability changes: `experiment-foundation`, `metrics-snapshot-and-recording`, and `scenario-runner-and-baseline` have been archived; the v0.1.0 and v0.2.0 capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
+- Java implementation status: the experiment foundation package, the metrics observation layer (sampling, normalization, append-only recording, summary), and the deterministic scenario runner with fixed baseline executor are present on the main working branch
 
 ## Active Authorized Change
 
-- Change name: `scenario-runner-and-baseline`
-- Bounded by: `docs/04-development/versions/v0.2.0/`
+- Change name: `none` — v0.2.0 is delivered; the next change requires a new version design
+- Bounded by: `v0.2.0` is the most recent baseline; v0.3.0 (or any successor) must be authored and reach `READY_FOR_CHANGE_DECOMPOSITION` before new `openspec/changes/**` work begins
 - Schema: `superspec`
-- Scope: create and execute the third superspec change for deterministic scenario running and fixed baseline execution
-- Non-scope: adaptive policy, executor resizing, queue mutation, external observability, new dependencies
+- Scope: post-delivery maintenance, documentation hygiene, and preparation of the next version design package
+- Non-scope: no new capability implementation until a successor version design is created and authorized
 
 ## What Is Allowed Now
 
 - Maintain the documentation framework.
 - Update cross-links so future work can discover the correct authority sequence quickly.
-- Create and maintain `openspec/changes/scenario-runner-and-baseline/` using the `superspec` schema.
-- Implement `scenario-runner-and-baseline` after its full artifact set is complete.
+- Author a successor version design (e.g., `v0.3.0`) under `docs/04-development/versions/`.
 - Keep the current-state record synchronized with the actual repository state.
 
 ## What Is Not Allowed Now
 
-- No OpenSpec change creation outside `scenario-runner-and-baseline`.
+- No new OpenSpec change creation until a successor version design is `READY_FOR_CHANGE_DECOMPOSITION` or `EXECUTION_AUTHORIZED`.
 - No unreviewed scope expansion.
 - No branch-state mismatch between the workspace and the authoritative branch.
 - No archive or finalize event without synchronized authority records.
 - No new dependencies.
-- No Java source or test change outside `scenario-runner-and-baseline`.
+- No Java source or test change outside an authorized change.
 
 ## Future Gate Sequence
 
-1. `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`
+1. `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED` ← current stage
 2. version design draft
 3. version design baseline
 4. `READY_FOR_CHANGE_DECOMPOSITION`
-5. `EXECUTION_AUTHORIZED` ← current stage
+5. `EXECUTION_AUTHORIZED`
 6. capability change execution
 
 ## Current Reference

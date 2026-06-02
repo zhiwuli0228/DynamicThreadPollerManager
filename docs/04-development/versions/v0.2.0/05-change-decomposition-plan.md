@@ -3,12 +3,12 @@
 ## Header
 
 - Version name: `v0.2.0`
-- Status: `EXECUTION_AUTHORIZED`
-- Authorization status: one OpenSpec change authorized
+- Status: `BASELINE_DELIVERED`
+- Authorization status: all authorized work delivered and archived
 
-## 1. Authorized Change
+## 1. Delivered Change
 
-### Change: `scenario-runner-and-baseline`
+### Change: `scenario-runner-and-baseline` → delivered and archived 2026-06-03
 
 Core responsibility:
 
@@ -38,11 +38,16 @@ The following remain deferred and are not authorized by this version:
 
 ## 3. Dependency Basis
 
-This change depends on delivered capabilities:
+This change depended on delivered capabilities:
 
 - `experiment-foundation`,
 - `metrics-snapshot-and-recording`.
 
-## 4. Execution Authorization
+## 4. Execution Closure
 
-`scenario-runner-and-baseline` is authorized to be created under `openspec/changes/` using the `superspec` schema and implemented after its full artifact set is produced.
+`scenario-runner-and-baseline` is delivered: all 9 superspec artifacts are
+complete, 93/93 Maven tests pass, verified behavior is synchronized to
+`openspec/specs/scenario-runner-and-baseline/spec.md`, and the change
+directory has been moved to `openspec/changes/archive/2026-06-03-scenario-runner-and-baseline/`.
+A successor version (e.g., `v0.3.0`) is required before any new
+`openspec/changes/**` work begins.
