@@ -20,7 +20,9 @@ public final class DefaultSnapshotAssembler implements SnapshotAssembler {
         PressureSnapshot snapshot = new PressureSnapshot(
                 observation.timestamp(),
                 SnapshotAssembler.resolveIntOrDefault(observation.activeThreads(), 0),
+                SnapshotAssembler.resolveIntOrDefault(observation.poolSize(), 0),
                 SnapshotAssembler.resolveIntOrDefault(observation.queueSize(), 0),
+                SnapshotAssembler.resolveLongOrDefault(observation.completedTaskCount(), 0L),
                 SnapshotAssembler.resolveDoubleOrDefault(observation.cpuUtilization(), 0.0)
         );
         return new ObservedSnapshot(runId, snapshot, observation);

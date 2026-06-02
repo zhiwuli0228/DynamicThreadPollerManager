@@ -1,11 +1,11 @@
 package com.zhiwu.dynamicthreadpollermanager.experiment.metrics;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -20,7 +20,7 @@ public final class InMemoryEvidenceRecorder implements EvidenceRecorder {
     @Override
     public void record(ObservedSnapshot snapshot) {
         Objects.requireNonNull(snapshot, "snapshot must not be null");
-        store.computeIfAbsent(snapshot.runId(), key -> new ArrayList<>()).add(snapshot);
+        store.computeIfAbsent(snapshot.runId(), key -> new CopyOnWriteArrayList<>()).add(snapshot);
     }
 
     @Override

@@ -29,6 +29,14 @@ public interface SnapshotAssembler {
     }
 
     /**
+     * Resolves a {@link MetricValue} to a {@code long}, falling back to the
+     * supplied default when the value is absent.
+     */
+    static long resolveLongOrDefault(MetricValue<Long> value, long fallback) {
+        return value.isPresent() ? value.asOptional().orElseThrow() : fallback;
+    }
+
+    /**
      * Resolves a {@link MetricValue} to a {@code double}, falling back to the
      * supplied default when the value is absent.
      */

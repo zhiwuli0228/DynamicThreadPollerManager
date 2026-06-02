@@ -12,16 +12,29 @@ public final class RuntimeObservation {
 
     private final Instant timestamp;
     private final MetricValue<Integer> activeThreads;
+    private final MetricValue<Integer> poolSize;
     private final MetricValue<Integer> queueSize;
+    private final MetricValue<Long> completedTaskCount;
     private final MetricValue<Double> cpuUtilization;
 
     public RuntimeObservation(Instant timestamp,
                               MetricValue<Integer> activeThreads,
                               MetricValue<Integer> queueSize,
                               MetricValue<Double> cpuUtilization) {
+        this(timestamp, activeThreads, MetricValue.absent(), queueSize, MetricValue.absent(), cpuUtilization);
+    }
+
+    public RuntimeObservation(Instant timestamp,
+                              MetricValue<Integer> activeThreads,
+                              MetricValue<Integer> poolSize,
+                              MetricValue<Integer> queueSize,
+                              MetricValue<Long> completedTaskCount,
+                              MetricValue<Double> cpuUtilization) {
         this.timestamp = Objects.requireNonNull(timestamp, "timestamp must not be null");
         this.activeThreads = Objects.requireNonNull(activeThreads, "activeThreads must not be null");
+        this.poolSize = Objects.requireNonNull(poolSize, "poolSize must not be null");
         this.queueSize = Objects.requireNonNull(queueSize, "queueSize must not be null");
+        this.completedTaskCount = Objects.requireNonNull(completedTaskCount, "completedTaskCount must not be null");
         this.cpuUtilization = Objects.requireNonNull(cpuUtilization, "cpuUtilization must not be null");
     }
 
@@ -33,8 +46,16 @@ public final class RuntimeObservation {
         return activeThreads;
     }
 
+    public MetricValue<Integer> poolSize() {
+        return poolSize;
+    }
+
     public MetricValue<Integer> queueSize() {
         return queueSize;
+    }
+
+    public MetricValue<Long> completedTaskCount() {
+        return completedTaskCount;
     }
 
     public MetricValue<Double> cpuUtilization() {
@@ -42,6 +63,6 @@ public final class RuntimeObservation {
     }
 
     public RuntimeObservation withTimestamp(Instant newTimestamp) {
-        return new RuntimeObservation(newTimestamp, activeThreads, queueSize, cpuUtilization);
+        return new RuntimeObservation(newTimestamp, activeThreads, poolSize, queueSize, completedTaskCount, cpuUtilization);
     }
 }

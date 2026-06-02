@@ -16,7 +16,9 @@ class ManualPressureSamplerTest {
         RuntimeObservation observation = new RuntimeObservation(
                 Instant.parse("2026-06-02T09:59:00Z"),
                 MetricValue.present(8),
+                MetricValue.present(16),
                 MetricValue.present(40),
+                MetricValue.present(200L),
                 MetricValue.present(0.6)
         );
 
@@ -26,7 +28,9 @@ class ManualPressureSamplerTest {
         PressureSnapshot snapshot = sampled.snapshot();
         assertEquals(at, snapshot.timestamp(), "sampler should override the observation timestamp");
         assertEquals(8, snapshot.activeThreads());
+        assertEquals(16, snapshot.poolSize());
         assertEquals(40, snapshot.queueSize());
+        assertEquals(200L, snapshot.completedTaskCount());
         assertEquals(0.6, snapshot.cpuUtilization());
     }
 

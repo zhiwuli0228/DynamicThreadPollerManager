@@ -14,13 +14,17 @@ class RuntimeObservationTest {
         RuntimeObservation observation = new RuntimeObservation(
                 now,
                 MetricValue.present(10),
+                MetricValue.present(12),
                 MetricValue.present(50),
+                MetricValue.present(100L),
                 MetricValue.present(0.75)
         );
 
         assertEquals(now, observation.timestamp());
         assertEquals(10, observation.activeThreads().asOptional().orElseThrow());
+        assertEquals(12, observation.poolSize().asOptional().orElseThrow());
         assertEquals(50, observation.queueSize().asOptional().orElseThrow());
+        assertEquals(100L, observation.completedTaskCount().asOptional().orElseThrow());
         assertEquals(0.75, observation.cpuUtilization().asOptional().orElseThrow());
     }
 
@@ -60,7 +64,9 @@ class RuntimeObservationTest {
 
         assertEquals(t2, updated.timestamp());
         assertEquals(10, updated.activeThreads().asOptional().orElseThrow());
+        assertTrue(updated.poolSize().isAbsent());
         assertTrue(updated.queueSize().isAbsent());
+        assertTrue(updated.completedTaskCount().isAbsent());
         assertEquals(0.5, updated.cpuUtilization().asOptional().orElseThrow());
         assertEquals(t1, original.timestamp(), "original observation must be unchanged");
     }

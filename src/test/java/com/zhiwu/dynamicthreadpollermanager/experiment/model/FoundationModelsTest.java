@@ -24,8 +24,14 @@ class FoundationModelsTest {
 
         assertEquals(now, snapshot.timestamp());
         assertEquals(10, snapshot.activeThreads());
+        assertEquals(0, snapshot.poolSize());
         assertEquals(50, snapshot.queueSize());
+        assertEquals(0L, snapshot.completedTaskCount());
         assertEquals(0.75, snapshot.cpuUtilization());
+
+        PressureSnapshot fullSnapshot = new PressureSnapshot(now, 10, 12, 50, 100L, 0.75);
+        assertEquals(12, fullSnapshot.poolSize());
+        assertEquals(100L, fullSnapshot.completedTaskCount());
     }
 
     @Test

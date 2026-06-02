@@ -1,3 +1,9 @@
+## Purpose
+
+The metrics snapshot and recording capability provides the read-only observation layer for experiment runs. It collects timestamped runtime pressure snapshots, preserves unavailable metric semantics, records evidence streams per run, and derives minimal summaries without evaluating policies or mutating executors.
+
+## Requirements
+
 ### Requirement: Runtime pressure snapshot collection
 The system MUST collect timestamped runtime pressure snapshots for an experiment run without evaluating policy decisions or mutating executor state.
 

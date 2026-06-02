@@ -17,7 +17,9 @@ class DefaultSnapshotAssemblerTest {
         RuntimeObservation observation = new RuntimeObservation(
                 now,
                 MetricValue.present(10),
+                MetricValue.present(12),
                 MetricValue.present(50),
+                MetricValue.present(300L),
                 MetricValue.present(0.75)
         );
 
@@ -27,7 +29,9 @@ class DefaultSnapshotAssemblerTest {
         PressureSnapshot snapshot = observed.snapshot();
         assertEquals(now, snapshot.timestamp());
         assertEquals(10, snapshot.activeThreads());
+        assertEquals(12, snapshot.poolSize());
         assertEquals(50, snapshot.queueSize());
+        assertEquals(300L, snapshot.completedTaskCount());
         assertEquals(0.75, snapshot.cpuUtilization());
     }
 
@@ -45,7 +49,9 @@ class DefaultSnapshotAssemblerTest {
 
         PressureSnapshot snapshot = observed.snapshot();
         assertEquals(0, snapshot.activeThreads());
+        assertEquals(0, snapshot.poolSize());
         assertEquals(0, snapshot.queueSize());
+        assertEquals(0L, snapshot.completedTaskCount());
         assertEquals(0.0, snapshot.cpuUtilization());
     }
 
@@ -56,13 +62,17 @@ class DefaultSnapshotAssemblerTest {
                 now,
                 MetricValue.present(7),
                 MetricValue.absent(),
+                MetricValue.absent(),
+                MetricValue.absent(),
                 MetricValue.present(0.4)
         );
 
         ObservedSnapshot observed = assembler.assemble("run-1", observation);
 
         assertTrue(observed.observation().activeThreads().isPresent());
+        assertTrue(observed.observation().poolSize().isAbsent());
         assertTrue(observed.observation().queueSize().isAbsent());
+        assertTrue(observed.observation().completedTaskCount().isAbsent());
         assertTrue(observed.observation().cpuUtilization().isPresent());
         assertEquals(7, observed.observation().activeThreads().asOptional().orElseThrow());
         assertEquals(0.4, observed.observation().cpuUtilization().asOptional().orElseThrow());
@@ -74,7 +84,9 @@ class DefaultSnapshotAssemblerTest {
         RuntimeObservation observation = new RuntimeObservation(
                 now,
                 MetricValue.present(5),
+                MetricValue.present(6),
                 MetricValue.absent(),
+                MetricValue.present(50L),
                 MetricValue.absent()
         );
 
@@ -82,7 +94,9 @@ class DefaultSnapshotAssemblerTest {
 
         PressureSnapshot snapshot = observed.snapshot();
         assertEquals(5, snapshot.activeThreads());
+        assertEquals(6, snapshot.poolSize());
         assertEquals(0, snapshot.queueSize());
+        assertEquals(50L, snapshot.completedTaskCount());
         assertEquals(0.0, snapshot.cpuUtilization());
     }
 
