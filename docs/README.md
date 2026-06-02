@@ -26,4 +26,5 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 - `docs/05-domain/` domain terms and exploration boundaries
 - `docs/06-operations/` runtime and operating notes
 - `docs/07-templates/` version, ADR, and change decomposition templates
+- `docs/08-retrospectives/` cross-agent delivery retrospectives and handoff improvements
 - `docs/99-archive/` bootstrap history and retired materials

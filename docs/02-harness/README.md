@@ -11,6 +11,9 @@ This directory defines the governance and operating rules for AI-assisted work i
 5. `docs/02-harness/verification-policy.md`
 6. `docs/02-harness/change-snapshot-policy.md`
 
+For cross-agent handoff and post-archive closeout lessons, also read
+`docs/08-retrospectives/agent-handoff-closeout-standard.md`.
+
 ## Reading Rule
 
 - Read `docs/00-project/current-state.md` first, then this directory, then architecture and OpenSpec rules.
