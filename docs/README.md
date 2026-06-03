@@ -4,9 +4,9 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `EXECUTION_AUTHORIZED` for the `scenario-runner-and-baseline` change.
+- `READY_FOR_CHANGE_DECOMPOSITION` for the `adaptive-policy-and-control-gate` change candidate.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.2.0` version design is `EXECUTION_AUTHORIZED` for the third bounded capability change.
+- `v0.3.0` version design is `READY_FOR_CHANGE_DECOMPOSITION`; no implementation change is active yet.
 
 ## Reading Order
 
