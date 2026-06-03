@@ -3,7 +3,7 @@
 ## Header
 
 - Version name: `v0.3.0`
-- Status: `READY_FOR_CHANGE_DECOMPOSITION`
+- Status: `EXECUTION_AUTHORIZED`
 - Change candidate: `adaptive-policy-and-control-gate`
 
 ## 1. API Surface

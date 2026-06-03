@@ -4,9 +4,9 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `READY_FOR_CHANGE_DECOMPOSITION` for the `adaptive-policy-and-control-gate` change candidate.
+- `EXECUTION_AUTHORIZED` for the `adaptive-policy-and-control-gate` change.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.3.0` version design is `READY_FOR_CHANGE_DECOMPOSITION`; no implementation change is active yet.
+- `v0.3.0` version design is `EXECUTION_AUTHORIZED`; implementation is bounded to `adaptive-policy-and-control-gate`.
 
 ## Reading Order
 

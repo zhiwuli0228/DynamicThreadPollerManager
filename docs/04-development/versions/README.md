@@ -7,7 +7,7 @@ This folder is reserved for version design packages.
 - Three version packages exist: `v0.1.0`, `v0.2.0`, and `v0.3.0`.
 - `v0.1.0` is `BASELINE_DELIVERED`.
 - `v0.2.0` is `BASELINE_DELIVERED`.
-- `v0.3.0` is `READY_FOR_CHANGE_DECOMPOSITION`; the next OpenSpec change candidate is `adaptive-policy-and-control-gate`.
+- `v0.3.0` is `EXECUTION_AUTHORIZED`; the active OpenSpec change is `adaptive-policy-and-control-gate`.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

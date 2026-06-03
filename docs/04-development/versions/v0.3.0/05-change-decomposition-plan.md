@@ -3,8 +3,8 @@
 ## Header
 
 - Version name: `v0.3.0`
-- Status: `READY_FOR_CHANGE_DECOMPOSITION`
-- Authorization status: one OpenSpec change may be created from this design
+- Status: `EXECUTION_AUTHORIZED`
+- Authorization status: `adaptive-policy-and-control-gate` may be implemented from its complete superspec artifacts
 
 ## 1. Change Candidate
 
@@ -49,9 +49,9 @@ The following remain deferred:
 
 Next step after this version design:
 
-1. Create `openspec/changes/adaptive-policy-and-control-gate/` using `superspec`.
-2. Generate full artifacts: brainstorm, proposal, design, specs, tasks, plan.
-3. Only then run apply.
+1. Run `/opsx:apply adaptive-policy-and-control-gate`.
+2. Implement only the tasks in `openspec/changes/adaptive-policy-and-control-gate/tasks.md`.
+3. Generate `apply.md`, then run verify before finalize/archive.
 
 ## 5. Decomposition Guardrail
 

@@ -2,7 +2,7 @@
 
 ## Current Stage
 
-This repository is in `READY_FOR_CHANGE_DECOMPOSITION`.
+This repository is in `EXECUTION_AUTHORIZED` for `adaptive-policy-and-control-gate`.
 
 The current stage is authoritative only as recorded in `docs/00-project/current-state.md`.
 
@@ -11,9 +11,9 @@ The current stage is authoritative only as recorded in `docs/00-project/current-
 - Execute the scope of the active task directly.
 - Do not infer an implementation mission from a documentation task.
 - Do not branch into unrelated capabilities or framework expansion.
-- No capability implementation is currently active.
-- The only OpenSpec change that may be created is `adaptive-policy-and-control-gate`.
-- Do not begin implementation until its OpenSpec artifacts are complete and execution is authorized in `docs/00-project/current-state.md`.
+- The only active implementation scope is `adaptive-policy-and-control-gate`.
+- Do not begin a neighboring change without a successor version design, OpenSpec change, and updated authorization in `docs/00-project/current-state.md`.
+- Do not implement executor mutation, queue resizing, scenario changes, persistence, external API, or new dependencies in this change.
 
 ## Autonomy Rule
 
