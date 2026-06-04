@@ -2,7 +2,7 @@
 
 ## Current Stage
 
-This repository is in `READY_FOR_CHANGE_DECOMPOSITION` for `v0.4.0`.
+This repository is in `EXECUTION_AUTHORIZED` for `v0.4.0`.
 
 The current stage is authoritative only as recorded in `docs/00-project/current-state.md`.
 
@@ -11,11 +11,11 @@ The current stage is authoritative only as recorded in `docs/00-project/current-
 - Execute the scope of the active task directly.
 - Do not infer an implementation mission from a documentation task.
 - Do not branch into unrelated capabilities or framework expansion.
-- Change decomposition is currently allowed only for the version named in `docs/00-project/current-state.md`.
-- No Java implementation scope is active unless `docs/00-project/current-state.md` names one explicitly.
+- Change execution is currently allowed only for the active change named in `docs/00-project/current-state.md`.
+- Java implementation scope is active only for the bounded change named in `docs/00-project/current-state.md`.
 - Do not begin a neighboring change without a successor version design, OpenSpec change, and updated authorization in `docs/00-project/current-state.md`.
 - Do not implement executor mutation, queue resizing, scenario changes, persistence, external API, or new dependencies without explicit successor authorization.
-- For future implementation work, do not start coding unless `docs/02-harness/managed-change-standard.md` gates are satisfied: IR closure, SR closure, OpenSpec authorization, and synchronized current-state authority.
+- For implementation work, do not code outside the active change boundary even if adjacent packages appear related.
 
 ## Autonomy Rule
 

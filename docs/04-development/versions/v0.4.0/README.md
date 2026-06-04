@@ -3,17 +3,17 @@
 ## Header
 
 - Version name: `v0.4.0`
-- Authoring date: `2026-06-04`
-- Status: `READY_FOR_CHANGE_DECOMPOSITION`
-- Current phase: `CHANGE_DECOMPOSITION_AUTHORIZED`
-- Current conclusion: SR closure verified; the `offline-replay-and-readiness-gate` change decomposition package has been created and is ready for implementation authorization review
+- Authoring date: `2026-06-05`
+- Status: `EXECUTION_AUTHORIZED`
+- Current phase: `BOUNDED_CHANGE_IMPLEMENTATION_AUTHORIZED`
+- Current conclusion: the `offline-replay-and-readiness-gate` change decomposition package has been approved for bounded implementation
 - Authoritative branch: `claude_master`
 
 ## Purpose
 
 `v0.4.0` 用于定义下一阶段需求：在进入 executor mutation、queue resizing 或闭环 adaptive control 之前，先获取和固化 baseline pressure evidence、offline policy replay、decision evidence 和最小实验报告输入。
 
-本版本当前只处于需求草案阶段，不授权 OpenSpec change，也不授权 Java 实现。
+本版本已授权 `offline-replay-and-readiness-gate` 进入受控实现阶段，但只允许在该 change 边界内修改 Java 源码、测试和 OpenSpec 执行证据。
 
 ## Managed Change Gate
 
@@ -43,8 +43,9 @@ Current:
 
 Next gated artifacts:
 
-- Implementation authorization review for `offline-replay-and-readiness-gate`
-- No Java execution until `docs/00-project/current-state.md` enters `EXECUTION_AUTHORIZED`
+- `apply.md`
+- `verify.md`
+- `finalize.md`
 
 ## Current IR Summary
 
@@ -59,12 +60,12 @@ The current IR defines eight requirement items:
 - `IR-v0.4-007`: evidence hygiene and boundary isolation.
 - `IR-v0.4-008`: reviewable experiment readiness criteria.
 
-The IR and SR closure sets are now complete, and the change decomposition package for `offline-replay-and-readiness-gate` has been created under `openspec/changes/`. `v0.4.0` still does not authorize Java implementation work.
+The IR and SR closure sets are complete, the change decomposition package for `offline-replay-and-readiness-gate` exists under `openspec/changes/`, and `docs/00-project/current-state.md` now authorizes bounded Java implementation for that change only.
 
 ## Current Non-Scope
 
-- No Java source or test implementation.
 - No executor mutation.
 - No queue capacity resizing.
 - No scheduler or scenario execution behavior change.
 - No persistence, REST API, UI, or production integration.
+- No neighboring capability implementation outside `offline-replay-and-readiness-gate`.

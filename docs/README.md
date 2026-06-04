@@ -4,11 +4,11 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `READY_FOR_CHANGE_DECOMPOSITION` for `v0.4.0`.
+- `EXECUTION_AUTHORIZED` for `v0.4.0`.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.4.0` is `READY_FOR_CHANGE_DECOMPOSITION`; change decomposition is authorized.
-- Active authorized OpenSpec change for decomposition only: `offline-replay-and-readiness-gate`.
-- No Java implementation scope is currently authorized.
+- `v0.4.0` is `EXECUTION_AUTHORIZED` for the bounded change `offline-replay-and-readiness-gate`.
+- Active authorized OpenSpec change: `offline-replay-and-readiness-gate`.
+- Java implementation is authorized only within that change boundary.
 
 ## Reading Order
 
