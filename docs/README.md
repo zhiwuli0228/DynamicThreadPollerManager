@@ -4,9 +4,10 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED` after archiving the `adaptive-policy-and-control-gate` change.
+- `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED` for `v0.4.0`.
 - Authoritative source: `docs/00-project/current-state.md`.
-- No active OpenSpec change is currently authorized. Future capability work requires an updated version design and `docs/00-project/current-state.md` authorization.
+- `v0.4.0` is `BASELINED`; only SR functional design is authorized.
+- No active OpenSpec change is currently authorized.
 
 ## Reading Order
 

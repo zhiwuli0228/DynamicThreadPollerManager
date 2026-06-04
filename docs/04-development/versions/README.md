@@ -8,7 +8,7 @@ This folder is reserved for version design packages.
 - `v0.1.0` is `BASELINE_DELIVERED`.
 - `v0.2.0` is `BASELINE_DELIVERED`.
 - `v0.3.0` is `IMPLEMENTED`; `adaptive-policy-and-control-gate` is archived and synchronized to `openspec/specs/`.
-- `v0.4.0` is `DRAFT`; only requirement drafting is authorized.
+- `v0.4.0` is `BASELINED`; SR functional design is authorized.
 - No active OpenSpec change is currently authorized.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 

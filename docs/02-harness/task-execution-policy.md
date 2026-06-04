@@ -2,7 +2,7 @@
 
 ## Current Stage
 
-This repository is in `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED` after archiving `adaptive-policy-and-control-gate`.
+This repository is in `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED` for `v0.4.0`.
 
 The current stage is authoritative only as recorded in `docs/00-project/current-state.md`.
 
@@ -11,6 +11,7 @@ The current stage is authoritative only as recorded in `docs/00-project/current-
 - Execute the scope of the active task directly.
 - Do not infer an implementation mission from a documentation task.
 - Do not branch into unrelated capabilities or framework expansion.
+- SR functional design is currently allowed only for the version named in `docs/00-project/current-state.md`.
 - No Java implementation scope is active unless `docs/00-project/current-state.md` names one explicitly.
 - Do not begin a neighboring change without a successor version design, OpenSpec change, and updated authorization in `docs/00-project/current-state.md`.
 - Do not implement executor mutation, queue resizing, scenario changes, persistence, external API, or new dependencies without explicit successor authorization.
