@@ -12,15 +12,16 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 1. `docs/00-project/current-state.md`
 2. `docs/02-harness/context-policy.md`
-3. `docs/01-architecture/README.md`
-4. `docs/03-openspec/README.md`
-5. `docs/04-development/versions/README.md`
+3. `docs/02-harness/managed-change-standard.md`
+4. `docs/01-architecture/README.md`
+5. `docs/03-openspec/README.md`
+6. `docs/04-development/versions/README.md`
 
 ## Hub Map
 
 - `docs/00-project/` project facts, current state, glossary, roadmap
 - `docs/01-architecture/` long-lived architecture and future ADR space
-- `docs/02-harness/` AI governance, context policy, execution and verification rules
+- `docs/02-harness/` AI governance, context policy, managed change standard, execution and verification rules
 - `docs/03-openspec/` OpenSpec lifecycle and version-design authorization rules
 - `docs/04-development/versions/` future version design carrier
 - `docs/05-domain/` domain terms and exploration boundaries

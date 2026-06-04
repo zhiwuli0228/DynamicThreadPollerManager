@@ -8,8 +8,9 @@ This directory defines the governance and operating rules for AI-assisted work i
 2. `docs/02-harness/agent-behavior.md`
 3. `docs/02-harness/context-policy.md`
 4. `docs/02-harness/task-execution-policy.md`
-5. `docs/02-harness/verification-policy.md`
-6. `docs/02-harness/change-snapshot-policy.md`
+5. `docs/02-harness/managed-change-standard.md`
+6. `docs/02-harness/verification-policy.md`
+7. `docs/02-harness/change-snapshot-policy.md`
 
 For cross-agent handoff and post-archive closeout lessons, also read
 `docs/08-retrospectives/agent-handoff-closeout-standard.md`.
@@ -17,3 +18,4 @@ For cross-agent handoff and post-archive closeout lessons, also read
 ## Reading Rule
 
 - Read `docs/00-project/current-state.md` first, then this directory, then architecture and OpenSpec rules.
+- For any future capability version, OpenSpec change, Java implementation, testing, archive, or handoff, read `docs/02-harness/managed-change-standard.md` before acting.

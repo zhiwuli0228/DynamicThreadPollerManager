@@ -9,6 +9,7 @@
 - Version design status: `v0.3.0` is `IMPLEMENTED`
 - OpenSpec capability changes: `experiment-foundation`, `metrics-snapshot-and-recording`, `scenario-runner-and-baseline`, and `adaptive-policy-and-control-gate` have been archived; the v0.1.0, v0.2.0, and v0.3.0 capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
 - Java implementation status: the experiment foundation package, the metrics observation layer (sampling, normalization, append-only recording, summary), the deterministic scenario runner with fixed baseline executor, and the adaptive policy/control-gate package are present on the main working branch
+- Governance status: future capability work must follow `docs/02-harness/managed-change-standard.md`; reusable stage-package guidance is available at `docs/07-templates/managed-change-stage-package-template.md`
 
 ## Active Authorized Change
 
@@ -21,6 +22,7 @@
 - Update cross-links so future work can discover the correct authority sequence quickly.
 - Keep the current-state record synchronized with the actual repository state.
 - Inspect archived artifacts and synchronized specs as evidence.
+- Maintain managed-change standards and templates without authorizing new Java implementation.
 
 ## What Is Not Allowed Now
 

@@ -12,6 +12,7 @@
 ### Before Implementation
 
 - [ ] The version design status authorizes this change.
+- [ ] Managed-change gates are satisfied: IR closure and SR closure are recorded, or the task explicitly authorizes a lighter documented path.
 - [ ] The change scope matches the approved capability boundary.
 - [ ] Requirement wording matches the intended runtime semantics.
 - [ ] The current-state record reflects the current authorization story.
@@ -27,6 +28,8 @@
 
 - [ ] Implementation evidence matches the spec wording.
 - [ ] Verification evidence proves the intended semantics.
+- [ ] Implementation review and test review findings are closed or recorded as accepted residual risk.
+- [ ] Acceptance precheck maps user-confirmed semantics to IR, SR, spec, implementation, tests, and evidence.
 - [ ] `docs/00-project/current-state.md` is synchronized to the actual repository state.
 - [ ] If long-lived architecture changed, `docs/01-architecture/` is updated.
 - [ ] If a long-lived decision was accepted, an ADR has been created or updated.

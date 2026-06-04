@@ -6,6 +6,7 @@
 - Run the repository validation commands requested by the task.
 - Record the result of each check honestly.
 - When another agent has already completed or archived work, verify the current repository state instead of relying only on that agent's report.
+- For managed changes, verify the stage gate required by `docs/02-harness/managed-change-standard.md` before accepting handoff or advancing stages.
 
 ## Expected Checks for Documentation Work
 
@@ -38,6 +39,7 @@ Final verification:
 - openspec validate: pass/fail, command used
 - tests: pass/fail, command used, test count if available
 - spec scenarios mapped: yes/no
+- managed-change gate satisfied: yes/no/N/A
 - worktree clean: yes/no
 - final commit: <sha>
 - residual risks: <none or list>
@@ -48,3 +50,4 @@ Final verification:
 - Never claim validation that was not actually executed.
 - Never treat task checkboxes alone as requirement coverage.
 - Never treat a pre-archive `verify.md` as proof that post-archive main specs are valid.
+- Never treat review disposition as closure unless a closure verification record exists or the current task explicitly defines a lighter gate.
