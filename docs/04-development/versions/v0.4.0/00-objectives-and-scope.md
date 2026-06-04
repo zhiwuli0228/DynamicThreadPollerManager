@@ -3,10 +3,10 @@
 ## Header
 
 - Version name: `v0.4.0`
-- Status: `BASELINED`
-- Current phase: `SR_FUNCTIONAL_DESIGN_AUTHORIZED`
+- Status: `READY_FOR_CHANGE_DECOMPOSITION`
+- Current phase: `CHANGE_DECOMPOSITION_AUTHORIZED`
 - Requirement theme: baseline pressure evidence, offline policy replay, decision evidence
-- Current conclusion: IR review/disposition/closure are complete; SR functional design may start
+- Current conclusion: IR/SR review, disposition, and closure are complete; change decomposition may start
 
 ## 1. 背景
 
@@ -58,11 +58,11 @@
 
 ## 6. 当前阶段出口
 
-IR 阶段已经完成。进入 SR 功能设计前应满足：
+IR 和 SR 阶段已经完成。进入 change decomposition 前应满足：
 
 1. `10-ir.md`。
 2. `11-ir-review.md`。
 3. `12-ir-review-disposition.md`。
 4. `13-ir-closure-verification.md`。
 
-上述条件已满足。下一步允许进入 SR 设计，但仍不允许 OpenSpec change 或 Java 实现。
+上述条件已满足。下一步允许进入 change decomposition 和 OpenSpec change 设计，但仍不允许 Java 实现。

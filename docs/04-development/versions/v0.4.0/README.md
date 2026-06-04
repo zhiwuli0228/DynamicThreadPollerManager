@@ -4,9 +4,9 @@
 
 - Version name: `v0.4.0`
 - Authoring date: `2026-06-04`
-- Status: `BASELINED`
-- Current phase: `SR_FUNCTIONAL_DESIGN_AUTHORIZED`
-- Current conclusion: IR closure verified; SR functional design may start
+- Status: `READY_FOR_CHANGE_DECOMPOSITION`
+- Current phase: `CHANGE_DECOMPOSITION_AUTHORIZED`
+- Current conclusion: SR closure verified; change decomposition may start
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -35,14 +35,16 @@ Current:
 - [11-ir-review.md](./11-ir-review.md)
 - [12-ir-review-disposition.md](./12-ir-review-disposition.md)
 - [13-ir-closure-verification.md](./13-ir-closure-verification.md)
+- [20-sr.md](./20-sr.md)
+- [21-sr-review.md](./21-sr-review.md)
+- [22-sr-review-disposition.md](./22-sr-review-disposition.md)
+- [23-sr-closure-verification.md](./23-sr-closure-verification.md)
 - [decision-log.md](./decision-log.md)
 
 Next gated artifacts:
 
-- `20-sr.md`
-- `21-sr-review.md`
-- `22-sr-review-disposition.md`
-- `23-sr-closure-verification.md`
+- OpenSpec change proposal artifacts
+- Change decomposition / task scaffolding
 
 ## Current IR Summary
 
@@ -57,7 +59,7 @@ The current IR defines eight requirement items:
 - `IR-v0.4-007`: evidence hygiene and boundary isolation.
 - `IR-v0.4-008`: reviewable experiment readiness criteria.
 
-The IR defines `AC-v0.4-001` through `AC-v0.4-012`, and the IR review/closure set is now complete. These ACs now authorize SR functional design input, but they still do not authorize OpenSpec or implementation work.
+The IR and SR closure sets are now complete. `v0.4.0` may enter change decomposition, but still does not authorize Java implementation work.
 
 ## Current Non-Scope
 

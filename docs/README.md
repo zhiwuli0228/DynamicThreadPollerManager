@@ -4,9 +4,9 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED` for `v0.4.0`.
+- `READY_FOR_CHANGE_DECOMPOSITION` for `v0.4.0`.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.4.0` is `BASELINED`; only SR functional design is authorized.
+- `v0.4.0` is `READY_FOR_CHANGE_DECOMPOSITION`; change decomposition is authorized.
 - No active OpenSpec change is currently authorized.
 
 ## Reading Order
