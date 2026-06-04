@@ -6,7 +6,7 @@
 - Status: `READY_FOR_CHANGE_DECOMPOSITION`
 - Current phase: `CHANGE_DECOMPOSITION_AUTHORIZED`
 - Requirement theme: baseline pressure evidence, offline policy replay, decision evidence
-- Current conclusion: IR/SR review, disposition, and closure are complete; change decomposition may start
+- Current conclusion: IR/SR review, disposition, and closure are complete; the `offline-replay-and-readiness-gate` change decomposition package is now present
 
 ## 1. 背景
 
@@ -65,4 +65,4 @@ IR 和 SR 阶段已经完成。进入 change decomposition 前应满足：
 3. `12-ir-review-disposition.md`。
 4. `13-ir-closure-verification.md`。
 
-上述条件已满足。下一步允许进入 change decomposition 和 OpenSpec change 设计，但仍不允许 Java 实现。
+上述条件已满足。`offline-replay-and-readiness-gate` change decomposition 和 OpenSpec proposal artifacts 已创建，但仍不允许 Java 实现。

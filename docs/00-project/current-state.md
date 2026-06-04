@@ -13,8 +13,10 @@
 
 ## Active Authorized Change
 
-- None.
-- No OpenSpec change or Java implementation scope is active until this file explicitly authorizes a successor version design and change.
+- Change name: `offline-replay-and-readiness-gate`
+- Authorized scope: OpenSpec change decomposition artifacts only
+- Execution status: Java implementation is still **not** authorized
+- Authority source: `docs/04-development/versions/v0.4.0/23-sr-closure-verification.md`
 
 ## Active Authorized Version Work
 
@@ -22,7 +24,7 @@
 - Work type: change decomposition only
 - Bounded by: `docs/04-development/versions/v0.4.0/`
 - Scope: define requirements for baseline pressure evidence, offline policy replay, decision evidence, and experiment-report inputs needed before any executor mutation work
-- Non-scope: OpenSpec change creation, Java implementation, executor mutation, queue resizing, scheduler changes, persistence, external API, new dependencies, production adaptive control
+- Non-scope: Java implementation, executor mutation, queue resizing, scheduler changes, persistence, external API, new dependencies, production adaptive control
 
 ## What Is Allowed Now
 
@@ -32,10 +34,11 @@
 - Inspect archived artifacts and synchronized specs as evidence.
 - Maintain managed-change standards and templates without authorizing new Java implementation.
 - Create `v0.4.0` change decomposition and OpenSpec proposal artifacts under the authorized version boundary.
+- Maintain the active change package `openspec/changes/offline-replay-and-readiness-gate/` until execution is explicitly authorized.
 
 ## What Is Not Allowed Now
 
-- No new OpenSpec change creation without a successor version design and explicit authorization in this file.
+- No new OpenSpec change creation beyond `offline-replay-and-readiness-gate` without a successor version design and explicit authorization in this file.
 - No unreviewed scope expansion.
 - No branch-state mismatch between the workspace and the authoritative branch.
 - No archive or finalize event without synchronized authority records.

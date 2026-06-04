@@ -9,7 +9,8 @@ This folder is reserved for version design packages.
 - `v0.2.0` is `BASELINE_DELIVERED`.
 - `v0.3.0` is `IMPLEMENTED`; `adaptive-policy-and-control-gate` is archived and synchronized to `openspec/specs/`.
 - `v0.4.0` is `READY_FOR_CHANGE_DECOMPOSITION`; change decomposition is authorized.
-- No active OpenSpec change is currently authorized.
+- The active authorized change decomposition package is `offline-replay-and-readiness-gate`.
+- No Java implementation scope is currently authorized.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

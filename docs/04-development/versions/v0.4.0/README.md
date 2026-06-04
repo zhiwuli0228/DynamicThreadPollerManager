@@ -6,7 +6,7 @@
 - Authoring date: `2026-06-04`
 - Status: `READY_FOR_CHANGE_DECOMPOSITION`
 - Current phase: `CHANGE_DECOMPOSITION_AUTHORIZED`
-- Current conclusion: SR closure verified; change decomposition may start
+- Current conclusion: SR closure verified; the `offline-replay-and-readiness-gate` change decomposition package has been created and is ready for implementation authorization review
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -43,8 +43,8 @@ Current:
 
 Next gated artifacts:
 
-- OpenSpec change proposal artifacts
-- Change decomposition / task scaffolding
+- Implementation authorization review for `offline-replay-and-readiness-gate`
+- No Java execution until `docs/00-project/current-state.md` enters `EXECUTION_AUTHORIZED`
 
 ## Current IR Summary
 
@@ -59,11 +59,10 @@ The current IR defines eight requirement items:
 - `IR-v0.4-007`: evidence hygiene and boundary isolation.
 - `IR-v0.4-008`: reviewable experiment readiness criteria.
 
-The IR and SR closure sets are now complete. `v0.4.0` may enter change decomposition, but still does not authorize Java implementation work.
+The IR and SR closure sets are now complete, and the change decomposition package for `offline-replay-and-readiness-gate` has been created under `openspec/changes/`. `v0.4.0` still does not authorize Java implementation work.
 
 ## Current Non-Scope
 
-- No OpenSpec change.
 - No Java source or test implementation.
 - No executor mutation.
 - No queue capacity resizing.

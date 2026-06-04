@@ -7,7 +7,8 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 - `READY_FOR_CHANGE_DECOMPOSITION` for `v0.4.0`.
 - Authoritative source: `docs/00-project/current-state.md`.
 - `v0.4.0` is `READY_FOR_CHANGE_DECOMPOSITION`; change decomposition is authorized.
-- No active OpenSpec change is currently authorized.
+- Active authorized OpenSpec change for decomposition only: `offline-replay-and-readiness-gate`.
+- No Java implementation scope is currently authorized.
 
 ## Reading Order
 
