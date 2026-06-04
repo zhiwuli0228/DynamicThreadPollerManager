@@ -4,10 +4,11 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- Three version packages exist: `v0.1.0`, `v0.2.0`, and `v0.3.0`.
+- Four version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, and `v0.4.0`.
 - `v0.1.0` is `BASELINE_DELIVERED`.
 - `v0.2.0` is `BASELINE_DELIVERED`.
 - `v0.3.0` is `IMPLEMENTED`; `adaptive-policy-and-control-gate` is archived and synchronized to `openspec/specs/`.
+- `v0.4.0` is `DRAFT`; only requirement drafting is authorized.
 - No active OpenSpec change is currently authorized.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
