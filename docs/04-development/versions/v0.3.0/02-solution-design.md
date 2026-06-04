@@ -3,7 +3,7 @@
 ## Header
 
 - Version name: `v0.3.0`
-- Status: `EXECUTION_AUTHORIZED`
+- Status: `IMPLEMENTED`
 - Change candidate: `adaptive-policy-and-control-gate`
 
 ## 1. Context

@@ -3,8 +3,8 @@
 ## Header
 
 - Version name: `v0.3.0`
-- Status: `EXECUTION_AUTHORIZED`
-- Authorization status: `adaptive-policy-and-control-gate` may be implemented from its complete superspec artifacts
+- Status: `IMPLEMENTED`
+- Authorization status: `adaptive-policy-and-control-gate` has been implemented, archived, and synchronized to `openspec/specs/`
 
 ## 1. Change Candidate
 
@@ -45,13 +45,14 @@ The following remain deferred:
 - analysis reports,
 - production integration.
 
-## 4. Execution Path
+## 4. Execution Result
 
-Next step after this version design:
+Result after this version design:
 
-1. Run `/opsx:apply adaptive-policy-and-control-gate`.
-2. Implement only the tasks in `openspec/changes/adaptive-policy-and-control-gate/tasks.md`.
-3. Generate `apply.md`, then run verify before finalize/archive.
+1. `adaptive-policy-and-control-gate` was implemented.
+2. The change was verified with the tests and evidence listed in `04-testing-and-acceptance-design.md`.
+3. The delta spec was synchronized to `openspec/specs/adaptive-policy-and-control-gate/spec.md`.
+4. The change was archived under `openspec/changes/archive/2026-06-04-adaptive-policy-and-control-gate/`.
 
 ## 5. Decomposition Guardrail
 

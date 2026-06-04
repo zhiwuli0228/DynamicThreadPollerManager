@@ -1,7 +1,8 @@
 # adaptive-policy-and-control-gate Specification
 
 ## Purpose
-TBD - created by archiving change adaptive-policy-and-control-gate. Update Purpose after archive.
+Define the implemented adaptive policy and control-gate capability: deterministic threshold-based policy evaluation from pressure snapshots, explicit minimum/maximum pool-size gating, reasoned policy decisions, conversion to applicable `ScaleDecision` records, and isolation from scenario execution or executor mutation.
+
 ## Requirements
 ### Requirement: Threshold policy configuration
 The system MUST define immutable threshold policy configuration with a policy identity, minimum pool size, maximum pool size, scale-up thresholds, scale-down threshold, and scale step.
@@ -94,4 +95,3 @@ The system MUST keep policy evaluation independent from scenario execution and e
 #### Scenario: Verify forbidden dependencies
 - **WHEN** the policy package source is inspected
 - **THEN** it MUST NOT reference scenario runner classes, executor adapter classes, queue mutation controllers, thread pool executors, scheduled executors, or adjustment event creation
-

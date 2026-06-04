@@ -4,7 +4,7 @@
 
 - Version name: `v0.3.0`
 - Authoring date: `2026-06-03`
-- Status: `EXECUTION_AUTHORIZED`
+- Status: `IMPLEMENTED`
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -27,9 +27,9 @@ The version introduces policy evaluation and safety gating only. It must produce
 
 - OpenSpec change candidate: `adaptive-policy-and-control-gate`
 - Schema: `superspec`
-- Current authorization: `EXECUTION_AUTHORIZED`
+- Current authorization: `ARCHIVED`
 
-This version package authorizes implementing `adaptive-policy-and-control-gate` after its full pre-implementation artifact set has been produced. It does not authorize executor mutation or a neighboring change.
+This version package authorized `adaptive-policy-and-control-gate`; the change has been implemented, archived, and synchronized to `openspec/specs/adaptive-policy-and-control-gate/spec.md`. It does not authorize executor mutation or a neighboring change.
 
 ## Boundary Summary
 

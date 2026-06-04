@@ -4,9 +4,9 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `EXECUTION_AUTHORIZED` for the `adaptive-policy-and-control-gate` change.
+- `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED` after archiving the `adaptive-policy-and-control-gate` change.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.3.0` version design is `EXECUTION_AUTHORIZED`; implementation is bounded to `adaptive-policy-and-control-gate`.
+- No active OpenSpec change is currently authorized. Future capability work requires an updated version design and `docs/00-project/current-state.md` authorization.
 
 ## Reading Order
 
