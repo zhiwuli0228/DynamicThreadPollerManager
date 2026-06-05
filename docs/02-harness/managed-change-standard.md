@@ -231,7 +231,33 @@ SR 必填内容：
 - 必要测试命令通过；
 - active changes 与 archive 目录状态一致；
 - 当前状态文件同步；
-- 不得把 precheck 通过误写为用户最终验收，除非用户明确确认。
+- 不得把 precheck 通过误写为用户最终验收，除非用户明确确认；
+- 必须进入复盘阶段，不能在 archive 后直接结束交付。
+
+### 9. Retrospective 复盘
+
+目标：在每个需求、版本或 bounded change 完成后，记录实际执行偏差、根因、流程问题和后续改进，避免同类问题在后续 agent 协作中重复出现。
+
+最低输出：
+
+- `docs/08-retrospectives/<date>-<change-or-version>-retrospective.md`
+
+复盘必填内容：
+
+- 交付对象和完成日期；
+- 计划路径与实际路径；
+- 发生的问题、遗漏和风险；
+- 问题根因；
+- 本次已经采纳的修复措施；
+- 仍未解决的问题；
+- 需要固化到规则、模板、脚本或检查清单的改进；
+- 后续 agent 必须遵守的行为。
+
+出口条件：
+
+- 复盘文档已创建并纳入 `docs/08-retrospectives/README.md`；
+- 若复盘提出流程改进，相关治理文档、模板或脚本已同步，或明确记录为后续待办；
+- 交付结论不能在复盘前标记为完全关闭。
 
 ## 严重级别规则
 
@@ -275,6 +301,7 @@ SR 必填内容：
 - OpenSpec `tasks.md` 是执行清单，不替代需求追踪矩阵。
 - OpenSpec `verify.md` 是 pre-archive 验证记录，不替代 archive 后主 spec 校验。
 - archive 后必须检查 `openspec/specs/<capability>/spec.md` 和 `docs/00-project/current-state.md`。
+- OpenSpec change 完成后仍必须进入 retrospective 复盘，不能以 archive 代替复盘。
 
 ## 当前项目的默认推进策略
 
@@ -294,3 +321,4 @@ SR 必填内容：
 - 若另一个 agent 声称完成，必须复核当前仓库状态、测试结果、OpenSpec 状态和 worktree 状态。
 - 不得把归档历史当作当前授权。
 - 不得自行创建下一个版本或 change，除非 `docs/00-project/current-state.md` 明确授权。
+- 每个需求、版本或 bounded change 完成后，必须补充复盘文档并检查是否需要同步治理规则。

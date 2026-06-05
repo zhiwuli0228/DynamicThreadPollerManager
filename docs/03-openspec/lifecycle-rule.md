@@ -6,6 +6,7 @@
 2. Decompose the version design into bounded change(s) only when the design says it is ready.
 3. Apply and verify the approved changes.
 4. Archive or sync the results according to the task.
+5. Complete retrospective and governance sync before claiming final closeout.
 
 ## Current Stage Rule
 

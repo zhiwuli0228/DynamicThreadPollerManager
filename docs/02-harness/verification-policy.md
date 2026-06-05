@@ -30,6 +30,7 @@
 - Confirm that `openspec list --json` does not still reference the archived change.
 - Map each spec scenario to implementation and test evidence when verifying a completed change.
 - For concurrent recorders, collectors, schedulers, and caches, inspect nested mutable state as well as outer container types.
+- Confirm that a retrospective record exists under `docs/08-retrospectives/` for the completed demand/change, or record that retrospective creation is still pending and the closeout is not fully complete.
 
 ## Archive Completion Gate (Hard Rule)
 
@@ -79,3 +80,4 @@ Final verification:
 - Never treat a pre-archive `verify.md` as proof that post-archive main specs are valid.
 - Never treat file moves into `openspec/changes/archive/**` as archive completion without a green post-archive guard.
 - Never treat review disposition as closure unless a closure verification record exists or the current task explicitly defines a lighter gate.
+- Never treat archive completion as final closeout if the mandatory retrospective step is still missing.

@@ -4,11 +4,11 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `EXECUTION_AUTHORIZED` for `v0.4.0`.
+- `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.4.0` is `EXECUTION_AUTHORIZED` for the bounded change `offline-replay-and-readiness-gate`.
-- Active authorized OpenSpec change: `offline-replay-and-readiness-gate`.
-- Java implementation is authorized only within that change boundary.
+- No active authorized OpenSpec change.
+- `v0.1.0` through `v0.4.0` are implemented and archived.
+- New capability work requires explicit re-authorization in `docs/00-project/current-state.md`.
 
 ## Reading Order
 
@@ -29,5 +29,5 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 - `docs/05-domain/` domain terms and exploration boundaries
 - `docs/06-operations/` runtime and operating notes
 - `docs/07-templates/` version, ADR, and change decomposition templates
-- `docs/08-retrospectives/` cross-agent delivery retrospectives and handoff improvements
+- `docs/08-retrospectives/` cross-agent delivery retrospectives, mandatory closeout reflection, and handoff improvements
 - `docs/99-archive/` bootstrap history and retired materials

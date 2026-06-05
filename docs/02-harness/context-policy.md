@@ -18,7 +18,7 @@
 - At an `EXECUTION_AUTHORIZED` stage, only the change named in `docs/00-project/current-state.md` may be implemented.
 - At `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`, no capability implementation is active; documentation framework maintenance is allowed unless this policy is explicitly superseded by `docs/00-project/current-state.md`.
 - A new capability change requires a successor version design, a new OpenSpec change, a new authorization stage in `docs/00-project/current-state.md`, and an updated version design entry.
-- Future capability work must follow `docs/02-harness/managed-change-standard.md`: IR closure before SR, SR closure before OpenSpec change authorization, implementation review closure before test/acceptance, and acceptance precheck before archive/state closeout.
+- Future capability work must follow `docs/02-harness/managed-change-standard.md`: IR closure before SR, SR closure before OpenSpec change authorization, implementation review closure before test/acceptance, acceptance precheck before archive/state closeout, and retrospective before final completion.
 
 ## Context Hygiene
 
