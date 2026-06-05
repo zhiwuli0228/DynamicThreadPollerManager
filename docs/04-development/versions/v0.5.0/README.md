@@ -4,10 +4,10 @@
 
 - Version name: `v0.5.0`
 - Authoring date: `2026-06-05`
-- Status: `READY_FOR_CHANGE_DECOMPOSITION`
-- Current phase: `SR_CLOSED`
+- Status: `EXECUTION_AUTHORIZED`
+- Current phase: `BOUNDED_CHANGE_IMPLEMENTATION_AUTHORIZED`
 - Requirement theme: executor adapter and queue resizing design readiness
-- Current conclusion: IR and SR review, disposition, and closure are complete; bounded OpenSpec change decomposition may begin after current-state authorization
+- Current conclusion: IR, SR, and OpenSpec decomposition are complete; `executor-adapter-and-adjustment-evidence` is authorized for bounded implementation
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -49,16 +49,15 @@ Next gated artifacts:
 
 ## Current Scope Boundary
 
-Allowed after current-state authorization:
+Allowed now:
 
-- Create bounded OpenSpec proposal/design/spec/tasks/plan artifacts for `executor-adapter-and-adjustment-evidence`.
+- Implement the bounded `executor-adapter-and-adjustment-evidence` OpenSpec change.
 - Use archived `v0.4.0` artifacts and synced specs as input evidence.
-- Translate closed SR requirements into OpenSpec change artifacts.
+- Update this change's `tasks.md`, `apply.md`, `verify.md`, and `finalize.md` as execution evidence.
 
 Not allowed now:
 
-- No OpenSpec change.
-- No Java source or test change.
-- No executor mutation.
+- No Java source or test change outside the approved `experiment.adjustment` implementation boundary.
 - No queue resizing implementation.
+- No production `ThreadPoolExecutor` integration.
 - No scheduler, scenario, persistence, REST, UI, or external dependency change.
