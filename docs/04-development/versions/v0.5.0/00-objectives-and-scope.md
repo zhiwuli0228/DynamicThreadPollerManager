@@ -3,10 +3,10 @@
 ## Header
 
 - Version name: `v0.5.0`
-- Status: `BASELINED`
-- Current phase: `IR_CLOSED`
+- Status: `READY_FOR_CHANGE_DECOMPOSITION`
+- Current phase: `SR_CLOSED`
 - Requirement theme: executor adapter and queue resizing design readiness
-- Current conclusion: IR review, disposition, and closure are complete; SR functional design is the next gated step
+- Current conclusion: IR and SR review, disposition, and closure are complete; bounded OpenSpec change decomposition is the next gated step
 
 ## 1. 背景
 
@@ -66,4 +66,4 @@ IR 阶段已闭环。已完成：
 3. `12-ir-review-disposition.md` 完成 findings 处置。
 4. `13-ir-closure-verification.md` 完成 P0/P1 闭环验证。
 
-下一步只能在 `docs/00-project/current-state.md` 明确授权后进入 `20-sr.md`。仍不允许创建 OpenSpec change、Java 实现、executor mutation 或 queue resizing implementation。
+SR 阶段也已闭环。下一步只能在 `docs/00-project/current-state.md` 明确授权后创建 `executor-adapter-and-adjustment-evidence` 的 OpenSpec change decomposition。仍不允许 Java 实现、executor mutation 或 queue resizing implementation。

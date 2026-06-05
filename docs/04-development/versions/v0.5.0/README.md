@@ -4,10 +4,10 @@
 
 - Version name: `v0.5.0`
 - Authoring date: `2026-06-05`
-- Status: `BASELINED`
-- Current phase: `IR_CLOSED`
+- Status: `READY_FOR_CHANGE_DECOMPOSITION`
+- Current phase: `SR_CLOSED`
 - Requirement theme: executor adapter and queue resizing design readiness
-- Current conclusion: IR review, disposition, and closure are complete; SR functional design may begin after current-state authorization
+- Current conclusion: IR and SR review, disposition, and closure are complete; bounded OpenSpec change decomposition may begin after current-state authorization
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -37,19 +37,23 @@ Current:
 - [11-ir-review.md](./11-ir-review.md)
 - [12-ir-review-disposition.md](./12-ir-review-disposition.md)
 - [13-ir-closure-verification.md](./13-ir-closure-verification.md)
+- [20-sr.md](./20-sr.md)
+- [21-sr-review.md](./21-sr-review.md)
+- [22-sr-review-disposition.md](./22-sr-review-disposition.md)
+- [23-sr-closure-verification.md](./23-sr-closure-verification.md)
 - [decision-log.md](./decision-log.md)
 
 Next gated artifacts:
 
-- `20-sr.md`
+- OpenSpec change decomposition for `executor-adapter-and-adjustment-evidence`
 
 ## Current Scope Boundary
 
 Allowed after current-state authorization:
 
-- Draft `v0.5.0` SR functional design.
+- Create bounded OpenSpec proposal/design/spec/tasks/plan artifacts for `executor-adapter-and-adjustment-evidence`.
 - Use archived `v0.4.0` artifacts and synced specs as input evidence.
-- Translate closed IR requirements into concrete data contracts, boundary rules, and test mapping.
+- Translate closed SR requirements into OpenSpec change artifacts.
 
 Not allowed now:
 
