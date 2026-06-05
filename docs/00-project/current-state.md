@@ -13,7 +13,8 @@
 
 ## Active Authorized Change
 
-- None. The most recent bounded change, `offline-replay-and-readiness-gate`, was archived on 2026-06-05 to `openspec/changes/archive/2026-06-05-offline-replay-and-readiness-gate/` and its delta spec is mirrored at `openspec/specs/offline-replay-and-readiness-gate/spec.md`.
+- `executor-adapter-and-adjustment-evidence` is active for change decomposition only under `openspec/changes/executor-adapter-and-adjustment-evidence/`.
+- The most recent archived bounded change, `offline-replay-and-readiness-gate`, was archived on 2026-06-05 to `openspec/changes/archive/2026-06-05-offline-replay-and-readiness-gate/` and its delta spec is mirrored at `openspec/specs/offline-replay-and-readiness-gate/spec.md`.
 
 ## Active Authorized Version Work
 

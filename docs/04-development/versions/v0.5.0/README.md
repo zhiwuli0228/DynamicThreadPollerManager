@@ -45,7 +45,7 @@ Current:
 
 Next gated artifacts:
 
-- OpenSpec change decomposition for `executor-adapter-and-adjustment-evidence`
+- [OpenSpec change decomposition](../../../../openspec/changes/executor-adapter-and-adjustment-evidence/)
 
 ## Current Scope Boundary
 
