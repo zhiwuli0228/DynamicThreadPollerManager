@@ -29,7 +29,29 @@ If any items failed, list id + issues:
 
 ---
 
-## 2. Task Completion (`tasks.md`)
+## 2. Archive Guard Precheck
+
+- [ ] `scripts/openspec-archive-guard.ps1 -Mode pre-finalize -ChangeName <change-name>` passed
+
+**Guard result**:
+
+```text
+<paste guard summary>
+```
+
+**Blocking findings** (if any):
+
+| Check | Result | Notes |
+|---|---|---|
+| — | — | — |
+
+The guard script is the canonical minimum-check gate. It MUST exit 0
+before this section can be marked done. A non-zero exit MUST surface
+as a blocking finding here, not be silently bypassed.
+
+---
+
+## 3. Task Completion (`tasks.md`)
 
 - [ ] All `- [ ]` have been changed to `- [x]`
 
@@ -41,7 +63,7 @@ If any items failed, list id + issues:
 
 ---
 
-## 3. Delta Spec Sync State
+## 4. Delta Spec Sync State
 
 For each capability directory under `openspec/changes/<name>/specs/`,
 compare with `openspec/specs/<capability>/spec.md`:
@@ -50,9 +72,15 @@ compare with `openspec/specs/<capability>/spec.md`:
 |---|---|---|
 | — | ✓ synced / ✗ pending sync / N/A | — |
 
+**Main spec structure checks**:
+
+| Capability | `## Purpose` present | `## Requirements` present | Notes |
+|---|---|---|---|
+| — | yes / no | yes / no | — |
+
 ---
 
-## 4. Design / Specs Coherence Spot Check
+## 5. Design / Specs Coherence Spot Check
 
 Spot-check whether decisions in `design.md` are reflected in the Requirements and
 Scenarios in `specs/*.md`:
@@ -67,10 +95,16 @@ Scenarios in `specs/*.md`:
 
 ---
 
-## 5. Implementation Signal
+## 6. Implementation Signal
 
 - [ ] No unstaged files in the worktree
 - [ ] All related commits have been pushed
+- [ ] `docs/00-project/current-state.md` matches the actual repository state
+- [ ] `openspec list --json`, `openspec validate --all --json`, and the worktree tell the same story
+
+A dirty worktree at this stage is a hard fail, not an
+informational note. The post-archive guard script will not pass
+when `git status --short` is non-empty.
 
 **Commit range** (if known): `<from-sha>..<to-sha>`
 
@@ -99,3 +133,5 @@ Scenarios in `specs/*.md`:
 > - FAIL with artifact-level items → fix the offending artifact, then
 >   re-enter apply.
 > - Iteration > 5 → stop the loop and report to the user.
+> - Never mark PASS if the archive guard fails, main spec structure is invalid,
+>   or current-state synchronization is still pending.

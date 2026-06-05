@@ -3,7 +3,9 @@ schema: superspec
 context: |
   Project: DynamicThreadPollerManager, a Java 21 and Spring Boot exploratory project.
   Authoritative branch: claude_master.
-  Current authorized stage: CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED.
+  Current execution authority is dynamic and MUST be read from
+  docs/00-project/current-state.md at runtime. Do not rely on any
+  stage label embedded in this config file.
   Current state source of truth: docs/00-project/current-state.md.
   Documentation context hub: docs/README.md.
 
@@ -53,8 +55,32 @@ rules:
     - Reject verification if requirement wording and implementation semantics diverge.
     - Reject verification if tests prove lifecycle shape but not the semantic intent of the requirement.
     - Record any blocked evidence honestly.
+    - The verify phase MUST execute, and record results for, all of the following minimum checks before any PASS or PASS_WITH_WARNINGS verdict is allowed:
+        1. `openspec validate --all --json` is fully green (every item `"valid": true`).
+        2. Every synced main spec under `openspec/specs/<capability>/spec.md` contains both `## Purpose` and `## Requirements` headers.
+        3. `docs/00-project/current-state.md`, `openspec list --json`, and the actual worktree state describe the same change (active vs archived).
+        4. `git status --short` (or an equivalent) was actually executed, not inferred, and the output is recorded.
+        5. `scripts/openspec-archive-guard.ps1 -Mode pre-finalize -ChangeName <name>` exited with status 0.
+    - Reject verification if any of the five minimum checks above is missing, skipped, or unrecorded.
+    - Reject verification if requirement wording and implementation semantics diverge.
+    - Reject verification if tests prove lifecycle shape but not the semantic intent of the requirement.
+    - Reject verification if worktree cleanliness, commit status, or sync state is only inferred instead of executed.
   finalize:
     - After verified implementation in a future authorized stage, record whether implemented behavior was synchronized to openspec/specs/** and whether architecture or ADR updates were required.
     - Do not finalize if docs/00-project/current-state.md has not been synchronized to the actual repository state.
     - Do not finalize if the archive receipt or verification report claims stronger semantics than the implementation actually provides.
+    - Archive completion is only satisfied when the following four states agree; a missing or divergent state is a hard fail and `mv openspec/changes/<name> openspec/changes/archive/...` alone is never sufficient:
+        1. An archive directory exists at `openspec/changes/archive/<date>-<name>/` and contains the change's artifacts.
+        2. Every delta capability has a synced main spec at `openspec/specs/<capability>/spec.md` containing both `## Purpose` and `## Requirements`.
+        3. `docs/00-project/current-state.md` no longer lists the archived change as an active authorized change and no longer declares `Current stage: EXECUTION_AUTHORIZED`.
+        4. The worktree state (tracked + untracked) is consistent with the archived state — `git status --short` either is empty or contains only items that current-state authorizes.
+    - The finalize phase MUST execute, and record results for, all of the following minimum checks before any archive receipt is written:
+        1. `openspec validate --all --json` is fully green.
+        2. The active change directory no longer exists under `openspec/changes/<name>/`.
+        3. The archive directory exists under `openspec/changes/archive/`.
+        4. The synced main spec contains `## Purpose` and `## Requirements`.
+        5. `docs/00-project/current-state.md` does not still list the change as active and does not still declare `EXECUTION_AUTHORIZED`.
+        6. `openspec list --json` does not still reference the change.
+    - Do not finalize or archive if `scripts/openspec-archive-guard.ps1 -Mode post-archive -ChangeName <name>` exits non-zero after state/spec synchronization.
+    - Do not treat moving files into `openspec/changes/archive/**` as sufficient; main spec validity, current-state synchronization, repository cleanliness, and list absence are separate required checks.
     - Restore the original branch or workspace after finalize so the repository returns to the pre-change branch state.

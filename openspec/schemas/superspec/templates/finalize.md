@@ -39,6 +39,33 @@
 
 ---
 
+## Repository Integrity
+
+The four states below MUST agree before `/opsx:archive` is honored.
+A missing or divergent state is a hard fail. "Files moved into
+`openspec/changes/archive/**`" alone is never sufficient.
+
+- [ ] **Archive directory present**: `<openspec/changes/archive/<date>-<name>/>` exists and contains the change's artifacts.
+- [ ] **Active change directory removed**: `<openspec/changes/<name>/>` no longer exists.
+- [ ] **Main spec synced**: `<openspec/specs/<capability>/spec.md>` exists for every capability listed in the proposal.
+- [ ] **Main spec structure valid**: every synced main spec contains both `## Purpose` and `## Requirements`.
+- [ ] **Current-state synchronized**: `docs/00-project/current-state.md` no longer lists the archived change as an active authorized change and no longer declares `Current stage: EXECUTION_AUTHORIZED`.
+- [ ] **List synchronized**: `openspec list --json` does not still reference the archived change.
+- [ ] **Worktree clean**: `git status --short` is empty. A non-empty worktree at this point is a hard fail; the `openspec-archive-guard.ps1` post-archive mode will exit non-zero.
+
+**Recorded values**:
+
+- **Archive guard mode**: `post-archive`
+- **Archive guard result**: `pass` | `fail`
+- **Archive guard command**: `scripts/openspec-archive-guard.ps1 -Mode post-archive -ChangeName <name>`
+- **Main spec sync**: `<capability path(s) or N/A>`
+- **Main spec structure valid**: `yes` | `no`
+- **Current-state synchronized**: `yes` | `no`
+- **List synchronized**: `yes` | `no`
+- **Worktree clean after archive**: `yes` | `no` (this is a hard gate; `no` is a fail)
+
+---
+
 ## Next step
 
 `<varies by outcome:>`
