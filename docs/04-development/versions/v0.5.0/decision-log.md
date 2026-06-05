@@ -17,3 +17,15 @@
 - Decision: 任何 runtime adjustment 实现前，必须先定义 adjustment evidence contract。
 - Rationale: 没有 before/requested/applied/failure evidence，就无法审计实际 executor mutation。
 - Consequence: 后续 SR 必须给出状态枚举、字段定义和测试映射。
+
+## Decision 4: `v0.4.0` readiness 只授权设计判断
+
+- Decision: `READY` 最多支持进入 SR 设计；`READY_WITH_RISK` 必须记录风险接受条件；`NOT_READY` 阻止 mutation implementation。
+- Rationale: offline replay 能证明 decision 分布和风险信号，不能证明 runtime mutation 后收益。
+- Consequence: 后续 SR 必须把 readiness status 映射到 runtime safety gate 和测试计划。
+
+## Decision 5: queue resizing 默认延期到安全 abstraction 明确之后
+
+- Decision: `v0.5.0` 默认不把 queue resizing 放入第一批实现候选。
+- Rationale: 当前代码没有 runtime queue capacity controller，baseline executor 只提供固定 queue capacity。
+- Consequence: 若 SR 要纳入 queue resizing，必须先定义单独 capability、failure semantics、rollback semantics 和测试策略。

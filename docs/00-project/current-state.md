@@ -2,11 +2,11 @@
 
 ## Authoritative Status
 
-- Current stage: `VERSION_REQUIREMENT_DRAFT_AUTHORIZED`
-- Current authorized work type: `VERSION_REQUIREMENT_DRAFT_ONLY`
+- Current stage: `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED`
+- Current authorized work type: `VERSION_FUNCTIONAL_DESIGN_ONLY`
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0`, `v0.2.0`, `v0.3.0`, and `v0.4.0` are `IMPLEMENTED`; `v0.5.0` is authorized for IR requirement draft only
+- Version design status: `v0.1.0`, `v0.2.0`, `v0.3.0`, and `v0.4.0` are `IMPLEMENTED`; `v0.5.0` IR is closed and authorized for SR functional design only
 - OpenSpec capability changes: `experiment-foundation`, `metrics-snapshot-and-recording`, `scenario-runner-and-baseline`, `adaptive-policy-and-control-gate`, and `offline-replay-and-readiness-gate` have been archived; the v0.1.0, v0.2.0, v0.3.0, and v0.4.0 capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
 - Java implementation status: the experiment foundation package, the metrics observation layer (sampling, normalization, append-only recording, summary), the deterministic scenario runner with fixed baseline executor, the adaptive policy/control-gate package, and the read-only `experiment.analysis` package (evidence validation, offline policy replay, summary aggregation, threshold sensitivity comparison, mutation readiness assessment, and controlled report artifacts) are present on the main working branch
 - Governance status: future capability work must follow `docs/02-harness/managed-change-standard.md`; reusable stage-package guidance is available at `docs/07-templates/managed-change-stage-package-template.md`
@@ -17,21 +17,22 @@
 
 ## Active Authorized Version Work
 
-- `v0.5.0` requirement draft is authorized under `docs/04-development/versions/v0.5.0/`.
-- Authorized artifacts: `README.md`, `00-objectives-and-scope.md`, `10-ir.md`, and `decision-log.md`.
-- Current authorization does not allow SR design, OpenSpec change creation, Java implementation, executor mutation, or queue resizing implementation.
+- `v0.5.0` SR functional design is authorized under `docs/04-development/versions/v0.5.0/`.
+- Completed IR artifacts: `README.md`, `00-objectives-and-scope.md`, `10-ir.md`, `11-ir-review.md`, `12-ir-review-disposition.md`, `13-ir-closure-verification.md`, and `decision-log.md`.
+- Authorized next artifact: `20-sr.md`.
+- Current authorization does not allow OpenSpec change creation, Java implementation, executor mutation, or queue resizing implementation.
 
 ## What Is Allowed Now
 
 - Inspect archived artifacts and synchronized specs as evidence.
 - Maintain managed-change standards and templates.
 - Keep the current-state record synchronized with the actual repository state.
-- Create and maintain the `v0.5.0` requirement draft artifacts listed above.
+- Create and maintain the `v0.5.0` SR functional design artifact listed above.
 - Inspect `v0.4.0` offline replay and readiness artifacts as input evidence.
 
 ## What Is Not Allowed Now
 
-- No new OpenSpec change creation during `v0.5.0` IR draft authorization.
+- No new OpenSpec change creation during `v0.5.0` SR design authorization.
 - No unreviewed scope expansion.
 - No branch-state mismatch between the workspace and the authoritative branch.
 - No archive or finalize event without synchronized authority records.
@@ -42,8 +43,8 @@
 ## Future Gate Sequence
 
 1. `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`
-2. version design draft ← current stage
-3. version design baseline
+2. version design draft
+3. version design baseline ← current stage
 4. `READY_FOR_CHANGE_DECOMPOSITION`
 5. `EXECUTION_AUTHORIZED`
 6. capability change execution

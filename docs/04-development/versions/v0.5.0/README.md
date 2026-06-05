@@ -4,10 +4,10 @@
 
 - Version name: `v0.5.0`
 - Authoring date: `2026-06-05`
-- Status: `DRAFT`
-- Current phase: `IR_REQUIREMENT_DRAFT_AUTHORIZED`
+- Status: `BASELINED`
+- Current phase: `IR_CLOSED`
 - Requirement theme: executor adapter and queue resizing design readiness
-- Current conclusion: requirement draft is authorized; no SR, OpenSpec change, Java implementation, executor mutation, or queue resizing implementation is authorized
+- Current conclusion: IR review, disposition, and closure are complete; SR functional design may begin after current-state authorization
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -34,26 +34,25 @@ Current:
 
 - [00-objectives-and-scope.md](./00-objectives-and-scope.md)
 - [10-ir.md](./10-ir.md)
+- [11-ir-review.md](./11-ir-review.md)
+- [12-ir-review-disposition.md](./12-ir-review-disposition.md)
+- [13-ir-closure-verification.md](./13-ir-closure-verification.md)
 - [decision-log.md](./decision-log.md)
 
 Next gated artifacts:
 
-- `11-ir-review.md`
-- `12-ir-review-disposition.md`
-- `13-ir-closure-verification.md`
 - `20-sr.md`
 
 ## Current Scope Boundary
 
-Allowed now:
+Allowed after current-state authorization:
 
-- Draft `v0.5.0` objectives and requirements.
+- Draft `v0.5.0` SR functional design.
 - Use archived `v0.4.0` artifacts and synced specs as input evidence.
-- Identify evidence gaps that block executor adapter or queue resizing design.
+- Translate closed IR requirements into concrete data contracts, boundary rules, and test mapping.
 
 Not allowed now:
 
-- No SR design.
 - No OpenSpec change.
 - No Java source or test change.
 - No executor mutation.

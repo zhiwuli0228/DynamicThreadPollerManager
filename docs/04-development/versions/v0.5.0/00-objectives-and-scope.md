@@ -3,10 +3,10 @@
 ## Header
 
 - Version name: `v0.5.0`
-- Status: `DRAFT`
-- Current phase: `IR_REQUIREMENT_DRAFT_AUTHORIZED`
+- Status: `BASELINED`
+- Current phase: `IR_CLOSED`
 - Requirement theme: executor adapter and queue resizing design readiness
-- Current conclusion: requirement draft is authorized only
+- Current conclusion: IR review, disposition, and closure are complete; SR functional design is the next gated step
 
 ## 1. 背景
 
@@ -59,10 +59,11 @@
 
 ## 6. 当前阶段出口
 
-进入 IR review 前应满足：
+IR 阶段已闭环。已完成：
 
 1. `10-ir.md` 完成需求条目、验收草案、风险和延期项。
-2. 明确当前只授权需求草案。
-3. 不创建 `20-sr.md`。
-4. 不创建 OpenSpec change。
-5. 不修改 Java 源码或测试。
+2. `11-ir-review.md` 完成独立 IR review。
+3. `12-ir-review-disposition.md` 完成 findings 处置。
+4. `13-ir-closure-verification.md` 完成 P0/P1 闭环验证。
+
+下一步只能在 `docs/00-project/current-state.md` 明确授权后进入 `20-sr.md`。仍不允许创建 OpenSpec change、Java 实现、executor mutation 或 queue resizing implementation。

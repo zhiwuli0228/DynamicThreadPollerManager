@@ -4,11 +4,11 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `VERSION_REQUIREMENT_DRAFT_AUTHORIZED` for `v0.5.0`.
+- `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED` for `v0.5.0`.
 - Authoritative source: `docs/00-project/current-state.md`.
 - No active authorized OpenSpec change.
 - `v0.1.0` through `v0.4.0` are implemented and archived.
-- `v0.5.0` is authorized for IR requirement draft only; Java implementation and OpenSpec change creation are not authorized.
+- `v0.5.0` IR is closed and SR functional design is authorized; Java implementation and OpenSpec change creation are not authorized.
 
 ## Reading Order
 
