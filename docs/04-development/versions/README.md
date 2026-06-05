@@ -4,11 +4,12 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- Four version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, and `v0.4.0`.
+- Five version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, and `v0.5.0`.
 - `v0.1.0`, `v0.2.0`, `v0.3.0`, and `v0.4.0` are `IMPLEMENTED`.
+- `v0.5.0` is authorized for IR requirement draft only.
 - `offline-replay-and-readiness-gate` has been archived and synchronized to `openspec/specs/offline-replay-and-readiness-gate/spec.md`.
 - There is no active authorized OpenSpec change.
-- Java implementation is not currently authorized for any successor version or bounded change.
+- Java implementation is not currently authorized for `v0.5.0` or any bounded change.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

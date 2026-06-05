@@ -4,16 +4,16 @@
 
 - Version name: `v0.4.0`
 - Authoring date: `2026-06-05`
-- Status: `EXECUTION_AUTHORIZED`
-- Current phase: `BOUNDED_CHANGE_IMPLEMENTATION_AUTHORIZED`
-- Current conclusion: the `offline-replay-and-readiness-gate` change decomposition package has been approved for bounded implementation
+- Status: `IMPLEMENTED`
+- Current phase: `ARCHIVED_AND_MAIN_SYNCED`
+- Current conclusion: `offline-replay-and-readiness-gate` has been implemented, verified, archived, and synchronized to `openspec/specs/offline-replay-and-readiness-gate/spec.md`
 - Authoritative branch: `claude_master`
 
 ## Purpose
 
 `v0.4.0` 用于定义下一阶段需求：在进入 executor mutation、queue resizing 或闭环 adaptive control 之前，先获取和固化 baseline pressure evidence、offline policy replay、decision evidence 和最小实验报告输入。
 
-本版本已授权 `offline-replay-and-readiness-gate` 进入受控实现阶段，但只允许在该 change 边界内修改 Java 源码、测试和 OpenSpec 执行证据。
+本版本已完成 `offline-replay-and-readiness-gate`。该 change 已归档到 `openspec/changes/archive/2026-06-05-offline-replay-and-readiness-gate/`，当前不再授权任何 Java 实现或相邻 capability。
 
 ## Managed Change Gate
 
@@ -41,11 +41,11 @@ Current:
 - [23-sr-closure-verification.md](./23-sr-closure-verification.md)
 - [decision-log.md](./decision-log.md)
 
-Next gated artifacts:
+Archived OpenSpec artifacts:
 
-- `apply.md`
-- `verify.md`
-- `finalize.md`
+- `openspec/changes/archive/2026-06-05-offline-replay-and-readiness-gate/apply.md`
+- `openspec/changes/archive/2026-06-05-offline-replay-and-readiness-gate/verify.md`
+- `openspec/changes/archive/2026-06-05-offline-replay-and-readiness-gate/finalize.md`
 
 ## Current IR Summary
 
@@ -60,7 +60,7 @@ The current IR defines eight requirement items:
 - `IR-v0.4-007`: evidence hygiene and boundary isolation.
 - `IR-v0.4-008`: reviewable experiment readiness criteria.
 
-The IR and SR closure sets are complete, the change decomposition package for `offline-replay-and-readiness-gate` exists under `openspec/changes/`, and `docs/00-project/current-state.md` now authorizes bounded Java implementation for that change only.
+The IR and SR closure sets are complete. The `offline-replay-and-readiness-gate` change has been archived, and `docs/00-project/current-state.md` now authorizes only `v0.5.0` IR requirement draft work.
 
 ## Current Non-Scope
 
