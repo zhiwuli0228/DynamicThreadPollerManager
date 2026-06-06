@@ -4,10 +4,10 @@
 
 - Version name: `v0.6.0`
 - Authoring date: `2026-06-06`
-- Status: `EXECUTION_AUTHORIZED`
-- Current phase: `EXECUTION_AUTHORIZED`
+- Status: `IMPLEMENTED`
+- Current phase: `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`
 - Requirement theme: pressure data acquisition and reproducible baseline evidence
-- Current conclusion: IR review、disposition、closure verification、SR review、disposition 和 closure verification 已完成；`pressure-data-acquisition-and-baseline` 现已授权进入 OpenSpec execution
+- Current conclusion: IR review、disposition、closure verification、SR review、disposition、closure verification、OpenSpec implementation、verification、finalize、archive and spec synchronization are complete for `pressure-data-acquisition-and-baseline`
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -42,21 +42,30 @@ Current:
 - [24-completion-assessment.md](./24-completion-assessment.md)
 - [decision-log.md](./decision-log.md)
 
-Pending:
+Archived OpenSpec artifacts:
 
-- OpenSpec execution package: `openspec/changes/pressure-data-acquisition-and-baseline/`
+- `openspec/changes/archive/2026-06-06-pressure-data-acquisition-and-baseline/apply.md`
+- `openspec/changes/archive/2026-06-06-pressure-data-acquisition-and-baseline/verify.md`
+- `openspec/changes/archive/2026-06-06-pressure-data-acquisition-and-baseline/finalize.md`
+- `openspec/specs/pressure-data-acquisition-and-baseline/spec.md`
+
+Remediation package:
+
+- [remediation/README.md](./remediation/README.md)
+- `remediation/` contains a separate, full-process design for the real-data gap remediation path and does not rewrite the original `v0.6.0` design docs.
 
 ## Current Scope Boundary
 
 Allowed now:
 
-- 读取已归档 capability spec、v0.6.0 IR / SR 闭环文档、change decomposition package 和当前主 spec 作为输入证据。
-- 实现 `pressure-data-acquisition-and-baseline` 授权 change 的 proposal、design、spec、tasks、plan、apply、verify 和 finalize 工作。
-- 将实现范围限制在已授权的 acquisition boundary 内。
+- Inspect archived `pressure-data-acquisition-and-baseline` artifacts and synchronized main spec as evidence.
+- Use the remediation package as an independent design reference when explicitly authorized.
+- Maintain governance, verification, and retrospective documents when explicitly authorized.
 
 Not allowed now:
 
-- 不修改授权 change 之外的 Java 源码或测试。
-- 不创建新的 OpenSpec change。
-- 不实现 queue resizing、生产 executor mutation、closed-loop controller、scheduler、REST/API/UI 或外部依赖。
-- 不声明性能提升结论；只能实现已授权的 acquisition boundary。
+- No Java source or test change without a new authorized change.
+- No additional OpenSpec change creation without new authorization.
+- No queue resizing implementation.
+- No production `ThreadPoolExecutor` integration.
+- No scheduler, scenario, persistence, REST, UI, or external dependency change.
