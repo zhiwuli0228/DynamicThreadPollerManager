@@ -4,10 +4,10 @@
 
 - Version name: `v0.6.0`
 - Authoring date: `2026-06-06`
-- Status: `SR_CLOSED`
-- Current phase: `READY_FOR_CHANGE_DECOMPOSITION`
+- Status: `EXECUTION_AUTHORIZED`
+- Current phase: `EXECUTION_AUTHORIZED`
 - Requirement theme: pressure data acquisition and reproducible baseline evidence
-- Current conclusion: IR review、disposition、closure verification、SR review、disposition 和 closure verification 已完成；v0.6.0 现已授权进入 OpenSpec change decomposition，但仍不授权 Java 实现
+- Current conclusion: IR review、disposition、closure verification、SR review、disposition 和 closure verification 已完成；`pressure-data-acquisition-and-baseline` 现已授权进入 OpenSpec execution
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -35,26 +35,27 @@ Current:
 - [00-objectives-and-scope.md](./00-objectives-and-scope.md)
 - [10-ir.md](./10-ir.md)
 - [15-experiment-data-acquisition-plan.md](./15-experiment-data-acquisition-plan.md)
+- [20-sr.md](./20-sr.md)
+- [21-sr-review.md](./21-sr-review.md)
+- [22-sr-review-disposition.md](./22-sr-review-disposition.md)
+- [23-sr-closure-verification.md](./23-sr-closure-verification.md)
 - [decision-log.md](./decision-log.md)
 
 Pending:
 
-- OpenSpec change decomposition package
+- OpenSpec execution package: `openspec/changes/pressure-data-acquisition-and-baseline/`
 
 ## Current Scope Boundary
 
 Allowed now:
 
-- 设计 v0.6.0 OpenSpec change decomposition。
-- 读取已归档 capability spec、v0.6.0 IR / SR 闭环文档和当前主 spec 作为输入证据。
-- 定义后续 OpenSpec change 的 proposal、design、spec、tasks 和 plan 草案边界。
-- 明确后续是否需要新 OpenSpec change，但不得创建未授权实现。
+- 读取已归档 capability spec、v0.6.0 IR / SR 闭环文档、change decomposition package 和当前主 spec 作为输入证据。
+- 实现 `pressure-data-acquisition-and-baseline` 授权 change 的 proposal、design、spec、tasks、plan、apply、verify 和 finalize 工作。
+- 将实现范围限制在已授权的 acquisition boundary 内。
 
 Not allowed now:
 
-- 不修改 Java 源码或测试。
-- 不执行 OpenSpec apply/verify/archive。
-- 不创建 `openspec/changes/**`。
-- 不实现新的压测 runner、CLI、报告 writer 或持久化。
-- 不执行 queue resizing、生产 executor mutation、closed-loop controller、scheduler、REST/API/UI 或外部依赖。
-- 不声明性能提升结论；只能定义未来如何采集和判定数据。
+- 不修改授权 change 之外的 Java 源码或测试。
+- 不创建新的 OpenSpec change。
+- 不实现 queue resizing、生产 executor mutation、closed-loop controller、scheduler、REST/API/UI 或外部依赖。
+- 不声明性能提升结论；只能实现已授权的 acquisition boundary。

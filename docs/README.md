@@ -4,11 +4,11 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `READY_FOR_CHANGE_DECOMPOSITION` for `v0.6.0`.
+- `EXECUTION_AUTHORIZED` for `pressure-data-acquisition-and-baseline`.
 - Authoritative source: `docs/00-project/current-state.md`.
-- Active authorized OpenSpec change: none.
+- Active authorized OpenSpec change: `pressure-data-acquisition-and-baseline`.
 - `v0.1.0` through `v0.5.0` are implemented and archived.
-- `v0.6.0` pressure data acquisition IR and SR are closed; OpenSpec change decomposition is authorized. Java implementation and actual pressure test execution are not authorized.
+- `v0.6.0` pressure data acquisition IR and SR are closed; OpenSpec change execution is authorized for the pressure data acquisition baseline capability. Work remains bounded to the authorized change.
 
 ## Reading Order
 

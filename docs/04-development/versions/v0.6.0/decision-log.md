@@ -28,4 +28,4 @@
 
 - Decision: 若后续需要自动化数据获取或报告能力，必须创建 `schema: superspec` 的 OpenSpec change。
 - Rationale: 项目已禁止新 capability change 使用 `spec-driven`，避免再次出现 apply/verify/finalize 流程不可追踪。
-- Consequence: 当前只保留候选 change 名称 `pressure-data-acquisition-and-baseline`，不创建 change。
+- Consequence: 已创建 `pressure-data-acquisition-and-baseline`，并以 `superspec` 进入执行授权；后续实现必须继续遵守该 schema。

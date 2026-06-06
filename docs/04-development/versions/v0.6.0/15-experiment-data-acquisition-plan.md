@@ -7,11 +7,11 @@
 - Status: `DRAFT`
 - Current phase: `PRESSURE_DATA_ACQUISITION_REQUIREMENT_DRAFT`
 - Authoring date: `2026-06-06`
-- Execution status: not authorized; do not run pressure acquisition from this draft alone
+- Execution status: not authorized from this draft alone; use current-state.md for the active authorization boundary
 
 ## 1. 计划目标
 
-本计划定义后续如何获取可复现的 pressure data。当前文档不执行压测，不修改代码，不创建 OpenSpec change。
+本计划定义后续如何获取可复现的 pressure data。当前文档不执行压测，不修改代码，不创建 OpenSpec change；它只定义后续数据获取的需求草案，实际执行边界以 current-state.md 为准。
 
 目标：
 
@@ -233,11 +233,11 @@ outputs/reports/v0.6.0/
 
 ## 10. 下一阶段候选
 
-若 IR/SR 闭环确认需要实现数据获取自动化，候选 change：
+若未来需要实现或替换当前授权的数据获取自动化，候选 change：
 
 - Change name draft: `pressure-data-acquisition-and-baseline`
 - Required schema: `superspec`
 - Likely scope: controlled pressure acquisition runner、manifest/report artifact writer、data quality validator
 - Explicit non-scope: executor mutation、queue resizing、closed-loop controller、production executor integration
 
-当前文档不授权创建该 change。
+当前文档不授权创建新的 change；实际创建与执行边界由 current-state.md 和对应 OpenSpec change 决定。
