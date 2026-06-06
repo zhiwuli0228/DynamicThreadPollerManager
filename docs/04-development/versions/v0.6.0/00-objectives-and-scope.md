@@ -3,10 +3,10 @@
 ## Header
 
 - Version name: `v0.6.0`
-- Status: `IR_CLOSED`
-- Current phase: `SR_FUNCTIONAL_DESIGN_AUTHORIZED`
+- Status: `SR_CLOSED`
+- Current phase: `READY_FOR_CHANGE_DECOMPOSITION`
 - Requirement theme: pressure data acquisition and reproducible baseline evidence
-- Current conclusion: IR 需求草案和实验数据获取计划已闭环；当前授权进入 SR 功能设计，但仍不授权实现或实际压测执行
+- Current conclusion: IR review、disposition、closure verification、SR review、disposition 和 closure verification 已完成；v0.6.0 现已授权进入 OpenSpec change decomposition，但仍不授权 Java 实现
 
 ## 1. 背景
 
@@ -75,9 +75,13 @@
 3. `decision-log.md` 记录关键需求判断。
 4. `docs/00-project/current-state.md` 与 v0.6.0 IR 草案状态一致。
 
-进入 SR 前必须完成：
+进入 OpenSpec change decomposition 前必须完成：
 
 1. `11-ir-review.md`
 2. `12-ir-review-disposition.md`
 3. `13-ir-closure-verification.md`
-4. `docs/00-project/current-state.md` 明确授权进入 `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED`
+4. `20-sr.md`
+5. `21-sr-review.md`
+6. `22-sr-review-disposition.md`
+7. `23-sr-closure-verification.md`
+8. `docs/00-project/current-state.md` 明确授权进入 `READY_FOR_CHANGE_DECOMPOSITION`

@@ -34,9 +34,9 @@ context: |
 
 rules:
   schema:
-    - New capability changes MUST use `schema: superspec`; do not create new changes with `schema: spec-driven`.
-    - If an existing historical change is already pinned to `schema: spec-driven`, do not tell agents to use `/opsx:continue` for `finalize`; hand-author the closeout receipt and record the compatibility reason.
-    - Any agent creating or continuing a change MUST read `openspec/changes/<name>/.openspec.yaml` before deciding the next workflow command.
+    - "New capability changes MUST use `schema: superspec`; do not create new changes with `schema: spec-driven`."
+    - "If an existing historical change is already pinned to `schema: spec-driven`, do not tell agents to use `/opsx:continue` for `finalize`; hand-author the closeout receipt and record the compatibility reason."
+    - "Any agent creating or continuing a change MUST read `openspec/changes/<name>/.openspec.yaml` before deciding the next workflow command."
   brainstorm:
     - When current stage is DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY, restrict work to documentation-framework governance and do not propose, create or execute a capability change.
     - Do not use archived, rejected or historical task material as current authorization.

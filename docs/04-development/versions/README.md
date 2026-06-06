@@ -6,7 +6,7 @@ This folder is reserved for version design packages.
 
 - Six version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, and `v0.6.0`.
 - `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, and `v0.5.0` are `IMPLEMENTED`.
-- `v0.6.0` pressure data acquisition IR is closed and SR functional design is authorized.
+- `v0.6.0` pressure data acquisition IR and SR are closed and OpenSpec change decomposition is authorized.
 - `executor-adapter-and-adjustment-evidence` has been archived and synchronized to `openspec/specs/executor-adapter-and-adjustment-evidence/spec.md`.
 - There is no active authorized OpenSpec change.
 - Java implementation is not currently authorized for `v0.6.0` or any bounded change.

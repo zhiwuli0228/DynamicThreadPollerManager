@@ -4,10 +4,10 @@
 
 - Version name: `v0.6.0`
 - Authoring date: `2026-06-06`
-- Status: `IR_CLOSED`
-- Current phase: `SR_FUNCTIONAL_DESIGN_AUTHORIZED`
+- Status: `SR_CLOSED`
+- Current phase: `READY_FOR_CHANGE_DECOMPOSITION`
 - Requirement theme: pressure data acquisition and reproducible baseline evidence
-- Current conclusion: IR review、disposition 和 closure verification 已完成；v0.6.0 已授权进入 SR 功能设计，但仍不授权 OpenSpec change 或 Java 实现
+- Current conclusion: IR review、disposition、closure verification、SR review、disposition 和 closure verification 已完成；v0.6.0 现已授权进入 OpenSpec change decomposition，但仍不授权 Java 实现
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -39,16 +39,16 @@ Current:
 
 Pending:
 
-- `20-sr.md`
+- OpenSpec change decomposition package
 
 ## Current Scope Boundary
 
 Allowed now:
 
-- 设计 v0.6.0 压测数据获取需求。
-- 读取已归档 capability spec 和当前主 spec 作为输入证据。
-- 定义实验矩阵、采样指标、运行次数、数据质量门禁、报告输出和验收标准。
-- 明确后续是否需要新 OpenSpec change，但不得创建。
+- 设计 v0.6.0 OpenSpec change decomposition。
+- 读取已归档 capability spec、v0.6.0 IR / SR 闭环文档和当前主 spec 作为输入证据。
+- 定义后续 OpenSpec change 的 proposal、design、spec、tasks 和 plan 草案边界。
+- 明确后续是否需要新 OpenSpec change，但不得创建未授权实现。
 
 Not allowed now:
 
