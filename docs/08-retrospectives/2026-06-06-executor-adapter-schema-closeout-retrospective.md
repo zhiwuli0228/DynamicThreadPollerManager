@@ -43,6 +43,7 @@ created: 2026-06-05
 - `verify.md` 曾保留“等待用户控制 archive”“independent review”一类模糊终态，弱 agent 会把它理解成必须停下等待用户。
 - 门禁脚本最初只识别 `Change name:`，而 `current-state.md` 使用 `Authorized OpenSpec change:`，导致 pre-finalize guard 真实失败过。
 - 修复门禁后，没有立即识别 schema 错配，继续建议 `/opsx:continue`，造成二次卡死。
+- archive 文件移动和 main spec 同步完成后，`docs/00-project/current-state.md` 仍保留 `EXECUTION_AUTHORIZED` 和 active change 授权，导致 post-archive guard 失败。
 
 ## 影响
 
@@ -69,6 +70,11 @@ created: 2026-06-05
 5. **历史兼容路径没有标准化**
    对已存在的 `spec-driven` change，没有明确的一次性兼容收尾规则。
 
+6. **archive 后状态同步没有固化为强制动作**
+   上一次流程修正覆盖了 pre-finalize、schema 识别和 verify 终态，但没有把
+   `archive -> current-state 同步 -> version 状态同步 -> post-archive guard -> 提交`
+   做成不可跳过步骤。结果 agent 仍可能把 archive 文件移动误判为交付闭环。
+
 ## 本次已采纳的修复
 
 - 为当前 change 手工补齐 `finalize.md`，明确这是 `spec-driven` 历史兼容收尾，不再要求 `/opsx:continue` 生成 finalize。
@@ -77,6 +83,9 @@ created: 2026-06-05
 - 更新 `docs/02-harness/managed-change-standard.md`，把 schema 强制规则写入中文管理标准。
 - 更新 superspec `verify.md` 模板，加入 `Machine-Actionable Closeout State`。
 - 更新 `scripts/openspec-archive-guard.ps1`，让 pre-finalize guard 同时兼容 `Change name:` 和 `Authorized OpenSpec change:`。
+- archive 后补充同步 `docs/00-project/current-state.md`，退出 `EXECUTION_AUTHORIZED`，移除 active change，并记录归档目录和同步后的 main spec。
+- 更新 `docs/04-development/versions/v0.5.0/README.md`，把版本状态改为 `IMPLEMENTED` 和 `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`。
+- 在 `docs/02-harness/managed-change-standard.md` 和 `openspec/config.yaml` 中增加 archive 后强制同步规则。
 
 ## 后续禁止项
 
@@ -85,6 +94,8 @@ created: 2026-06-05
 - 禁止对 `spec-driven` change 声称 `/opsx:continue` 可以生成 `finalize.md`。
 - 禁止在 `verify.md` 同时保留历史失败结论和当前通过结论作为并列终态。
 - 禁止用“user-controlled archive”替代明确的 `Agent next action`。
+- 禁止把 OpenSpec 文件移动或 `openspec validate` 通过当成 archive 完成；post-archive guard 通过前不得称为闭环。
+- 禁止在 `openspec list --json` 已无 active change 时，让 `current-state.md` 继续声明 active change。
 
 ## 后续 agent 必须遵守
 
@@ -93,10 +104,11 @@ created: 2026-06-05
 3. 若 schema 是 `superspec`，按 DAG 运行 apply / verify / finalize。
 4. 若历史 schema 是 `spec-driven`，采用兼容收尾：手工补真实 `finalize.md`，记录原因，不重试 `/opsx:continue`。
 5. `verify.md` 必须包含机器可执行 closeout 状态，并明确是否需要用户动作。
+6. archive 后必须立即同步 `current-state.md` 和版本状态文件。
+7. post-archive guard 不通过时，必须继续修正状态同步，不得转入新需求。
 
 ## 仍未解决的问题
 
-- 当前 change 尚未 archive；archive 必须在当前实现、证据、finalize 和治理修正提交后执行。
 - `AGENTS.md` 中仍有历史授权状态描述，后续应单独治理，避免与 `docs/00-project/current-state.md` 产生认知噪声。
 
 ## 结论

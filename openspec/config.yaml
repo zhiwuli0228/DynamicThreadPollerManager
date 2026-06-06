@@ -90,4 +90,7 @@ rules:
       6. `openspec list --json` does not still reference the change.
     - Do not finalize or archive if `scripts/openspec-archive-guard.ps1 -Mode post-archive -ChangeName <name>` exits non-zero after state/spec synchronization.
     - Do not treat moving files into `openspec/changes/archive/**` as sufficient; main spec validity, current-state synchronization, repository cleanliness, and list absence are separate required checks.
+    - After archive, immediately update `docs/00-project/current-state.md` so it no longer declares `EXECUTION_AUTHORIZED` or the archived change as active.
+    - After archive, immediately update the relevant version status document so it matches the archived and synchronized repository state.
+    - Never claim archive completion while `openspec list --json` and `docs/00-project/current-state.md` disagree about whether a change is active.
     - Restore the original branch or workspace after finalize so the repository returns to the pre-change branch state.

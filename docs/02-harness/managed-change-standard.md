@@ -233,6 +233,15 @@ Schema 强制规则：
 - `docs/00-project/current-state.md` 已反映实际状态；
 - `git status --short` 干净。
 
+Archive 后强制同步规则：
+
+- 执行 archive 后，必须立即更新 `docs/00-project/current-state.md`，移除 archived change 的 active 授权、移除 `Authorized OpenSpec change`、退出 `EXECUTION_AUTHORIZED`，并记录 archive 目录和同步后的 main spec 路径。
+- 执行 archive 后，必须同步相关版本 README 或状态文件，把版本状态从执行授权改为已交付或已归档后的实际状态。
+- archive 后不得只依赖 OpenSpec 文件移动结果；必须运行 `scripts/openspec-archive-guard.ps1 -Mode post-archive -ChangeName <name>`。
+- post-archive guard 不通过时，禁止声称“归档完成”或“需求闭环”。
+- archive move、main spec、`current-state.md`、版本状态文件、复盘或治理修正必须进入同一个归档收尾提交，除非明确拆分并记录原因。
+- 若 `openspec list --json` 已无 active change，但 `current-state.md` 仍声明 active change，这是 P1 流程缺陷，必须先修正状态同步，而不是继续推进新需求。
+
 出口条件：
 
 - `openspec.cmd validate --all --json` 通过；

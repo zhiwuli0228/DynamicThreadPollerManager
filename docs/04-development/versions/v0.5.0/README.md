@@ -4,10 +4,10 @@
 
 - Version name: `v0.5.0`
 - Authoring date: `2026-06-05`
-- Status: `EXECUTION_AUTHORIZED`
-- Current phase: `BOUNDED_CHANGE_IMPLEMENTATION_AUTHORIZED`
+- Status: `IMPLEMENTED`
+- Current phase: `CAPABILITY_BASELINE_DELIVERED_AND_MAIN_SYNCED`
 - Requirement theme: executor adapter and queue resizing design readiness
-- Current conclusion: IR, SR, and OpenSpec decomposition are complete; `executor-adapter-and-adjustment-evidence` is authorized for bounded implementation
+- Current conclusion: IR, SR, OpenSpec decomposition, bounded implementation, verification, closeout, archive, and spec synchronization are complete for `executor-adapter-and-adjustment-evidence`
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -43,21 +43,22 @@ Current:
 - [23-sr-closure-verification.md](./23-sr-closure-verification.md)
 - [decision-log.md](./decision-log.md)
 
-Next gated artifacts:
+Delivered OpenSpec change:
 
-- [OpenSpec change decomposition](../../../../openspec/changes/executor-adapter-and-adjustment-evidence/)
+- [Archived OpenSpec change](../../../../openspec/changes/archive/2026-06-06-executor-adapter-and-adjustment-evidence/)
+- [Synchronized main spec](../../../../openspec/specs/executor-adapter-and-adjustment-evidence/spec.md)
 
 ## Current Scope Boundary
 
 Allowed now:
 
-- Implement the bounded `executor-adapter-and-adjustment-evidence` OpenSpec change.
+- Inspect the archived `executor-adapter-and-adjustment-evidence` OpenSpec change and synchronized main spec as evidence.
 - Use archived `v0.4.0` artifacts and synced specs as input evidence.
-- Update this change's `tasks.md`, `apply.md`, `verify.md`, and `finalize.md` as execution evidence.
+- Maintain governance, verification, and retrospective documents when explicitly authorized.
 
 Not allowed now:
 
-- No Java source or test change outside the approved `experiment.adjustment` implementation boundary.
+- No additional Java source or test change without a newly authorized change.
 - No queue resizing implementation.
 - No production `ThreadPoolExecutor` integration.
 - No scheduler, scenario, persistence, REST, UI, or external dependency change.
