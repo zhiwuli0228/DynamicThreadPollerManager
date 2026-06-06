@@ -4,10 +4,10 @@
 
 - Version name: `v0.6.0`
 - Authoring date: `2026-06-06`
-- Status: `IR_DRAFT`
-- Current phase: `PRESSURE_DATA_ACQUISITION_REQUIREMENT_DRAFT`
+- Status: `IR_CLOSED`
+- Current phase: `SR_FUNCTIONAL_DESIGN_AUTHORIZED`
 - Requirement theme: pressure data acquisition and reproducible baseline evidence
-- Current conclusion: IR 草案和实验数据获取计划已创建；不得作为 SR、OpenSpec change 或 Java 实现输入，直到 IR review、disposition 和 closure verification 完成
+- Current conclusion: IR review、disposition 和 closure verification 已完成；v0.6.0 已授权进入 SR 功能设计，但仍不授权 OpenSpec change 或 Java 实现
 - Authoritative branch: `claude_master`
 
 ## Purpose
@@ -39,9 +39,6 @@ Current:
 
 Pending:
 
-- `11-ir-review.md`
-- `12-ir-review-disposition.md`
-- `13-ir-closure-verification.md`
 - `20-sr.md`
 
 ## Current Scope Boundary

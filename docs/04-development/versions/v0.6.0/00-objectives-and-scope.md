@@ -3,10 +3,10 @@
 ## Header
 
 - Version name: `v0.6.0`
-- Status: `IR_DRAFT`
-- Current phase: `PRESSURE_DATA_ACQUISITION_REQUIREMENT_DRAFT`
+- Status: `IR_CLOSED`
+- Current phase: `SR_FUNCTIONAL_DESIGN_AUTHORIZED`
 - Requirement theme: pressure data acquisition and reproducible baseline evidence
-- Current conclusion: 当前只授权需求草案和实验数据获取计划；不授权实现或实际压测执行
+- Current conclusion: IR 需求草案和实验数据获取计划已闭环；当前授权进入 SR 功能设计，但仍不授权实现或实际压测执行
 
 ## 1. 背景
 
@@ -80,4 +80,4 @@
 1. `11-ir-review.md`
 2. `12-ir-review-disposition.md`
 3. `13-ir-closure-verification.md`
-4. 明确授权进入 `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED`
+4. `docs/00-project/current-state.md` 明确授权进入 `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED`

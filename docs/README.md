@@ -4,11 +4,11 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `VERSION_REQUIREMENT_DRAFT_AUTHORIZED` for `v0.6.0`.
+- `VERSION_FUNCTIONAL_DESIGN_AUTHORIZED` for `v0.6.0`.
 - Authoritative source: `docs/00-project/current-state.md`.
 - Active authorized OpenSpec change: none.
 - `v0.1.0` through `v0.5.0` are implemented and archived.
-- `v0.6.0` pressure data acquisition IR draft is authorized; Java implementation, OpenSpec change creation, and actual pressure test execution are not authorized.
+- `v0.6.0` pressure data acquisition IR is closed; SR functional design is authorized. Java implementation, OpenSpec change creation, and actual pressure test execution are not authorized.
 
 ## Reading Order
 

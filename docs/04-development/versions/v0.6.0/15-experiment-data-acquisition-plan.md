@@ -121,6 +121,21 @@ SR 可调整 seed，但必须保证：
 - `environmentSummary`
 - `commandLine`
 
+### 5.1.1 Environment fingerprint
+
+每个 run 的 `environmentSummary` 至少应覆盖：
+
+- `osName`
+- `osVersion`
+- `javaVersion`
+- `javaVendor`
+- `cpuModel` 或等价硬件标识
+- `availableProcessors`
+- `maxMemory`
+- `workingDirectory`
+
+如果某项不可得，必须显式标记为 `unavailable`，不得静默省略。
+
 ### 5.2 Snapshot metrics
 
 - `runId`
@@ -189,6 +204,13 @@ outputs/reports/v0.6.0/
 | `replay-summary-<group>.json` | yes | replay action/gate/oscillation summary |
 | `readiness-summary-<group>.md` | yes | readiness 结论、原因、阻塞项 |
 | `raw-snapshots-<runId>.jsonl` | no | 原始 snapshot evidence，默认不纳入版本控制 |
+
+### 7.1 Raw evidence retention
+
+- raw evidence 默认只作为执行后中间产物，不进入版本控制。
+- 若需要保留 raw evidence，用于 review 或后续 repeatability 检查，必须在执行前记录保留位置和清理责任。
+- 若 raw evidence 超过审阅需要，必须在 versioned summary 之外另行清理，不得长期堆积在仓库根目录或未受控输出目录。
+- 清理规则应在后续 SR 或实现阶段进一步自动化，但当前 IR 只要求定义原则和责任边界。
 
 ## 8. 执行前置条件
 
