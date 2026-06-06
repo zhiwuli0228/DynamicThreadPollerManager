@@ -118,6 +118,14 @@ SR 必填内容：
 - `tasks.md`
 - `plan.md`
 
+Schema 强制规则：
+
+- 新建 capability change 必须使用 `schema: superspec`。
+- 不允许再新建 `schema: spec-driven` 的 capability change。
+- 继续任何既有 change 前，必须先读取 `openspec/changes/<name>/.openspec.yaml`，再决定能否使用 `/opsx:continue`、`/opsx:apply`、`/opsx:verify` 或 `finalize`。
+- 若历史 change 已经固定为 `schema: spec-driven`，不得声称 `/opsx:continue` 可以生成 `finalize.md`；必须采用一次性兼容收尾，手工补齐真实的 `finalize.md` 并记录原因。
+- 若 change 声称基于 superspec 创建，但 `.openspec.yaml` 不是 `schema: superspec`，这是 P1 流程缺陷，必须立即修正或停止交付。
+
 出口条件：
 
 - change 名称、scope、non-scope 与 SR 一致；
@@ -233,6 +241,15 @@ SR 必填内容：
 - 当前状态文件同步；
 - 不得把 precheck 通过误写为用户最终验收，除非用户明确确认；
 - 必须进入复盘阶段，不能在 archive 后直接结束交付。
+
+Verify 阶段的自动推进规则：
+
+- `verify.md` 必须只有一个最终结论；历史失败、旧指令或前一轮用户约束只能作为过程记录，不得保留为当前终态。
+- `verify.md` 必须写入 `Machine-Actionable Closeout State`，至少包含 `Gate status`、`Worktree status`、`Blocking reason`、`Agent next action`、`User action required before next agent action`、`Archive status`。
+- 当 `Gate status` 为 `PASS` 或 `PASS_WITH_WARNINGS` 且 `User action required before next agent action` 为 `no` 时，后续 agent 必须继续执行 `Agent next action`，不得停在“等待用户控制 archive”。
+- “user-controlled archive” 只能用于确实需要用户作出验收、权限或发布决策的场景；不能用来替代 `commit`、`/opsx:continue`、`finalize.md` 生成或门禁验证。
+- 若工作区在 verify 后仍为 dirty，但 dirty 内容正是当前实现、测试、证据或治理修正，则应标记为 `DIRTY_EXPECTED_BEFORE_COMMIT`，下一步必须是提交或提交前复核，而不是等待用户。
+- 若 `pre-finalize` 门禁通过，标准下一步是提交当前实现/证据并运行 `/opsx:continue` 进入 finalize；不得直接 archive，也不得无理由停止。
 
 ### 9. Retrospective 复盘
 

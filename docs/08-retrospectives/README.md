@@ -14,6 +14,7 @@
 1. `docs/08-retrospectives/agent-handoff-closeout-standard.md`
 2. `docs/08-retrospectives/2026-06-02-metrics-snapshot-and-recording-retrospective.md`
 3. `docs/08-retrospectives/2026-06-05-offline-replay-and-readiness-gate-retrospective.md`
+4. `docs/08-retrospectives/2026-06-06-executor-adapter-schema-closeout-retrospective.md`
 
 ## 使用规则
 

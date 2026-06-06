@@ -14,6 +14,8 @@
                        * active change directory exists
                        * current-state still authorizes
                          EXECUTION_AUTHORIZED and the supplied change
+                         (either 'Change name: <name>' or
+                         'Authorized OpenSpec change: <name>')
                        * openspec list --json still references the
                          change
 
@@ -27,7 +29,9 @@
                          openspec/specs/<name>/spec.md and contains
                          both `## Purpose` and `## Requirements`
                        * current-state no longer lists the change as
-                         active and no longer declares
+                         active (neither 'Change name: <name>' nor
+                         'Authorized OpenSpec change: <name>' may
+                         remain) and no longer declares
                          Current stage: EXECUTION_AUTHORIZED
                        * openspec list --json no longer references
                          the change
@@ -159,14 +163,31 @@ if ($validateFailures -gt 0) {
 
 $worktreeEntries = Get-WorktreeStatus
 
+# current-state.md has used two interchangeable labels for the active
+# change: "Change name: <name>" (legacy, used through the offline-replay
+# authorization) and "Authorized OpenSpec change: <name>" (current,
+# introduced when the executor-adapter change was authorized). They are
+# semantically equivalent; the guard accepts either so the contract does
+# not silently break on every authorize commit.
+#
+# The backticks are written inside a single-quoted here-string so the
+# regex engine receives literal backticks; PowerShell's double-quoted
+# strings would silently drop the unescaped `` ` `` characters and
+# break the pattern.
+$activeChangePattern = @'
+(?:Change name|Authorized OpenSpec change):\s+`?
+'@ + [regex]::Escape($ChangeName) + @'
+`?
+'@
+
 switch ($Mode) {
     "pre-finalize" {
         $activeChangePath = Join-Path $repoRoot ("openspec/changes/" + $ChangeName)
         Require-Path $activeChangePath "Active change path not found: $activeChangePath"
         Require-TextMatch $currentState 'Current stage:\s+`?EXECUTION_AUTHORIZED`?' `
             "current-state is not in EXECUTION_AUTHORIZED while pre-finalize guard expects active execution."
-        Require-TextMatch $currentState ("Change name:\s+`?" + [regex]::Escape($ChangeName) + "`?") `
-            "current-state does not identify the active change $ChangeName."
+        Require-TextMatch $currentState $activeChangePattern `
+            "current-state does not identify the active change $ChangeName (expected 'Change name: <name>' or 'Authorized OpenSpec change: <name>')."
 
         $activeChangeNames = Get-OpenSpecListMentions
         if ($activeChangeNames -notcontains $ChangeName) {
@@ -199,8 +220,8 @@ switch ($Mode) {
         Require-TextMatch $mainSpec '(?m)^## Purpose\s*$' "Main spec is missing '## Purpose': $mainSpecPath"
         Require-TextMatch $mainSpec '(?m)^## Requirements\s*$' "Main spec is missing '## Requirements': $mainSpecPath"
 
-        Require-TextNoMatch $currentState ("Change name:\s+`?" + [regex]::Escape($ChangeName) + "`?") `
-            "current-state still lists archived change $ChangeName as active."
+        Require-TextNoMatch $currentState $activeChangePattern `
+            "current-state still lists archived change $ChangeName as active (expected neither 'Change name: <name>' nor 'Authorized OpenSpec change: <name>' to be present)."
         Require-TextNoMatch $currentState 'Current stage:\s+`?EXECUTION_AUTHORIZED`?' `
             "current-state still shows EXECUTION_AUTHORIZED after archive."
 

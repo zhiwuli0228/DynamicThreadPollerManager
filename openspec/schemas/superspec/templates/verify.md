@@ -120,6 +120,26 @@ when `git status --short` is non-empty.
 
 <describe the next action>
 
+## Machine-Actionable Closeout State
+
+Record exactly one closeout state. Do not leave stale or
+conflicting conclusions in this file.
+
+- **Gate status**: `PASS` | `PASS_WITH_WARNINGS` | `FAIL`
+- **Worktree status**: `CLEAN` | `DIRTY_EXPECTED_BEFORE_COMMIT` | `DIRTY_BLOCKING`
+- **Blocking reason**: `none` | `<specific blocker>`
+- **Agent next action**: `<one exact command/action, e.g. commit current implementation/evidence updates, then run /opsx:continue to generate finalize.md>`
+- **User action required before next agent action**: `yes` | `no`
+- **Archive status**: `not_started` | `ready_after_finalize` | `blocked`
+- **Archive rule**: `do not skip finalize; archive may run only after finalize.md exists and the relevant archive guard sequence is green`
+
+If **User action required before next agent action** is `no`, the
+next agent must continue with the recorded **Agent next action**
+instead of stopping with "waiting for user-controlled archive".
+Use "user-controlled archive" only when the user must make an
+explicit acceptance, permission, or release decision before the next
+agent can safely act.
+
 > **Convergence loop reminder**:
 > - PASS / PASS_WITH_WARNINGS → `/opsx:continue` advances to the finalize
 >   artifact, which executes the git-side closeout directly (merges
