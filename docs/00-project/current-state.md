@@ -13,7 +13,7 @@
 
 ## Active Authorized Change
 
-- `pressure-data-acquisition-and-baseline`.
+- Authorized OpenSpec change: `pressure-data-acquisition-and-baseline`
 - The authorized OpenSpec change is located at `openspec/changes/pressure-data-acquisition-and-baseline/`.
 - The most recent archived bounded change, `executor-adapter-and-adjustment-evidence`, was archived on 2026-06-06 to `openspec/changes/archive/2026-06-06-executor-adapter-and-adjustment-evidence/` and its delta spec is mirrored at `openspec/specs/executor-adapter-and-adjustment-evidence/spec.md`.
 

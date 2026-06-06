@@ -241,6 +241,7 @@ Archive 后强制同步规则：
 - post-archive guard 不通过时，禁止声称“归档完成”或“需求闭环”。
 - archive move、main spec、`current-state.md`、版本状态文件、复盘或治理修正必须进入同一个归档收尾提交，除非明确拆分并记录原因。
 - 若 `openspec list --json` 已无 active change，但 `current-state.md` 仍声明 active change，这是 P1 流程缺陷，必须先修正状态同步，而不是继续推进新需求。
+- `docs/00-project/current-state.md` 中任何会被 verify/guard 读取的授权字段，必须使用脚本可识别的固定格式，例如 `Authorized OpenSpec change: <name>` 或 `Change name: <name>`；不能只用纯描述性短句代替。
 
 出口条件：
 

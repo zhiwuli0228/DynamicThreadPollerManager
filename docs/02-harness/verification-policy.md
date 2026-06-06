@@ -27,6 +27,7 @@
 - Run `git status --short` and report whether the worktree is clean.
 - Confirm that every synced main spec contains both `## Purpose` and `## Requirements`.
 - Confirm that `docs/00-project/current-state.md` no longer claims the archived change is still active or execution-authorized.
+- Confirm that any active change authorization line in `docs/00-project/current-state.md` uses a script-recognized fixed format before relying on it in verify or archive guard checks.
 - Confirm that `openspec list --json` does not still reference the archived change.
 - Map each spec scenario to implementation and test evidence when verifying a completed change.
 - For concurrent recorders, collectors, schedulers, and caches, inspect nested mutable state as well as outer container types.
