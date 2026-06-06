@@ -39,6 +39,7 @@ Current:
 - [21-sr-review.md](./21-sr-review.md)
 - [22-sr-review-disposition.md](./22-sr-review-disposition.md)
 - [23-sr-closure-verification.md](./23-sr-closure-verification.md)
+- [24-completion-assessment.md](./24-completion-assessment.md)
 - [decision-log.md](./decision-log.md)
 
 Pending:
