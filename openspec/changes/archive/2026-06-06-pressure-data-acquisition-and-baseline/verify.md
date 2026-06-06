@@ -5,8 +5,8 @@
 > Failed checks must be fixed in the corresponding artifact, then re-run verify.
 
 **Change**: `pressure-data-acquisition-and-baseline`
-**Verified at**: `2026-06-06 15:00`
-**Iteration**: `1`
+**Verified at**: `2026-06-06 15:10`
+**Iteration**: `2`
 **Verifier**: `claude-code`
 
 ---
@@ -34,30 +34,23 @@
 
 ## 2. Archive Guard Precheck
 
-- [ ] `scripts/openspec-archive-guard.ps1 -Mode pre-finalize -ChangeName pressure-data-acquisition-and-baseline` passed
+- [x] `scripts/openspec-archive-guard.ps1 -Mode pre-finalize -ChangeName pressure-data-acquisition-and-baseline` passed
 
 **Guard result**:
 
 ```text
-Fail : current-state does not identify the active change pressure-data-acquisition-and-baseline
-       (expected 'Change name: <name>' or 'Authorized OpenSpec change: <name>').
-Exit code: 1
+PASS pre-finalize: validate green, active change exists, current-state authorizes pressure-data-acquisition-and-baseline, list agrees.
+Exit code: 0
 ```
 
-**Blocking findings**:
+**Blocking findings** (if any):
 
 | Check | Result | Notes |
 |---|---|---|
 | openspec validate --all --json | PASS | 6/6 items valid |
 | Active change directory exists | PASS | `openspec/changes/pressure-data-acquisition-and-baseline/` exists |
-| current-state authorizes change | FAIL | `docs/00-project/current-state.md` references `pressure-data-acquisition-and-baseline` on line 16 but uses the format `- \`pressure-data-acquisition-and-baseline\`.` instead of the expected `Change name: <name>` or `Authorized OpenSpec change: <name>` pattern. The guard script regex requires one of these two formats. |
+| current-state authorizes change | PASS | `Authorized OpenSpec change: \`pressure-data-acquisition-and-baseline\`` found at line 16 |
 | openspec list references change | PASS | `openspec list --json` includes `pressure-data-acquisition-and-baseline` |
-
-**Fix required**: Update `docs/00-project/current-state.md` to include the line:
-```
-- Authorized OpenSpec change: `pressure-data-acquisition-and-baseline`
-```
-in the "Active Authorized Change" section (line 16 area).
 
 ---
 
@@ -115,40 +108,35 @@ Scenarios in `specs/*.md`:
 - [x] No unstaged files in the worktree
 - [x] All related commits have been pushed
 - [x] `docs/00-project/current-state.md` matches the actual repository state
-- [ ] `openspec list --json`, `openspec validate --all --json`, and the worktree tell the same story
+- [x] `openspec list --json`, `openspec validate --all --json`, and the worktree tell the same story
 
-**Untracked files** (not blocking for pre-finalize, must be clean before post-archive):
+**Untracked files** (non-blocking, local tooling only):
 
 | File | Status |
 |---|---|
 | `.claude/settings.local.json` | Untracked (local config, not part of change) |
 | `.opencode/` | Untracked (local tooling, not part of change) |
-| `openspec/changes/pressure-data-acquisition-and-baseline/apply.md` | Untracked (newly created receipt, needs commit) |
 
-**Commit range**: `b4da4de..d6792bd`
-
-**Note**: `current-state.md` references the change but uses a format the archive guard script does not recognize. The change is semantically authorized but the guard's regex pattern (`Change name:` or `Authorized OpenSpec change:`) does not match the current formatting (`- \`pressure-data-acquisition-and-baseline\`.`). This is a governance formatting issue, not an implementation issue.
+**Commit range**: `b4da4de..7c35de3`
 
 ---
 
 ## Overall Decision
 
-- [ ] ✅ PASS — ready to proceed via /opsx:continue to the finalize artifact, then /opsx:archive
+- [x] ✅ PASS — ready to proceed via /opsx:continue to the finalize artifact, then /opsx:archive
 - [ ] ⚠️ PASS WITH WARNINGS — can proceed but note: `<explanation>`
-- [x] ❌ FAIL — return to the failed artifact, fix, then re-run verify
+- [ ] ❌ FAIL — return to the failed artifact, fix, then re-run verify
 
 **Next step**:
 
-Fix the archive guard failure by updating `docs/00-project/current-state.md` to include the expected authorization pattern. The "Active Authorized Change" section (line 16) should be updated to include `Authorized OpenSpec change: \`pressure-data-acquisition-and-baseline\`` in addition to or instead of the current bullet format.
-
-After fixing, also commit `apply.md` and re-run the archive guard to confirm it passes. Then re-run `/opsx:verify`.
+Run `/opsx:continue` to advance to the finalize artifact, which executes the git-side closeout (merge worktree → feature branch, push, update PR if exists, post code-reviewer comment).
 
 ## Machine-Actionable Closeout State
 
-- **Gate status**: `FAIL`
-- **Worktree status**: `DIRTY_EXPECTED_BEFORE_COMMIT` (apply.md untracked)
-- **Blocking reason**: Archive guard precheck failed — `current-state.md` does not use the expected `Change name:` or `Authorized OpenSpec change:` format recognized by the guard script regex.
-- **Agent next action**: Update `docs/00-project/current-state.md` line 16 to use `Authorized OpenSpec change: \`pressure-data-acquisition-and-baseline\``, commit apply.md and the current-state fix, then re-run `/opsx:verify`.
+- **Gate status**: `PASS`
+- **Worktree status**: `CLEAN` (only local tooling untracked)
+- **Blocking reason**: `none`
+- **Agent next action**: Run `/opsx:continue` to generate finalize.md
 - **User action required before next agent action**: `no`
-- **Archive status**: `blocked`
+- **Archive status**: `ready_after_finalize`
 - **Archive rule**: `do not skip finalize; archive may run only after finalize.md exists and the relevant archive guard sequence is green`
