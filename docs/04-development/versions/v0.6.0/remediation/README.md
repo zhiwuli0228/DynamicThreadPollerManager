@@ -30,6 +30,11 @@ Current:
 - [23-sr-closure-verification.md](./23-sr-closure-verification.md)
 - [decision-log.md](./decision-log.md)
 - [60-retrospective.md](./60-retrospective.md)
+- [30-execution-task.md](./30-execution-task.md)
+- [61-rectification-report.md](./61-rectification-report.md)
+- [preflight-note.md](./preflight-note.md)
+- [62-dispatch-process.md](./62-dispatch-process.md)
+- [dispatch-checklist.md](./dispatch-checklist.md)
 
 ## Process
 
