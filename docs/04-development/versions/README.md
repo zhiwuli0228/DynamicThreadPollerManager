@@ -4,12 +4,12 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- Six version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, and `v0.6.0`.
-- `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, and `v0.5.0` are `IMPLEMENTED`.
-- `v0.6.0` pressure data acquisition IR and SR are closed and `pressure-data-acquisition-and-baseline` is authorized for OpenSpec execution.
-- `executor-adapter-and-adjustment-evidence` has been archived and synchronized to `openspec/specs/executor-adapter-and-adjustment-evidence/spec.md`.
-- There is one active authorized OpenSpec change: `pressure-data-acquisition-and-baseline`.
-- Java implementation is authorized only within the active change scope.
+- Seven version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, and `v0.7.0`.
+- `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, and `v0.6.0` are `IMPLEMENTED`.
+- `v0.7.0` managed executor domain is `EXECUTION_AUTHORIZED`; change `establish-managed-executor-and-registry` is active.
+- `executor-adapter-and-adjustment-evidence` and `pressure-data-acquisition-and-baseline` have been archived and synchronized to `openspec/specs/`.
+- There is no active authorized OpenSpec change.
+- Java implementation is not authorized until IR + SR closure and a new `EXECUTION_AUTHORIZED` stage.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

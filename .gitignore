@@ -35,3 +35,4 @@ build/
 ### Local tooling ###
 .claude/
 .opencode/
+outputs/

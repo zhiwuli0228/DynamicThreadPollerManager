@@ -4,11 +4,11 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `EXECUTION_AUTHORIZED` for `pressure-data-acquisition-and-baseline`.
+- `EXECUTION_AUTHORIZED` for `v0.7.0` change `establish-managed-executor-and-registry`.
 - Authoritative source: `docs/00-project/current-state.md`.
-- Active authorized OpenSpec change: `pressure-data-acquisition-and-baseline`.
-- `v0.1.0` through `v0.5.0` are implemented and archived.
-- `v0.6.0` pressure data acquisition IR and SR are closed; OpenSpec change execution is authorized for the pressure data acquisition baseline capability. Work remains bounded to the authorized change.
+- Active authorized OpenSpec change: `establish-managed-executor-and-registry`.
+- `v0.1.0` through `v0.6.0` are implemented and archived.
+- `v0.7.0` change 1/3 executing; implementation authorized.
 
 ## Reading Order
 
