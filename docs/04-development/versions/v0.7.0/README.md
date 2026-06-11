@@ -4,45 +4,47 @@
 
 - Version name: `v0.7.0`
 - Authoring date: `2026-06-11`
-- Status: `CHANGE_2_ARCHIVED` — changes 1/3 and 2/3 archived; change 3/3 (`closed-loop-experiment-verification`) pending
-- Current phase: `DESIGN_ONLY` — preparing change 3/3
+- Status: `IMPLEMENTED` — all 3 changes archived; 412 tests pass
 - Authoritative branch: `claude_master`
 
-## Change Status
+## Purpose
 
-| Change | Name | Status | Archive |
+v0.7.0 桥接了 v0.1.0-v0.6.0 的实验基础设施到真实 `ThreadPoolExecutor`，完成了首次闭环实验验证。
+
+## Change Summary
+
+| # | Change | Status | Tests |
 |---|---|---|---|
-| 1/3 | establish-managed-executor-and-registry | ARCHIVED | `openspec/changes/archive/2026-06-12-establish-managed-executor-and-registry/` |
-| 2/3 | bridge-adjustment-to-real-executor | ARCHIVED | `openspec/changes/archive/2026-06-12-bridge-adjustment-to-real-executor/` |
-| 3/3 | closed-loop-experiment-verification | PENDING | — |
+| 1/3 | `establish-managed-executor-and-registry` | ARCHIVED | 394 pass |
+| 2/3 | `bridge-adjustment-to-real-executor` | ARCHIVED | 409 pass |
+| 3/3 | `closed-loop-experiment-verification` | ARCHIVED | 412 pass |
+
+## Delivered Capabilities
+
+| Capability | Description |
+|---|---|
+| `ManagedExecutor` | ThreadPoolExecutor wrapper with controlled parameter adjustment |
+| `ExecutorRegistry` | Thread-safe named executor registry with deletion safety |
+| `RuntimeSetting` | Parameter classification (adjustable/non-adjustable) and bounds |
+| `DeletionSafety` | Atomic reference counting for safe executor removal |
+| `ManagedExecutorAdjustmentAdapter` | Bridges ScaleAdjustmentCommand to real ManagedExecutor |
+| `ExecutorStateSnapshot` extension | 5 new nullable fields from real ThreadPoolExecutor |
+| Closed-loop experiment | End-to-end test proving full pipeline on real executor |
 
 ## Test Results
 
-| Change | Tests | Result |
-|---|---|---|
-| 1/3 | 394 (380 existing + 14 new) | 0 failures |
-| 2/3 | 409 (394 existing + 15 new) | 0 failures |
+- **Final**: 412 tests, 0 failures, 0 errors
+- **New tests**: ManagedExecutorTest (16), ExecutorRegistryTest (9), AtomicDeletionSafetyTest (9), ParameterBoundsTest (10), ManagedExecutorAdjustmentAdapterTest (15), ClosedLoopExperimentTest (3)
+- **Non-regression**: All existing InMemoryAdjustableExecutorProbe tests pass unmodified
 
 ## Document Set
 
-- `README.md`（本文档）
+- `README.md`
 - `00-objectives-and-scope.md`
 - `decision-log.md`
-- `10-ir.md`
-- `11-ir-review.md`
-- `12-ir-review-disposition.md`
-- `13-ir-closure-verification.md`
-- `20-sr.md`
-- `21-sr-review.md`
-- `22-sr-review-disposition.md`
-- `23-sr-closure-verification.md`
+- `10-ir.md` → `11-ir-review.md` → `12-ir-review-disposition.md` → `13-ir-closure-verification.md`
+- `20-sr.md` → `21-sr-review.md` → `22-sr-review-disposition.md` → `23-sr-closure-verification.md`
 
-## Current Scope Boundary
+## Next Step
 
-Allowed now:
-- Draft final v0.7.0 OpenSpec change (`closed-loop-experiment-verification`).
-- Inspect archived artifacts and synchronized specs.
-
-Not allowed now:
-- Java source or test change (requires new `EXECUTION_AUTHORIZED`).
-- Queue resizing, persistence, REST/API/UI, external dependencies.
+Retrospective per managed-change-standard section 9.
