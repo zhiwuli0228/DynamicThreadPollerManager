@@ -22,5 +22,7 @@ public enum AdjustmentFailureCode {
     /** Adapter probe reported a runtime failure during the attempted adjustment. */
     PROBE_FAILURE,
     /** Adapter does not support the requested adjustment type. */
-    UNSUPPORTED
+    UNSUPPORTED,
+    /** Target executor not found in the registry. */
+    EXECUTOR_NOT_FOUND
 }

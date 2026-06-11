@@ -256,7 +256,7 @@ class AdjustmentContractsTest {
 
     @Test
     void adjustmentFailureCodeShouldExposeRequiredCodes() {
-        assertEquals(8, AdjustmentFailureCode.values().length);
+        assertEquals(9, AdjustmentFailureCode.values().length);
         assertNotNull(AdjustmentFailureCode.NOT_READY);
         assertNotNull(AdjustmentFailureCode.RISK_NOT_ACCEPTED);
         assertNotNull(AdjustmentFailureCode.COOLDOWN_ACTIVE);
@@ -265,6 +265,7 @@ class AdjustmentContractsTest {
         assertNotNull(AdjustmentFailureCode.INVALID_COMMAND);
         assertNotNull(AdjustmentFailureCode.PROBE_FAILURE);
         assertNotNull(AdjustmentFailureCode.UNSUPPORTED);
+        assertNotNull(AdjustmentFailureCode.EXECUTOR_NOT_FOUND);
     }
 
     @Test
