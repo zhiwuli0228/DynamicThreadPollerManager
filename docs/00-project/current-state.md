@@ -2,8 +2,8 @@
 
 ## Authoritative Status
 
-- Current stage: `VERSION_IMPLEMENTED` for `v0.7.0`
-- Current authorized work type: `RETROSPECTIVE_ONLY` — v0.7.0 all 3 changes archived; retrospective is the next step
+- Current stage: `VERSION_COMPLETE` for `v0.7.0`
+- Current authorized work type: `PLANNING_ONLY` — v0.7.0 delivered, archived, and retrospected; next version planning is the next step
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
 - Version design status: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, and `v0.7.0` are `IMPLEMENTED`
@@ -36,7 +36,7 @@
 5. ~~`EXECUTION_AUTHORIZED`~~ (completed for all 3 changes)
 6. ~~capability change execution~~ (completed for all 3 changes)
 7. ~~archive~~ (all 3 changes archived)
-8. v0.7.0 retrospective ← next stage
+8. ~~v0.7.0 retrospective~~ (completed)
 
 ## v0.7.0 Change Summary
 

@@ -16,6 +16,7 @@
 3. `docs/08-retrospectives/2026-06-05-offline-replay-and-readiness-gate-retrospective.md`
 4. `docs/08-retrospectives/2026-06-06-executor-adapter-schema-closeout-retrospective.md`
 5. `docs/08-retrospectives/2026-06-06-pressure-data-acquisition-verify-gate-retrospective.md`
+6. `docs/08-retrospectives/2026-06-12-v0.7.0-managed-executor-domain-retrospective.md`
 
 ## 使用规则
 
