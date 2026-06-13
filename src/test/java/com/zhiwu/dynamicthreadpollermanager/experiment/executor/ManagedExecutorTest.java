@@ -208,4 +208,11 @@ class ManagedExecutorTest {
         assertNotNull(snapshot.largestPoolSize());
         assertNotNull(snapshot.taskCount());
     }
+
+    @Test
+    void shouldReturnPlatformThreadModeByDefault() {
+        executor = new ManagedExecutor(2, 4, 60,
+                TimeUnit.SECONDS, new LinkedBlockingQueue<>(10));
+        assertEquals(ThreadMode.PLATFORM, executor.getThreadMode());
+    }
 }

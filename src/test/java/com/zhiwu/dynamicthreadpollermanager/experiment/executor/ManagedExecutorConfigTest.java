@@ -105,4 +105,23 @@ class ManagedExecutorConfigTest {
         assertTrue(str.contains("corePoolSize=2"));
         assertTrue(str.contains("queueCapacity=10"));
     }
+
+    @Test
+    void shouldDefaultConfigUsePlatform() {
+        ManagedExecutorConfig config = ManagedExecutorConfig.defaultConfig();
+        assertEquals(ThreadMode.PLATFORM, config.threadMode());
+    }
+
+    @Test
+    void shouldCreateConfigWithThreadMode() {
+        ManagedExecutorConfig config = new ManagedExecutorConfig(
+                2, 4, 10, 60, TimeUnit.SECONDS, ThreadMode.VIRTUAL);
+        assertEquals(ThreadMode.VIRTUAL, config.threadMode());
+    }
+
+    @Test
+    void shouldRejectNullThreadMode() {
+        assertThrows(NullPointerException.class, () ->
+                new ManagedExecutorConfig(2, 4, 10, 60, TimeUnit.SECONDS, null));
+    }
 }

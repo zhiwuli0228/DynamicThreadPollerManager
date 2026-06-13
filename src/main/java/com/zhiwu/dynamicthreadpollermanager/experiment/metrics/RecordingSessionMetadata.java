@@ -15,6 +15,7 @@ public record RecordingSessionMetadata(
         int queueCapacity,
         long keepAliveTime,
         String keepAliveTimeUnit,
+        String threadMode,
         Instant startedAt,
         Instant closedAt,
         int snapshotCount,

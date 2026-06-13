@@ -11,7 +11,7 @@ class RecordingSessionTest {
     @Test
     void shouldStartSessionAsActive() {
         RecordingSession session = new RecordingSession(
-                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS");
+                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS", "PLATFORM");
 
         assertEquals(SessionStatus.ACTIVE, session.status());
         assertEquals(0, session.snapshotCount());
@@ -22,13 +22,14 @@ class RecordingSessionTest {
         assertEquals(10, session.queueCapacity());
         assertEquals(60L, session.keepAliveTime());
         assertEquals("SECONDS", session.keepAliveTimeUnit());
+        assertEquals("PLATFORM", session.threadMode());
         assertNotNull(session.startedAt());
     }
 
     @Test
     void shouldIncrementSnapshotCount() {
         RecordingSession session = new RecordingSession(
-                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS");
+                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS", "PLATFORM");
 
         session.incrementSnapshotCount();
         session.incrementSnapshotCount();
@@ -40,7 +41,7 @@ class RecordingSessionTest {
     @Test
     void shouldCloseSessionAndReturnMetadata() {
         RecordingSession session = new RecordingSession(
-                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS");
+                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS", "PLATFORM");
         session.incrementSnapshotCount();
         session.incrementSnapshotCount();
 
@@ -55,6 +56,7 @@ class RecordingSessionTest {
         assertEquals(10, metadata.queueCapacity());
         assertEquals(60L, metadata.keepAliveTime());
         assertEquals("SECONDS", metadata.keepAliveTimeUnit());
+        assertEquals("PLATFORM", metadata.threadMode());
         assertEquals(2, metadata.snapshotCount());
         assertNotNull(metadata.startedAt());
         assertNotNull(metadata.closedAt());
@@ -63,7 +65,7 @@ class RecordingSessionTest {
     @Test
     void shouldThrowOnDoubleClose() {
         RecordingSession session = new RecordingSession(
-                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS");
+                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS", "PLATFORM");
         session.close();
 
         assertThrows(IllegalStateException.class, session::close);
@@ -72,9 +74,20 @@ class RecordingSessionTest {
     @Test
     void shouldThrowOnIncrementAfterClose() {
         RecordingSession session = new RecordingSession(
-                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS");
+                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS", "PLATFORM");
         session.close();
 
         assertThrows(IllegalStateException.class, session::incrementSnapshotCount);
+    }
+
+    @Test
+    void shouldStoreThreadMode() {
+        RecordingSession session = new RecordingSession(
+                "sess-001", "run-001", 2, 4, 10, 60, "SECONDS", "VIRTUAL");
+
+        assertEquals("VIRTUAL", session.threadMode());
+
+        RecordingSessionMetadata metadata = session.close();
+        assertEquals("VIRTUAL", metadata.threadMode());
     }
 }

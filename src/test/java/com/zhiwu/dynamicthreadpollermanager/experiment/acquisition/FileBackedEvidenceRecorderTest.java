@@ -133,6 +133,7 @@ class FileBackedEvidenceRecorderTest {
         assertEquals("run-001", metadata.runId());
         assertEquals(config.corePoolSize(), metadata.corePoolSize());
         assertEquals(config.maximumPoolSize(), metadata.maximumPoolSize());
+        assertEquals(config.threadMode().name(), metadata.threadMode());
     }
 
     @Test
@@ -149,6 +150,7 @@ class FileBackedEvidenceRecorderTest {
         assertTrue(content.contains("\"sessionId\""), "should contain sessionId field");
         assertTrue(content.contains("\"run-001\""), "should contain runId");
         assertTrue(content.contains("\"CLOSED\""), "should contain CLOSED status");
+        assertTrue(content.contains("\"threadMode\""), "should contain threadMode field");
     }
 
     @Test

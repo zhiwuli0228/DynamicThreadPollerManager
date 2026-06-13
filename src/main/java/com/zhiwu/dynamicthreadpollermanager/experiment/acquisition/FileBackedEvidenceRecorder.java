@@ -103,7 +103,8 @@ public final class FileBackedEvidenceRecorder implements EvidenceRecorder {
         RecordingSession session = new RecordingSession(sessionId, runId,
                 config.corePoolSize(), config.maximumPoolSize(),
                 config.queueCapacity(), config.keepAliveTime(),
-                config.keepAliveTimeUnit().name());
+                config.keepAliveTimeUnit().name(),
+                config.threadMode().name());
         sessions.put(runId, session);
         return session;
     }
@@ -156,6 +157,7 @@ public final class FileBackedEvidenceRecorder implements EvidenceRecorder {
         map.put("queueCapacity", metadata.queueCapacity());
         map.put("keepAliveTime", metadata.keepAliveTime());
         map.put("keepAliveTimeUnit", metadata.keepAliveTimeUnit());
+        map.put("threadMode", metadata.threadMode());
         return map;
     }
 

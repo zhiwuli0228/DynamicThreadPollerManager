@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -36,6 +37,12 @@ public final class ExecutorRebuildStrategy {
         ExecutorStateSnapshot beforeState = oldExecutor.toSnapshot();
         int oldQueueCapacity = oldExecutor.getQueueCapacity();
         QueueResizeCommand.Direction direction = command.direction(oldQueueCapacity);
+
+        if (oldExecutor.getThreadMode() == ThreadMode.VIRTUAL) {
+            return rebuildVirtual(executorId, oldExecutor, command,
+                    beforeState, oldQueueCapacity, direction, startTime);
+        }
+
         ThreadPoolExecutor oldTpe = oldExecutor.unwrap();
         int corePoolSize = oldExecutor.getCorePoolSize();
         int maxPoolSize = oldExecutor.getMaximumPoolSize();
@@ -98,6 +105,58 @@ public final class ExecutorRebuildStrategy {
                 }
             }
         }
+
+        ExecutorStateSnapshot afterState = newExecutor.toSnapshot();
+        long durationMs = Duration.between(startTime, clock.get()).toMillis();
+
+        return new RebuildResult(
+                true, beforeState, afterState, durationMs,
+                drainedTasks.size(), rejectedCount,
+                direction, oldQueueCapacity, command.targetQueueCapacity(),
+                null);
+    }
+
+    private RebuildResult rebuildVirtual(String executorId, ManagedExecutor oldExecutor,
+                                         QueueResizeCommand command,
+                                         ExecutorStateSnapshot beforeState,
+                                         int oldQueueCapacity,
+                                         QueueResizeCommand.Direction direction,
+                                         Instant startTime) {
+        RejectedExecutionHandler rejectionHandler = oldExecutor.getRejectionPolicy();
+        int maxConcurrency = oldExecutor.getCorePoolSize();
+        long keepAliveMs = oldExecutor.getKeepAliveTime(TimeUnit.MILLISECONDS);
+
+        // Create new virtual executor with target queue capacity
+        ManagedExecutor newExecutor;
+        try {
+            newExecutor = ManagedExecutor.virtual(
+                    maxConcurrency, command.targetQueueCapacity(),
+                    keepAliveMs, TimeUnit.MILLISECONDS, rejectionHandler);
+        } catch (Exception e) {
+            long durationMs = Duration.between(startTime, clock.get()).toMillis();
+            return new RebuildResult(
+                    false, beforeState, null, durationMs,
+                    0, 0, direction, oldQueueCapacity, command.targetQueueCapacity(),
+                    "Commission failed: " + e.getMessage());
+        }
+
+        // Drain pending tasks from old executor and replay into new
+        List<Runnable> drainedTasks = oldExecutor.shutdownNow();
+        int replayedCount = 0;
+        int rejectedCount = 0;
+        if (!drainedTasks.isEmpty() && direction == QueueResizeCommand.Direction.EXPAND) {
+            for (Runnable task : drainedTasks) {
+                try {
+                    newExecutor.submit(task);
+                    replayedCount++;
+                } catch (RejectedExecutionException e) {
+                    rejectedCount++;
+                }
+            }
+        }
+
+        registry.remove(executorId);
+        registry.register(executorId, newExecutor);
 
         ExecutorStateSnapshot afterState = newExecutor.toSnapshot();
         long durationMs = Duration.between(startTime, clock.get()).toMillis();

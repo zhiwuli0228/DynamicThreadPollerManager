@@ -19,6 +19,7 @@ public final class RecordingSession {
     private final int queueCapacity;
     private final long keepAliveTime;
     private final String keepAliveTimeUnit;
+    private final String threadMode;
     private final Instant startedAt;
     private volatile Instant closedAt;
     private volatile int snapshotCount;
@@ -26,7 +27,8 @@ public final class RecordingSession {
 
     public RecordingSession(String sessionId, String runId,
                             int corePoolSize, int maximumPoolSize, int queueCapacity,
-                            long keepAliveTime, String keepAliveTimeUnit) {
+                            long keepAliveTime, String keepAliveTimeUnit,
+                            String threadMode) {
         this.sessionId = Objects.requireNonNull(sessionId, "sessionId must not be null");
         this.runId = Objects.requireNonNull(runId, "runId must not be null");
         this.corePoolSize = corePoolSize;
@@ -34,6 +36,7 @@ public final class RecordingSession {
         this.queueCapacity = queueCapacity;
         this.keepAliveTime = keepAliveTime;
         this.keepAliveTimeUnit = Objects.requireNonNull(keepAliveTimeUnit, "keepAliveTimeUnit must not be null");
+        this.threadMode = Objects.requireNonNull(threadMode, "threadMode must not be null");
         this.startedAt = Instant.now();
         this.snapshotCount = 0;
         this.status = SessionStatus.ACTIVE;
@@ -55,7 +58,7 @@ public final class RecordingSession {
         return new RecordingSessionMetadata(
                 sessionId, runId,
                 corePoolSize, maximumPoolSize, queueCapacity,
-                keepAliveTime, keepAliveTimeUnit,
+                keepAliveTime, keepAliveTimeUnit, threadMode,
                 startedAt, closedAt, snapshotCount, status);
     }
 
@@ -66,6 +69,7 @@ public final class RecordingSession {
     public int queueCapacity() { return queueCapacity; }
     public long keepAliveTime() { return keepAliveTime; }
     public String keepAliveTimeUnit() { return keepAliveTimeUnit; }
+    public String threadMode() { return threadMode; }
     public Instant startedAt() { return startedAt; }
     public Instant closedAt() { return closedAt; }
     public int snapshotCount() { return snapshotCount; }
