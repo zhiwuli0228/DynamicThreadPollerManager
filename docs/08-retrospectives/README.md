@@ -18,6 +18,7 @@
 5. `docs/08-retrospectives/2026-06-06-pressure-data-acquisition-verify-gate-retrospective.md`
 6. `docs/08-retrospectives/2026-06-12-v0.7.0-managed-executor-domain-retrospective.md`
 7. `docs/08-retrospectives/2026-06-13-v0.8.0-real-data-acquisition-retrospective.md`
+8. `docs/08-retrospectives/2026-06-13-v0.9.0-queue-resize-retrospective.md`
 
 ## 使用规则
 

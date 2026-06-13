@@ -149,6 +149,20 @@ class QueueResizeAdjustmentAdapterTest {
     }
 
     @Test
+    void isResizeInProgressReturnsFalseWhenNotResizing() {
+        ManagedExecutor executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10));
+        registry.register("test-exec", executor);
+
+        assertFalse(adapter.isResizeInProgress("test-exec"));
+    }
+
+    @Test
+    void isResizeInProgressReturnsFalseForUnknownExecutor() {
+        assertFalse(adapter.isResizeInProgress("nonexistent"));
+    }
+
+    @Test
     void evidenceOnSuccessfulResize() {
         ManagedExecutor executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(10));

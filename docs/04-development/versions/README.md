@@ -4,11 +4,10 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- Nine version packages exist: `v0.1.0` through `v0.9.0`.
-- `v0.1.0` through `v0.8.0` are `IMPLEMENTED` (v0.8.0 retrospective published).
-- `v0.9.0` is `VERSION_DESIGN_DRAFT` — queue capacity resizing.
-- All 12 capability changes (experiment-foundation through acquisition-paths-and-quality-gates) have been implemented; 433 tests pass with 0 failures.
-- Both v0.8.0 changes (`real-executor-data-acquisition` and `acquisition-paths-and-quality-gates`) are archived (2026-06-13).
+- Ten version packages exist: `v0.1.0` through `v0.10.0`.
+- `v0.1.0` through `v0.10.0` are `IMPLEMENTED`.
+- All 16 capability changes have been implemented and archived; 534 tests pass with 0 failures.
+- Both v0.10.0 changes (`rejection-policy-command-and-adapter` and `rejection-policy-end-to-end-verification`) are archived (2026-06-13).
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

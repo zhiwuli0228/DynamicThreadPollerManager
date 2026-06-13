@@ -99,6 +99,25 @@ SR 必填内容：
 - 非范围再次声明；
 - 对弱实现 agent 足够明确的任务切分。
 
+SR 伪代码强制验证规则（v0.9.0 复盘 P1/P2/P4 驱动）：
+
+- SR 中任何组件伪代码引用已有类型（类、接口、record、enum）时，**必须先读取该类型的实际源码**，确认构造器签名、方法签名、泛型参数、工厂方法行为与伪代码一致。
+- 至少需要验证的引用点：
+  - `new` 构造调用 → 确认构造器存在且参数匹配；
+  - `implements` / `extends` → 确认接口/父类的方法签名完全匹配；
+  - 静态工厂方法（如 `XxxResult.success(...)` / `XxxResult.failed(...)`）→ 确认方法签名、参数顺序、返回值泛型；
+  - 方法参数类型（如 `ReadinessSummary`、`ExecutorStateSnapshot`）→ 确认实际类型而非假设类型。
+- 如果一个类型有多个重载，伪代码必须明确使用哪个重载，并在注释中标注"已验证 API 签名"。
+- SR review 的必查项新增一条：随机抽取伪代码中的 3 个 API 调用点，读取实际源码验证签名匹配。若发现不一致 → P1 finding。
+
+Change 分解独立验证规则（v0.9.0 复盘 P3 驱动）：
+
+- Change 分解后，必须对每个 change 执行独立可验证性检查：
+  - 该 change 是否可以独立运行 `mvn test` 并通过其范围内的测试？
+  - 该 change 是否依赖另一个 change 的源码才能编译？
+  - 如果 change B 的唯一价值是测试 change A 的组件，change B 不是独立 change，应与 change A 合并。
+- 如果两个 change 共享同一测试基础设施且无法独立运行测试，必须在 change decomposition 中明确记录"合并交付"决策及理由。
+
 出口条件：
 
 - 独立功能设计评审完成；

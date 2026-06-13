@@ -8,7 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -155,6 +158,38 @@ class ExecutorRebuildStrategyTest {
         // Drained tasks should be replayed (EXPAND direction)
         assertTrue(result.drainedTaskCount() >= 0);
         assertEquals(0, result.rejectedTaskCount());
+    }
+
+    @Test
+    void rejectionPolicyPreservedAfterRebuild() {
+        ManagedExecutor executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.CallerRunsPolicy());
+        registry.register("test-exec", executor);
+
+        QueueResizeCommand cmd = new QueueResizeCommand(20, "expand", 10_000L);
+        strategy.rebuild("test-exec", executor, cmd);
+
+        ManagedExecutor newExecutor = registry.get("test-exec").orElseThrow();
+        RejectedExecutionHandler handler = newExecutor.getRejectionPolicy();
+        assertInstanceOf(ThreadPoolExecutor.CallerRunsPolicy.class, handler);
+    }
+
+    @Test
+    void rejectionPolicyPreservedWhenDiscardPolicy() {
+        ManagedExecutor executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.DiscardPolicy());
+        registry.register("test-exec", executor);
+
+        QueueResizeCommand cmd = new QueueResizeCommand(20, "expand", 10_000L);
+        strategy.rebuild("test-exec", executor, cmd);
+
+        ManagedExecutor newExecutor = registry.get("test-exec").orElseThrow();
+        assertInstanceOf(ThreadPoolExecutor.DiscardPolicy.class,
+                newExecutor.getRejectionPolicy());
     }
 
     @Test

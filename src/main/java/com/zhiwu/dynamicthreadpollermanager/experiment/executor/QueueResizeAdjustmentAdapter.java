@@ -31,6 +31,10 @@ public final class QueueResizeAdjustmentAdapter {
         this.rebuildStrategy = Objects.requireNonNull(rebuildStrategy, "rebuildStrategy must not be null");
     }
 
+    public boolean isResizeInProgress(String executorId) {
+        return resizeInProgress.containsKey(executorId);
+    }
+
     public QueueResizeResult apply(String executorId, QueueResizeCommand command) {
         Objects.requireNonNull(executorId, "executorId must not be null");
         Objects.requireNonNull(command, "command must not be null");

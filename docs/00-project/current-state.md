@@ -2,17 +2,24 @@
 
 ## Authoritative Status
 
-- Current stage: `ARCHIVED` for `v0.9.0` — both changes implemented, verified, and archived
-- Current authorized work type: `RETROSPECTIVE` — write v0.9.0 retrospective
+- Current stage: `ARCHIVED` for `v0.10.0` — both changes archived; 534 tests pass
+- Current authorized work type: `RETROSPECTIVE` — v0.10.0 retrospective pending
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.8.0` are `IMPLEMENTED`; `v0.9.0` is `IMPLEMENTED`
-- OpenSpec capability changes: All 14 capability changes (experiment-foundation through queue-resize-end-to-end-verification) have been implemented; all capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
-- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 476 tests pass with 0 failures
+- Version design status: `v0.1.0` through `v0.10.0` are `IMPLEMENTED`
+- OpenSpec capability changes: 16 implemented + archived
+- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 534 tests pass with 0 failures
 
 ## Active Authorized Changes
 
-- No active changes pending — v0.9.0 implementation complete.
+- None — v0.10.0 complete, both changes archived
+
+## v0.10.0 Change Summary
+
+| Change | Name | Status | Tests |
+|---|---|---|---|
+| 1/2 | rejection-policy-command-and-adapter | ARCHIVED (2026-06-13) | 526 pass |
+| 2/2 | rejection-policy-end-to-end-verification | ARCHIVED (2026-06-13) | 534 pass |
 
 ## v0.9.0 Change Summary
 
@@ -30,13 +37,14 @@
 
 ## What Is Allowed Now
 
-- Write v0.9.0 retrospective.
-- Plan v0.10.0 scope.
+- Create v0.10.0 retrospective.
+- Commit all implementation evidence.
 
 ## What Is Not Allowed Now
 
-- No new Java implementation without version design authorization.
-- No modification to ManagedExecutorAdjustmentAdapter, ScaleAdjustmentCommand, ManagedExecutor, ExecutorRegistry.
+- No new production code or tests without a new version design.
+- No modification to existing adapters or commands without design revision.
+- No new dependencies or scope expansion.
 
 ## Future Gate Sequence
 
@@ -48,7 +56,27 @@
 6. ~~`EXECUTION_AUTHORIZED`~~ (completed)
 7. ~~capability change execution~~ (completed — change 1/2 and 2/2 implemented)
 8. ~~archive~~ (completed — 2026-06-13)
-9. ~~v0.8.0 retrospective~~ (completed — 2026-06-13)
+9. ~~v0.9.0 retrospective~~ (completed — 2026-06-13)
+10. ~~v0.10.0 scope objectives and decision log created~~ (completed — 2026-06-13)
+11. ~~v0.10.0 IR phase~~ (completed — 2026-06-13, IR closure verified)
+12. ~~v0.10.0 SR phase~~ (completed — 2026-06-13, SR closure verified)
+13. ~~v0.10.0 READY_FOR_CHANGE_DECOMPOSITION~~ (completed — 2026-06-13)
+14. ~~v0.10.0 EXECUTION_AUTHORIZED~~ (completed — 2026-06-13)
+15. ~~v0.10.0 capability change execution~~ (completed — 2026-06-13, both changes implemented)
+16. ~~v0.10.0 archive~~ (completed — 2026-06-13, both changes archived)
+17. v0.10.0 retrospective (next)
+
+## v0.10.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.10.0/`
+- Requirement theme: runtime rejection-policy replacement with rebuild policy preservation
+- Key insight: `ThreadPoolExecutor.setRejectedExecutionHandler()` is a public JDK API — no executor rebuild needed (unlike v0.9.0 queue resize)
+- Associated fix: `ExecutorRebuildStrategy` hardcodes `AbortPolicy()` — must preserve original rejection policy during rebuild
+- OpenSpec changes: TBD after change decomposition
+- Candidate changes: `rejection-policy-command-and-adapter` (change 1/2) → `rejection-policy-end-to-end-verification` (change 2/2)
+- OpenSpec changes: `openspec/changes/rejection-policy-command-and-adapter/` and `openspec/changes/rejection-policy-end-to-end-verification/`
+- Changes: `rejection-policy-command-and-adapter` (change 1/2) → `rejection-policy-end-to-end-verification` (change 2/2)
+- Status: `ARCHIVED` — 534 tests passing, 0 failures, both changes archived
 
 ## v0.7.0 Change Summary
 

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -150,6 +151,43 @@ class ManagedExecutorTest {
                 new LinkedBlockingQueue<>(10));
         executor.close();
         assertTrue(executor.isShutdown());
+    }
+
+    @Test
+    void setRejectionPolicyShouldReflectImmediately() {
+        executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10));
+        assertInstanceOf(ThreadPoolExecutor.AbortPolicy.class,
+                executor.getRejectionPolicy());
+
+        executor.setRejectionPolicy(new ThreadPoolExecutor.CallerRunsPolicy());
+        assertInstanceOf(ThreadPoolExecutor.CallerRunsPolicy.class,
+                executor.getRejectionPolicy());
+    }
+
+    @Test
+    void setRejectionPolicyNullThrows() {
+        executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10));
+        assertThrows(NullPointerException.class,
+                () -> executor.setRejectionPolicy(null));
+    }
+
+    @Test
+    void getRejectionPolicyDelegatesToTpe() {
+        executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10));
+        assertSame(executor.unwrap().getRejectedExecutionHandler(),
+                executor.getRejectionPolicy());
+    }
+
+    @Test
+    void setRejectionPolicyPropagatesToUnderlyingTpe() {
+        executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10));
+        executor.setRejectionPolicy(new ThreadPoolExecutor.DiscardPolicy());
+        assertInstanceOf(ThreadPoolExecutor.DiscardPolicy.class,
+                executor.unwrap().getRejectedExecutionHandler());
     }
 
     @Test

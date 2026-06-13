@@ -18,7 +18,6 @@ public class ManagedExecutor implements AutoCloseable {
 
     private final ThreadPoolExecutor executor;
     private final int queueCapacity;
-    private final RejectedExecutionHandler rejectionPolicy;
 
     public ManagedExecutor(int corePoolSize, int maxPoolSize, long keepAliveTime,
                            TimeUnit unit, BlockingQueue<Runnable> workQueue) {
@@ -47,7 +46,6 @@ public class ManagedExecutor implements AutoCloseable {
                 corePoolSize, maxPoolSize, keepAliveTime, unit,
                 workQueue, threadFactory, rejectionHandler);
         this.queueCapacity = workQueue.remainingCapacity() + workQueue.size();
-        this.rejectionPolicy = rejectionHandler;
     }
 
     public <T> Future<T> submit(Callable<T> task) {
@@ -113,7 +111,12 @@ public class ManagedExecutor implements AutoCloseable {
     }
 
     public RejectedExecutionHandler getRejectionPolicy() {
-        return rejectionPolicy;
+        return executor.getRejectedExecutionHandler();
+    }
+
+    public void setRejectionPolicy(RejectedExecutionHandler newPolicy) {
+        Objects.requireNonNull(newPolicy, "rejectionPolicy must not be null");
+        executor.setRejectedExecutionHandler(newPolicy);
     }
 
     public void shutdown() {
