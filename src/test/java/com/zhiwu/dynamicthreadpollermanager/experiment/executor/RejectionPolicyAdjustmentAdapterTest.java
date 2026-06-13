@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -190,6 +191,30 @@ class RejectionPolicyAdjustmentAdapterTest {
     void nullCommandThrows() {
         assertThrows(NullPointerException.class,
                 () -> adapter.apply("test-exec", null));
+    }
+
+    @Test
+    void policySetFailureReturnsFailedResult() {
+        ManagedExecutor executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(10)) {
+            @Override
+            public void setRejectionPolicy(RejectedExecutionHandler newPolicy) {
+                Objects.requireNonNull(newPolicy, "rejectionPolicy must not be null");
+                throw new RuntimeException("simulated TPE failure");
+            }
+        };
+        registry.register("test-exec", executor);
+
+        RejectedExecutionHandler target = new ThreadPoolExecutor.CallerRunsPolicy();
+        RejectionPolicyCommand cmd = new RejectionPolicyCommand(target, "switch");
+        PolicyReplacementResult result = adapter.apply("test-exec", cmd);
+
+        assertFalse(result.success());
+        assertEquals("POLICY_SET_FAILED", result.failureCode());
+        assertNotNull(result.evidence());
+        assertFalse(result.evidence().success());
+        assertTrue(result.evidence().reason().contains("simulated TPE failure"),
+                "reason should contain the exception message: " + result.evidence().reason());
     }
 
     private static String shortClassName(String fqcn) {

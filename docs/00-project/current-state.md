@@ -2,17 +2,17 @@
 
 ## Authoritative Status
 
-- Current stage: `ARCHIVED` for `v0.10.0` — both changes archived; 534 tests pass
-- Current authorized work type: `RETROSPECTIVE` — v0.10.0 retrospective pending
+- Current stage: `BASELINE_COMPLETE` — v0.10.0 retrospective delivered; all three dynamic configuration dimensions implemented
+- Current authorized work type: `NONE` — no active authorized changes
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
 - Version design status: `v0.1.0` through `v0.10.0` are `IMPLEMENTED`
 - OpenSpec capability changes: 16 implemented + archived
-- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 534 tests pass with 0 failures
+- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 535 tests pass with 0 failures
 
 ## Active Authorized Changes
 
-- None — v0.10.0 complete, both changes archived
+- None — all v0.1.0 through v0.10.0 implemented, archived, and retrospectives completed
 
 ## v0.10.0 Change Summary
 
@@ -20,6 +20,8 @@
 |---|---|---|---|
 | 1/2 | rejection-policy-command-and-adapter | ARCHIVED (2026-06-13) | 526 pass |
 | 2/2 | rejection-policy-end-to-end-verification | ARCHIVED (2026-06-13) | 534 pass |
+
+Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retrospective.md` — all three dynamic configuration dimensions delivered.
 
 ## v0.9.0 Change Summary
 
@@ -37,12 +39,12 @@
 
 ## What Is Allowed Now
 
-- Create v0.10.0 retrospective.
-- Commit all implementation evidence.
+- Planning for future capability versions (v0.11.0+).
+- Documentation and retrospectives refinement.
 
 ## What Is Not Allowed Now
 
-- No new production code or tests without a new version design.
+- No new production code or tests without a new version design and `EXECUTION_AUTHORIZED` state.
 - No modification to existing adapters or commands without design revision.
 - No new dependencies or scope expansion.
 
@@ -64,7 +66,7 @@
 14. ~~v0.10.0 EXECUTION_AUTHORIZED~~ (completed — 2026-06-13)
 15. ~~v0.10.0 capability change execution~~ (completed — 2026-06-13, both changes implemented)
 16. ~~v0.10.0 archive~~ (completed — 2026-06-13, both changes archived)
-17. v0.10.0 retrospective (next)
+17. ~~v0.10.0 retrospective~~ (completed — 2026-06-13)
 
 ## v0.10.0 Plan
 
@@ -76,7 +78,7 @@
 - Candidate changes: `rejection-policy-command-and-adapter` (change 1/2) → `rejection-policy-end-to-end-verification` (change 2/2)
 - OpenSpec changes: `openspec/changes/rejection-policy-command-and-adapter/` and `openspec/changes/rejection-policy-end-to-end-verification/`
 - Changes: `rejection-policy-command-and-adapter` (change 1/2) → `rejection-policy-end-to-end-verification` (change 2/2)
-- Status: `ARCHIVED` — 534 tests passing, 0 failures, both changes archived
+- Status: `ARCHIVED` — 534 tests passing, 0 failures, both changes archived, retrospective completed
 
 ## v0.7.0 Change Summary
 
