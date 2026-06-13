@@ -2,27 +2,27 @@
 
 ## Authoritative Status
 
-- Current stage: `EXECUTION_COMPLETE` for `v0.8.0` — both changes implemented and verified
-- Current authorized work type: `ARCHIVE` — both v0.8.0 changes ready for archive
+- Current stage: `ARCHIVE_COMPLETE` for `v0.8.0` — both changes archived
+- Current authorized work type: `RETROSPECTIVE` — prepare v0.8.0 retrospective
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, and `v0.7.0` are `IMPLEMENTED`; `v0.8.0` is `EXECUTION_COMPLETE`
-- OpenSpec capability changes: All 12 capability changes (experiment-foundation through acquisition-paths-and-quality-gates) have been implemented; all capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
+- Version design status: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, `v0.7.0`, and `v0.8.0` are `IMPLEMENTED`
+- OpenSpec capability changes: All 12 capability changes (experiment-foundation through acquisition-paths-and-quality-gates) have been implemented and archived; all capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
 - Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 433 tests pass with 0 failures
 
 ## Active Authorized Change
 
-- Change 1/2: `real-executor-data-acquisition` — **COMPLETE** (archived)
+- Change 1/2: `real-executor-data-acquisition` — **ARCHIVED** on 2026-06-13
   - Delivered: ManagedExecutorConfig, ManagedExecutorScenarioRunner (7-phase), SnapshotAssembler.fromExecutorState(), ManualPressureSampler.sampleFromExecutorState(), integration tests
-- Change 2/2: `acquisition-paths-and-quality-gates` — **COMPLETE** (433 tests, 0 failures)
+- Change 2/2: `acquisition-paths-and-quality-gates` — **ARCHIVED** on 2026-06-13 (433 tests, 0 failures)
   - Delivered: AcquisitionReportPaths.forVersion(), AcquisitionReportWriter dual-arg constructor, RunSnapshot extension (G7-G9 fields), G7-G9 data quality gates, AcquisitionReportBridge, 9-run data acquisition test, RuntimeObservation extension (keepAliveTimeSeconds/largestPoolSize/taskCount)
-- The most recent archived change, `closed-loop-experiment-verification`, was archived on 2026-06-12.
+- No active changes pending.
 
 ## What Is Allowed Now
 
-- Archive both v0.8.0 changes (`real-executor-data-acquisition` and `acquisition-paths-and-quality-gates`)
-- Update governance files and version README.
 - Prepare v0.8.0 retrospective.
+- Plan v0.9.0 or next version if desired.
+- No Java source or test changes without new authorization.
 
 ## What Is Not Allowed Now
 
@@ -38,8 +38,8 @@
 5. ~~`CHANGE_DECOMPOSITION_COMPLETE`~~ (completed — 2 OpenSpec changes created)
 6. ~~`EXECUTION_AUTHORIZED`~~ (completed)
 7. ~~capability change execution~~ (completed — change 1/2 and 2/2 implemented)
-8. archive (next)
-9. v0.8.0 retrospective
+8. ~~archive~~ (completed — 2026-06-13)
+9. v0.8.0 retrospective (next)
 
 ## v0.7.0 Change Summary
 
@@ -61,5 +61,5 @@
 
 | Change | Name | Status | Tests |
 |---|---|---|---|
-| 1/2 | real-executor-data-acquisition | COMPLETE | 432 pass |
-| 2/2 | acquisition-paths-and-quality-gates | COMPLETE | 433 pass |
+| 1/2 | real-executor-data-acquisition | ARCHIVED (2026-06-13) | 432 pass |
+| 2/2 | acquisition-paths-and-quality-gates | ARCHIVED (2026-06-13) | 433 pass |

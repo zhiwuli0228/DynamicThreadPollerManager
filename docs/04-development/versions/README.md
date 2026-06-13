@@ -7,7 +7,7 @@ This folder is reserved for version design packages.
 - Eight version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, `v0.7.0`, and `v0.8.0`.
 - `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, `v0.7.0`, and `v0.8.0` are `IMPLEMENTED`.
 - All 12 capability changes (experiment-foundation through acquisition-paths-and-quality-gates) have been implemented; 433 tests pass with 0 failures.
-- Both v0.8.0 changes (`real-executor-data-acquisition` and `acquisition-paths-and-quality-gates`) are complete and ready for archive.
+- Both v0.8.0 changes (`real-executor-data-acquisition` and `acquisition-paths-and-quality-gates`) are archived (2026-06-13).
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle
