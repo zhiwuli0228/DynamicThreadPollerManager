@@ -68,12 +68,12 @@ public final class ManagedExecutorScenarioRunner {
                 definition.scenarioId(), config.toPresetSummary().policyId());
         coordinator.startRun(run.runId());
 
+        ScenarioPlan plan = planner.plan(definition);
+
         if (liveSamplerConfig != null) {
             liveSampler = new LivePressureSampler(executor, recorder, liveSamplerConfig);
             liveSampler.start(run.runId());
         }
-
-        ScenarioPlan plan = planner.plan(definition);
 
         try {
             for (ScenarioStep step : plan.steps()) {
@@ -110,6 +110,9 @@ public final class ManagedExecutorScenarioRunner {
                 waitForIdle(executor);
             }
         } catch (RuntimeException ex) {
+            if (liveSampler != null) {
+                liveSampler.stop();
+            }
             tryStop(run.runId());
             shutdownAndTerminate(executor);
             throw ex;
