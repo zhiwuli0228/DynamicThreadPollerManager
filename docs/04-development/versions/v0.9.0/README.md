@@ -5,7 +5,7 @@
 - Version name: `v0.9.0`
 - Authoring date: `2026-06-13`
 - Status: `DRAFT`
-- Current phase: `SR_FUNCTIONAL_DESIGN_DRAFT`
+- Current phase: `SR_CLOSURE_VERIFIED`
 - Requirement theme: runtime queue capacity resizing, executor rebuild strategy, safety coverage
 
 ## Purpose
@@ -51,7 +51,10 @@ See `decision-log.md`.
 - `12-ir-review-disposition.md` — disposition (4 FIX + 4 DEFER_TO_SR)
 - `13-ir-closure-verification.md` — IR closure verified
 - `20-sr.md` — functional design (5 core components, 2 candidate changes)
+- `21-sr-review.md` — independent SR review (4 findings)
+- `22-sr-review-disposition.md` — disposition (2 FIX + 1 DEFER + 1 FIX)
+- `23-sr-closure-verification.md` — SR closure verified
 
 ## Next Step
 
-`SR_REVIEW` — independent SR review and closure.
+`READY_FOR_CHANGE_DECOMPOSITION` — create OpenSpec changes, then EXECUTION_AUTHORIZED.

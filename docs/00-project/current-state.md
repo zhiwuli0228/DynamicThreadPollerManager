@@ -2,8 +2,8 @@
 
 ## Authoritative Status
 
-- Current stage: `SR_FUNCTIONAL_DESIGN_DRAFT` for `v0.9.0` — SR functional design document created (5 core components)
-- Current authorized work type: `SR_REVIEW` — independent review of v0.9.0 SR
+- Current stage: `SR_CLOSURE_VERIFIED` for `v0.9.0` — SR review complete, 4 findings disposed, all P1 closed
+- Current authorized work type: `READY_FOR_CHANGE_DECOMPOSITION` — create v0.9.0 OpenSpec changes
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
 - Version design status: `v0.1.0` through `v0.8.0` are `IMPLEMENTED`; `v0.9.0` is `VERSION_DESIGN_DRAFT`
@@ -20,9 +20,8 @@
 
 ## What Is Allowed Now
 
-- Proceed with v0.9.0 IR (requirements analysis) phase.
-- Create v0.9.0 design documents (IR, SR).
-- Plan v0.9.0 OpenSpec change decomposition.
+- Create v0.9.0 OpenSpec changes from SR change decomposition.
+- Proceed to EXECUTION_AUTHORIZED and implement v0.9.0.
 - No Java source or test changes until EXECUTION_AUTHORIZED.
 
 ## What Is Not Allowed Now
