@@ -8,7 +8,7 @@
 - Source of truth for execution authority: this file
 - Version design status: `v0.1.0` through `v0.11.0` are `IMPLEMENTED`
 - OpenSpec capability changes: 18 implemented + archived
-- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 622 tests pass with 0 failures
+- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 646 tests pass with 0 failures
 
 ## Active Authorized Changes
 
@@ -53,6 +53,18 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 - OpenSpec changes: `openspec/changes/persistent-evidence-recorder/` and `openspec/changes/live-pressure-sampler-and-integration/`
 - Changes: `persistent-evidence-recorder` (change 1/2) → `live-pressure-sampler-and-integration` (change 2/2)
 - Status: `ARCHIVED` — 622 tests passing, 0 failures
+
+## parallel-test-execution Change Summary
+
+| Change | Name | Status | Tests |
+|---|---|---|---|
+| 1/1 | parallel-test-execution | ARCHIVED (2026-06-14) | 646 pass |
+
+- Change: `parallel-test-execution`
+- Status: `ARCHIVED` — 646 tests passing, 0 failures
+- Performance: sequential 4:46 → parallel 2:37 (~1.8x speedup)
+- OpenSpec change: `openspec/changes/archive/2026-06-14-parallel-test-execution/`
+- Main spec synced: `openspec/specs/parallel-test-execution-config/spec.md`
 
 ## What Is Allowed Now
 
