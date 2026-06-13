@@ -44,7 +44,8 @@ v0.7.0 桥接了 v0.1.0-v0.6.0 的实验基础设施到真实 `ThreadPoolExecuto
 - `decision-log.md`
 - `10-ir.md` → `11-ir-review.md` → `12-ir-review-disposition.md` → `13-ir-closure-verification.md`
 - `20-sr.md` → `21-sr-review.md` → `22-sr-review-disposition.md` → `23-sr-closure-verification.md`
+- `15-experiment-data-acquisition-plan.md` — 真实 ManagedExecutor 数据获取方案（新增）
 
 ## Next Step
 
-Retrospective per managed-change-standard section 9.
+Data acquisition on real ManagedExecutor per `15-experiment-data-acquisition-plan.md`.

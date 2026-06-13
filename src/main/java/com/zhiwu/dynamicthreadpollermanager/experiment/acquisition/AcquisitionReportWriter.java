@@ -29,6 +29,12 @@ public final class AcquisitionReportWriter {
         this.outputDirectory = outputRoot.resolve(AcquisitionReportPaths.OUTPUT_DIRECTORY);
     }
 
+    public AcquisitionReportWriter(Path outputRoot, AcquisitionReportPaths paths) {
+        Objects.requireNonNull(outputRoot, "outputRoot must not be null");
+        Objects.requireNonNull(paths, "paths must not be null");
+        this.outputDirectory = outputRoot.resolve(paths.outputDirectory());
+    }
+
     public Path outputDirectory() {
         return outputDirectory;
     }

@@ -37,7 +37,7 @@ public final class EvidenceIndex {
         this.runManifestPath = requireNonBlank(runManifestPath, "runManifestPath");
         this.pressureSummaryPath = requireNonBlank(pressureSummaryPath, "pressureSummaryPath");
         this.replaySummaryPath = requireNonBlank(replaySummaryPath, "replaySummaryPath");
-        this.readinessSummaryPath = requireNonBlank(readinessSummaryPath, "readinessSummaryPath");
+        this.readinessSummaryPath = readinessSummaryPath == null ? "" : readinessSummaryPath;
         this.retention = Objects.requireNonNull(retention, "retention");
         this.retention.validate();
     }

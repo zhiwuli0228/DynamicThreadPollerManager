@@ -1,5 +1,7 @@
 package com.zhiwu.dynamicthreadpollermanager.experiment.metrics;
 
+import com.zhiwu.dynamicthreadpollermanager.experiment.adjustment.ExecutorStateSnapshot;
+
 import java.time.Instant;
 import java.util.Objects;
 
@@ -26,5 +28,11 @@ public final class ManualPressureSampler implements PressureSampler {
         Objects.requireNonNull(observation, "observation must not be null");
         Objects.requireNonNull(at, "at must not be null");
         return assembler.assemble(runId, observation.withTimestamp(at));
+    }
+
+    public ObservedSnapshot sampleFromExecutorState(String runId, ExecutorStateSnapshot state) {
+        Objects.requireNonNull(runId, "runId must not be null");
+        Objects.requireNonNull(state, "state must not be null");
+        return assembler.fromExecutorState(runId, state);
     }
 }

@@ -49,7 +49,10 @@ public final class AcquisitionDataSet {
                               ScenarioProfile profile,
                               long seed,
                               String baselinePolicyId,
-                              List<Instant> snapshotTimestamps) {
+                              List<Instant> snapshotTimestamps,
+                              Map<String, Boolean> extendedFieldPresence,
+                              Integer queuePressureSnapshotCount,
+                              Boolean threadLeakFree) {
         public RunSnapshot {
             AcquisitionDataSet.requireNonBlank(runId, "runId");
             AcquisitionDataSet.requireNonBlank(scenarioId, "scenarioId");
@@ -57,6 +60,19 @@ public final class AcquisitionDataSet {
             AcquisitionDataSet.requireNonBlank(baselinePolicyId, "baselinePolicyId");
             snapshotTimestamps = List.copyOf(Objects.requireNonNull(
                     snapshotTimestamps, "snapshotTimestamps"));
+            if (extendedFieldPresence == null) {
+                extendedFieldPresence = Map.of();
+            }
+        }
+
+        public RunSnapshot(String runId,
+                           String scenarioId,
+                           ScenarioProfile profile,
+                           long seed,
+                           String baselinePolicyId,
+                           List<Instant> snapshotTimestamps) {
+            this(runId, scenarioId, profile, seed, baselinePolicyId,
+                    snapshotTimestamps, Map.of(), null, null);
         }
     }
 

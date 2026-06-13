@@ -4,9 +4,10 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 /**
- * Centralized naming and path rules for v0.6.0 acquisition
- * report artifacts. The class is intentionally stateless and
- * exposes only deterministic, file-system-safe names.
+ * Centralized naming and path rules for acquisition
+ * report artifacts. The class exposes deterministic,
+ * file-system-safe names and supports versioned output
+ * directories via {@link #forVersion(String)}.
  *
  * <p>Naming convention:
  * <ul>
@@ -17,18 +18,39 @@ import java.util.Objects;
  *   <li>{@code readiness-summary-<runId>.json}</li>
  *   <li>{@code acquisition-report-<runId>.md}</li>
  * </ul>
- *
- * <p>All artifacts are written under
- * {@code outputs/reports/v0.6.0/} relative to a caller-supplied
- * output root.
  */
 public final class AcquisitionReportPaths {
 
     public static final String OUTPUT_DIRECTORY = "outputs/reports/v0.6.0";
     public static final String VERSION_TAG = "v0.6.0";
 
+    private final String outputDirectory;
+    private final String versionTag;
+
     private AcquisitionReportPaths() {
+        this.outputDirectory = OUTPUT_DIRECTORY;
+        this.versionTag = VERSION_TAG;
     }
+
+    private AcquisitionReportPaths(String versionTag) {
+        this.versionTag = versionTag;
+        this.outputDirectory = "outputs/reports/" + versionTag;
+    }
+
+    public static AcquisitionReportPaths forVersion(String versionTag) {
+        if (versionTag == null || versionTag.isBlank()) {
+            throw new IllegalArgumentException("versionTag must not be null or blank");
+        }
+        if (versionTag.contains("/") || versionTag.contains("\\")
+                || versionTag.contains("..")) {
+            throw new IllegalArgumentException(
+                    "versionTag must not contain path separators or traversal");
+        }
+        return new AcquisitionReportPaths(versionTag);
+    }
+
+    public String outputDirectory() { return outputDirectory; }
+    public String versionTag() { return versionTag; }
 
     public static Path reportDirectory(Path outputRoot) {
         Objects.requireNonNull(outputRoot, "outputRoot must not be null");

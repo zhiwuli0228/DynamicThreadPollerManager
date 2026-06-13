@@ -1,5 +1,6 @@
 package com.zhiwu.dynamicthreadpollermanager.experiment.metrics;
 
+import com.zhiwu.dynamicthreadpollermanager.experiment.adjustment.ExecutorStateSnapshot;
 import com.zhiwu.dynamicthreadpollermanager.experiment.model.PressureSnapshot;
 
 /**
@@ -11,6 +12,35 @@ import com.zhiwu.dynamicthreadpollermanager.experiment.model.PressureSnapshot;
 public interface SnapshotAssembler {
 
     ObservedSnapshot assemble(String runId, RuntimeObservation observation);
+
+    default ObservedSnapshot fromExecutorState(String runId, ExecutorStateSnapshot state) {
+        RuntimeObservation observation = new RuntimeObservation(
+                state.observedAt(),
+                state.activeCount() != null
+                        ? MetricValue.present(state.activeCount())
+                        : MetricValue.absent(),
+                state.poolSize() != null
+                        ? MetricValue.present(state.poolSize())
+                        : MetricValue.absent(),
+                state.queueSize() != null
+                        ? MetricValue.present(state.queueSize())
+                        : MetricValue.absent(),
+                state.completedTaskCount() != null
+                        ? MetricValue.present(state.completedTaskCount())
+                        : MetricValue.absent(),
+                MetricValue.absent(),
+                state.keepAliveTimeSeconds() != null
+                        ? MetricValue.present(state.keepAliveTimeSeconds())
+                        : MetricValue.absent(),
+                state.largestPoolSize() != null
+                        ? MetricValue.present(state.largestPoolSize())
+                        : MetricValue.absent(),
+                state.taskCount() != null
+                        ? MetricValue.present(state.taskCount())
+                        : MetricValue.absent()
+        );
+        return assemble(runId, observation);
+    }
 
     /**
      * Resolves a {@link MetricValue} to a primitive value, falling back to the

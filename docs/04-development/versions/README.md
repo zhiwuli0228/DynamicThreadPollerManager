@@ -4,12 +4,10 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- Seven version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, and `v0.7.0`.
-- `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, and `v0.6.0` are `IMPLEMENTED`.
-- `v0.7.0` managed executor domain is `EXECUTION_AUTHORIZED`; change `establish-managed-executor-and-registry` is active.
-- `executor-adapter-and-adjustment-evidence` and `pressure-data-acquisition-and-baseline` have been archived and synchronized to `openspec/specs/`.
-- There is no active authorized OpenSpec change.
-- Java implementation is not authorized until IR + SR closure and a new `EXECUTION_AUTHORIZED` stage.
+- Eight version packages exist: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, `v0.7.0`, and `v0.8.0`.
+- `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, `v0.7.0`, and `v0.8.0` are `IMPLEMENTED`.
+- All 12 capability changes (experiment-foundation through acquisition-paths-and-quality-gates) have been implemented; 433 tests pass with 0 failures.
+- Both v0.8.0 changes (`real-executor-data-acquisition` and `acquisition-paths-and-quality-gates`) are complete and ready for archive.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

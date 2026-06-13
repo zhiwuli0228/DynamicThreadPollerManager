@@ -20,11 +20,17 @@ public record AcquisitionReportArtifact(Path runManifestPath,
         Objects.requireNonNull(runManifestPath, "runManifestPath");
         Objects.requireNonNull(pressureSummaryPath, "pressureSummaryPath");
         Objects.requireNonNull(replaySummaryPath, "replaySummaryPath");
-        Objects.requireNonNull(readinessSummaryPath, "readinessSummaryPath");
         Objects.requireNonNull(evidenceIndexPath, "evidenceIndexPath");
     }
 
     public List<Path> allPaths() {
+        if (readinessSummaryPath == null) {
+            return List.of(
+                    runManifestPath,
+                    pressureSummaryPath,
+                    replaySummaryPath,
+                    evidenceIndexPath);
+        }
         return List.of(
                 runManifestPath,
                 pressureSummaryPath,

@@ -12,7 +12,7 @@ public class ExecutorRegistry {
     private final DeletionSafety deletionSafety;
 
     public ExecutorRegistry(DeletionSafety deletionSafety) {
-        this.deletionSafety = Objects.requireNonNull(deletionSafety, "deletionSafety must not be null");
+        this.deletionSafety = deletionSafety;
     }
 
     public void register(String name, ManagedExecutor executor) {
@@ -35,7 +35,7 @@ public class ExecutorRegistry {
 
     public boolean remove(String name) {
         Objects.requireNonNull(name, "name must not be null");
-        if (!deletionSafety.canRemove(name, this)) {
+        if (deletionSafety != null && !deletionSafety.canRemove(name, this)) {
             return false;
         }
         return executors.remove(name) != null;
