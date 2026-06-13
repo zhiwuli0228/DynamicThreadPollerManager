@@ -2,11 +2,11 @@
 
 ## Authoritative Status
 
-- Current stage: `RETROSPECTIVE_COMPLETE` for `v0.8.0` — retrospective published
-- Current authorized work type: `PLANNING` — ready for v0.9.0 or next version design
+- Current stage: `VERSION_DESIGN_DRAFT` for `v0.9.0` — version design documents created
+- Current authorized work type: `IR` — requirements analysis for v0.9.0 queue capacity resizing
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, `v0.5.0`, `v0.6.0`, `v0.7.0`, and `v0.8.0` are `IMPLEMENTED`
+- Version design status: `v0.1.0` through `v0.8.0` are `IMPLEMENTED`; `v0.9.0` is `VERSION_DESIGN_DRAFT`
 - OpenSpec capability changes: All 12 capability changes (experiment-foundation through acquisition-paths-and-quality-gates) have been implemented and archived; all capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
 - Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 433 tests pass with 0 failures
 
@@ -20,14 +20,15 @@
 
 ## What Is Allowed Now
 
-- Prepare v0.8.0 retrospective.
-- Plan v0.9.0 or next version if desired.
-- No Java source or test changes without new authorization.
+- Proceed with v0.9.0 IR (requirements analysis) phase.
+- Create v0.9.0 design documents (IR, SR).
+- Plan v0.9.0 OpenSpec change decomposition.
+- No Java source or test changes until EXECUTION_AUTHORIZED.
 
 ## What Is Not Allowed Now
 
-- No Java source or test changes without new authorization.
-- No new dependencies, queue resizing, persistence, REST/API/UI without new authorization.
+- No Java source or test changes without EXECUTION_AUTHORIZED.
+- No new dependencies, persistence, REST/API/UI without explicit authorization.
 
 ## Future Gate Sequence
 
@@ -63,3 +64,11 @@
 |---|---|---|---|
 | 1/2 | real-executor-data-acquisition | ARCHIVED (2026-06-13) | 432 pass |
 | 2/2 | acquisition-paths-and-quality-gates | ARCHIVED (2026-06-13) | 433 pass |
+
+## v0.9.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.9.0/`
+- Requirement theme: runtime queue capacity resizing with executor rebuild strategy
+- Key challenge: ThreadPoolExecutor does not support work-queue replacement — requires decommission/commission cycle
+- Surrounding infrastructure: ManagedExecutor, ExecutorRegistry, SafetyGate, AdjustmentAdapter, EvidenceRecorder all in place
+- Next gate: `IR` — requirements analysis
