@@ -5,6 +5,8 @@ import com.zhiwu.dynamicthreadpollermanager.experiment.executor.ExecutorRegistry
 import com.zhiwu.dynamicthreadpollermanager.experiment.executor.ManagedExecutor;
 import com.zhiwu.dynamicthreadpollermanager.experiment.executor.ManagedExecutorConfig;
 import com.zhiwu.dynamicthreadpollermanager.experiment.metrics.EvidenceRecorder;
+import com.zhiwu.dynamicthreadpollermanager.experiment.metrics.LivePressureSampler;
+import com.zhiwu.dynamicthreadpollermanager.experiment.metrics.LivePressureSamplerConfig;
 import com.zhiwu.dynamicthreadpollermanager.experiment.metrics.MetricValue;
 import com.zhiwu.dynamicthreadpollermanager.experiment.metrics.ObservedSnapshot;
 import com.zhiwu.dynamicthreadpollermanager.experiment.metrics.PressureSampler;
@@ -25,6 +27,8 @@ public final class ManagedExecutorScenarioRunner {
     private final PressureSampler sampler;
     private final EvidenceRecorder recorder;
     private final Supplier<Instant> clock;
+    private final LivePressureSamplerConfig liveSamplerConfig;
+    private LivePressureSampler liveSampler;
 
     public ManagedExecutorScenarioRunner(
             ExperimentCoordinator coordinator,
@@ -32,11 +36,22 @@ public final class ManagedExecutorScenarioRunner {
             PressureSampler sampler,
             EvidenceRecorder recorder,
             Supplier<Instant> clock) {
+        this(coordinator, planner, sampler, recorder, clock, null);
+    }
+
+    public ManagedExecutorScenarioRunner(
+            ExperimentCoordinator coordinator,
+            ScenarioPlanner planner,
+            PressureSampler sampler,
+            EvidenceRecorder recorder,
+            Supplier<Instant> clock,
+            LivePressureSamplerConfig liveSamplerConfig) {
         this.coordinator = Objects.requireNonNull(coordinator, "coordinator must not be null");
         this.planner = Objects.requireNonNull(planner, "planner must not be null");
         this.sampler = Objects.requireNonNull(sampler, "sampler must not be null");
         this.recorder = Objects.requireNonNull(recorder, "recorder must not be null");
         this.clock = Objects.requireNonNull(clock, "clock must not be null");
+        this.liveSamplerConfig = liveSamplerConfig;
     }
 
     public ScenarioRunOutcome run(ScenarioDefinition definition, ManagedExecutorConfig config) {
@@ -52,6 +67,11 @@ public final class ManagedExecutorScenarioRunner {
         ExperimentRun run = coordinator.createRun(
                 definition.scenarioId(), config.toPresetSummary().policyId());
         coordinator.startRun(run.runId());
+
+        if (liveSamplerConfig != null) {
+            liveSampler = new LivePressureSampler(executor, recorder, liveSamplerConfig);
+            liveSampler.start(run.runId());
+        }
 
         ScenarioPlan plan = planner.plan(definition);
 
@@ -79,10 +99,12 @@ public final class ManagedExecutorScenarioRunner {
                     // timeout: record warning but continue sampling
                 }
 
-                RuntimeObservation observation = buildObservation(executor, clock.get());
-                ObservedSnapshot snapshot = sampler.sample(
-                        run.runId(), observation, observation.timestamp());
-                recorder.record(snapshot);
+                if (liveSampler == null) {
+                    RuntimeObservation observation = buildObservation(executor, clock.get());
+                    ObservedSnapshot snapshot = sampler.sample(
+                            run.runId(), observation, observation.timestamp());
+                    recorder.record(snapshot);
+                }
 
                 blocker.countDown();
                 waitForIdle(executor);
@@ -97,7 +119,10 @@ public final class ManagedExecutorScenarioRunner {
         coordinator.stopRun(run.runId());
         ExperimentRun finalized = coordinator.finalizeRun(run.runId());
 
-        // Phase 5: shutdown + terminate
+        // Phase 5: stop live sampler, shutdown + terminate
+        if (liveSampler != null) {
+            liveSampler.stop();
+        }
         shutdownAndTerminate(executor);
 
         // Phase 6: remove from registry after confirming terminated

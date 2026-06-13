@@ -2,8 +2,8 @@
 
 ## Authoritative Status
 
-- Current stage: `EXECUTION_AUTHORIZED` — v0.11.0 change 1/2 (persistent-evidence-recorder) implementation authorized
-- Current authorized work type: `IMPLEMENTATION` — v0.11.0 change 1/2 active
+- Current stage: `EXECUTION_AUTHORIZED` — v0.11.0 change 2/2 (live-pressure-sampler-and-integration) implementation authorized
+- Current authorized work type: `IMPLEMENTATION` — v0.11.0 change 2/2 active
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
 - Version design status: `v0.1.0` through `v0.10.0` are `IMPLEMENTED`; `v0.11.0` is `DRAFT`
@@ -12,7 +12,8 @@
 
 ## Active Authorized Changes
 
-- `persistent-evidence-recorder` (change 1/2) — **ACTIVE** — implementing FileBackedEvidenceRecorder, snapshot serialization, RecordingSession, AcquisitionJsonWriter.parse()
+- `persistent-evidence-recorder` (change 1/2) — **IMPLEMENTED** — 594 tests pass, awaiting archive
+- `live-pressure-sampler-and-integration` (change 2/2) — **ACTIVE** — implementing LivePressureSampler, ManagedExecutorScenarioRunner integration, end-to-end tests
 
 ## v0.10.0 Change Summary
 
