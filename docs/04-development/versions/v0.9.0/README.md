@@ -5,7 +5,7 @@
 - Version name: `v0.9.0`
 - Authoring date: `2026-06-13`
 - Status: `DRAFT`
-- Current phase: `IR_CLOSURE_VERIFIED`
+- Current phase: `SR_FUNCTIONAL_DESIGN_DRAFT`
 - Requirement theme: runtime queue capacity resizing, executor rebuild strategy, safety coverage
 
 ## Purpose
@@ -50,7 +50,8 @@ See `decision-log.md`.
 - `11-ir-review.md` — independent IR review (8 findings)
 - `12-ir-review-disposition.md` — disposition (4 FIX + 4 DEFER_TO_SR)
 - `13-ir-closure-verification.md` — IR closure verified
+- `20-sr.md` — functional design (5 core components, 2 candidate changes)
 
 ## Next Step
 
-`SR` — functional design phase.
+`SR_REVIEW` — independent SR review and closure.

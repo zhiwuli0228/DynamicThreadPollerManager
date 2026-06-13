@@ -2,8 +2,8 @@
 
 ## Authoritative Status
 
-- Current stage: `IR_CLOSURE_VERIFIED` for `v0.9.0` — IR review complete, 8 findings disposed, all P0/P1 closed
-- Current authorized work type: `SR` — functional design for v0.9.0 queue capacity resizing
+- Current stage: `SR_FUNCTIONAL_DESIGN_DRAFT` for `v0.9.0` — SR functional design document created (5 core components)
+- Current authorized work type: `SR_REVIEW` — independent review of v0.9.0 SR
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
 - Version design status: `v0.1.0` through `v0.8.0` are `IMPLEMENTED`; `v0.9.0` is `VERSION_DESIGN_DRAFT`
