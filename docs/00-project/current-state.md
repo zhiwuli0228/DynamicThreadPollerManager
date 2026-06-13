@@ -2,8 +2,8 @@
 
 ## Authoritative Status
 
-- Current stage: `VERSION_DESIGN_DRAFT` for `v0.9.0` — version design documents created
-- Current authorized work type: `IR` — requirements analysis for v0.9.0 queue capacity resizing
+- Current stage: `IR_DRAFT` for `v0.9.0` — IR requirements analysis document created (6 IR entries)
+- Current authorized work type: `IR_REVIEW` — independent review of v0.9.0 IR
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
 - Version design status: `v0.1.0` through `v0.8.0` are `IMPLEMENTED`; `v0.9.0` is `VERSION_DESIGN_DRAFT`

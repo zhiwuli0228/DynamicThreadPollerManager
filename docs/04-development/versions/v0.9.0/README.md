@@ -5,7 +5,7 @@
 - Version name: `v0.9.0`
 - Authoring date: `2026-06-13`
 - Status: `DRAFT`
-- Current phase: `VERSION_DESIGN_DRAFT`
+- Current phase: `IR_DRAFT`
 - Requirement theme: runtime queue capacity resizing, executor rebuild strategy, safety coverage
 
 ## Purpose
@@ -46,7 +46,8 @@ See `decision-log.md`.
 - `README.md`
 - `00-objectives-and-scope.md`
 - `decision-log.md`
+- `10-ir.md` — requirements analysis (6 IR entries)
 
 ## Next Step
 
-`IR` — requirements analysis phase.
+`IR_REVIEW` — independent IR review and closure.
