@@ -13,7 +13,7 @@
 - **Branch**: `feat/parallel-test-execution`
 - **Base branch**: `claude_master`
 - **Final state**: `pr-open`
-- **PR URL**: (pending — will be filled after PR creation)
+- **PR URL**: https://github.com/zhiwuli0228/DynamicThreadPollerManager/pull/3
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## PR comment
 
-- **Comment status**: `skipped (no PR yet)`
+- **Comment status**: `posted`
 
 ---
 
