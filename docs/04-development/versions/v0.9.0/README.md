@@ -5,7 +5,7 @@
 - Version name: `v0.9.0`
 - Authoring date: `2026-06-13`
 - Status: `DRAFT`
-- Current phase: `IR_DRAFT`
+- Current phase: `IR_CLOSURE_VERIFIED`
 - Requirement theme: runtime queue capacity resizing, executor rebuild strategy, safety coverage
 
 ## Purpose
@@ -47,7 +47,10 @@ See `decision-log.md`.
 - `00-objectives-and-scope.md`
 - `decision-log.md`
 - `10-ir.md` — requirements analysis (6 IR entries)
+- `11-ir-review.md` — independent IR review (8 findings)
+- `12-ir-review-disposition.md` — disposition (4 FIX + 4 DEFER_TO_SR)
+- `13-ir-closure-verification.md` — IR closure verified
 
 ## Next Step
 
-`IR_REVIEW` — independent IR review and closure.
+`SR` — functional design phase.
