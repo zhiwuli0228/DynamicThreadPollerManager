@@ -2,32 +2,41 @@
 
 ## Authoritative Status
 
-- Current stage: `SR_CLOSURE_VERIFIED` for `v0.9.0` — SR review complete, 4 findings disposed, all P1 closed
-- Current authorized work type: `READY_FOR_CHANGE_DECOMPOSITION` — create v0.9.0 OpenSpec changes
+- Current stage: `ARCHIVED` for `v0.9.0` — both changes implemented, verified, and archived
+- Current authorized work type: `RETROSPECTIVE` — write v0.9.0 retrospective
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.8.0` are `IMPLEMENTED`; `v0.9.0` is `VERSION_DESIGN_DRAFT`
-- OpenSpec capability changes: All 12 capability changes (experiment-foundation through acquisition-paths-and-quality-gates) have been implemented and archived; all capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
-- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 433 tests pass with 0 failures
+- Version design status: `v0.1.0` through `v0.8.0` are `IMPLEMENTED`; `v0.9.0` is `IMPLEMENTED`
+- OpenSpec capability changes: All 14 capability changes (experiment-foundation through queue-resize-end-to-end-verification) have been implemented; all capability baselines are present on `claude_master` and verified behavior is synchronized to `openspec/specs/`
+- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 476 tests pass with 0 failures
 
-## Active Authorized Change
+## Active Authorized Changes
+
+- No active changes pending — v0.9.0 implementation complete.
+
+## v0.9.0 Change Summary
+
+| Change | Name | Status | Tests |
+|---|---|---|---|
+| 1/2 | queue-resize-command-and-rebuild | ARCHIVED (2026-06-13) | 468 pass |
+| 2/2 | queue-resize-end-to-end-verification | ARCHIVED (2026-06-13) | 476 pass |
+
+## Archived Changes
 
 - Change 1/2: `real-executor-data-acquisition` — **ARCHIVED** on 2026-06-13
   - Delivered: ManagedExecutorConfig, ManagedExecutorScenarioRunner (7-phase), SnapshotAssembler.fromExecutorState(), ManualPressureSampler.sampleFromExecutorState(), integration tests
 - Change 2/2: `acquisition-paths-and-quality-gates` — **ARCHIVED** on 2026-06-13 (433 tests, 0 failures)
   - Delivered: AcquisitionReportPaths.forVersion(), AcquisitionReportWriter dual-arg constructor, RunSnapshot extension (G7-G9 fields), G7-G9 data quality gates, AcquisitionReportBridge, 9-run data acquisition test, RuntimeObservation extension (keepAliveTimeSeconds/largestPoolSize/taskCount)
-- No active changes pending.
 
 ## What Is Allowed Now
 
-- Create v0.9.0 OpenSpec changes from SR change decomposition.
-- Proceed to EXECUTION_AUTHORIZED and implement v0.9.0.
-- No Java source or test changes until EXECUTION_AUTHORIZED.
+- Write v0.9.0 retrospective.
+- Plan v0.10.0 scope.
 
 ## What Is Not Allowed Now
 
-- No Java source or test changes without EXECUTION_AUTHORIZED.
-- No new dependencies, persistence, REST/API/UI without explicit authorization.
+- No new Java implementation without version design authorization.
+- No modification to ManagedExecutorAdjustmentAdapter, ScaleAdjustmentCommand, ManagedExecutor, ExecutorRegistry.
 
 ## Future Gate Sequence
 
@@ -70,4 +79,6 @@
 - Requirement theme: runtime queue capacity resizing with executor rebuild strategy
 - Key challenge: ThreadPoolExecutor does not support work-queue replacement — requires decommission/commission cycle
 - Surrounding infrastructure: ManagedExecutor, ExecutorRegistry, SafetyGate, AdjustmentAdapter, EvidenceRecorder all in place
-- Next gate: `IR` — requirements analysis
+- OpenSpec changes: `openspec/changes/queue-resize-command-and-rebuild/` and `openspec/changes/queue-resize-end-to-end-verification/`
+- Changes: `queue-resize-command-and-rebuild` (change 1/2) → `queue-resize-end-to-end-verification` (change 2/2)
+- Status: `ARCHIVED` — 476 tests passing, 0 failures
