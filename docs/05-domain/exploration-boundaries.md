@@ -16,8 +16,6 @@
 - Authentication.
 - Multi-node coordination.
 - Virtual threads as a default execution mode.
-- Runtime queue-capacity replacement.
-- Runtime rejection-policy replacement.
 
 ## Rule
 

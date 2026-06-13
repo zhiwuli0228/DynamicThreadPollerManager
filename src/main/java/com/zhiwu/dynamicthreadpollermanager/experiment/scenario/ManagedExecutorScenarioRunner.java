@@ -156,24 +156,7 @@ public final class ManagedExecutorScenarioRunner {
     }
 
     private RuntimeObservation buildObservation(ManagedExecutor executor, Instant now) {
-        int activeCount = executor.getActiveCount();
-        int poolSize = executor.getPoolSize();
-        int queueSize = executor.getQueueSize();
-        long completedTaskCount = executor.getCompletedTaskCount();
-        long keepAliveTimeSeconds = executor.getKeepAliveTime(TimeUnit.SECONDS);
-        int largestPoolSize = executor.getLargestPoolSize();
-        long taskCount = executor.getTaskCount();
-        return new RuntimeObservation(
-                now,
-                MetricValue.present(activeCount),
-                MetricValue.present(poolSize),
-                MetricValue.present(queueSize),
-                MetricValue.present(completedTaskCount),
-                MetricValue.absent(),
-                MetricValue.present(keepAliveTimeSeconds),
-                MetricValue.present(largestPoolSize),
-                MetricValue.present(taskCount)
-        );
+        return RuntimeObservation.fromExecutor(executor, now);
     }
 
     private void tryStop(String runId) {

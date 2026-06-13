@@ -111,6 +111,24 @@ public final class AcquisitionReportPaths {
         return reportDirectory(outputRoot).resolve(compositeReportFileName(runId));
     }
 
+    public static String evidenceFileName(String runId) {
+        return requireSafeRunId(runId, "runId") + "-evidence.jsonl";
+    }
+
+    public static String sessionMetadataFileName(String runId) {
+        return requireSafeRunId(runId, "runId") + "-session.json";
+    }
+
+    public static Path evidenceFile(Path outputRoot, String runId) {
+        return outputRoot.resolve("outputs/reports/v0.11.0")
+                .resolve(evidenceFileName(runId));
+    }
+
+    public static Path sessionMetadataFile(Path outputRoot, String runId) {
+        return outputRoot.resolve("outputs/reports/v0.11.0")
+                .resolve(sessionMetadataFileName(runId));
+    }
+
     private static String requireSafeRunId(String runId, String name) {
         Objects.requireNonNull(runId, name + " must not be null");
         if (runId.isBlank()) {

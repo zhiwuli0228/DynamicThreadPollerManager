@@ -2,6 +2,8 @@ package com.zhiwu.dynamicthreadpollermanager.experiment.metrics;
 
 import com.zhiwu.dynamicthreadpollermanager.experiment.model.PressureSnapshot;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -31,5 +33,43 @@ public final class ObservedSnapshot {
 
     public RuntimeObservation observation() {
         return observation;
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("runId", runId);
+        map.put("snapshot", snapshot.toMap());
+        map.put("observation", observation.toMap());
+        return map;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static ObservedSnapshot fromMap(Map<String, Object> map) {
+        String runId = (String) map.get("runId");
+        PressureSnapshot snapshot = PressureSnapshot.fromMap(
+                (Map<String, Object>) map.get("snapshot"));
+        RuntimeObservation observation = RuntimeObservation.fromMap(
+                (Map<String, Object>) map.get("observation"));
+        return new ObservedSnapshot(runId, snapshot, observation);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ObservedSnapshot that)) return false;
+        return runId.equals(that.runId)
+                && snapshot.equals(that.snapshot)
+                && observation.equals(that.observation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(runId, snapshot, observation);
+    }
+
+    @Override
+    public String toString() {
+        return "ObservedSnapshot{runId='%s', snapshot=%s, observation=%s}"
+                .formatted(runId, snapshot, observation);
     }
 }

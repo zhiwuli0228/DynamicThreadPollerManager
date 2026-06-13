@@ -8,7 +8,7 @@ This document states the limits that future work should respect.
 
 - Do not expand into Redis, Kafka, database persistence, frontend, authentication, or multi-node coordination without a revised design.
 - Do not introduce virtual-thread mode as a hidden default.
-- Do not replace queue capacity or rejection strategy at runtime without explicit design and safety coverage.
+- Queue capacity and rejection strategy are now runtime-configurable (implemented in v0.9.0 and v0.10.0). Any future modification must maintain the existing safety coverage.
 
 ## Operational Boundaries
 

@@ -2,17 +2,17 @@
 
 ## Authoritative Status
 
-- Current stage: `BASELINE_COMPLETE` — v0.10.0 retrospective delivered; all three dynamic configuration dimensions implemented
-- Current authorized work type: `NONE` — no active authorized changes
+- Current stage: `EXECUTION_AUTHORIZED` — v0.11.0 change 1/2 (persistent-evidence-recorder) implementation authorized
+- Current authorized work type: `IMPLEMENTATION` — v0.11.0 change 1/2 active
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.10.0` are `IMPLEMENTED`
+- Version design status: `v0.1.0` through `v0.10.0` are `IMPLEMENTED`; `v0.11.0` is `DRAFT`
 - OpenSpec capability changes: 16 implemented + archived
 - Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 535 tests pass with 0 failures
 
 ## Active Authorized Changes
 
-- None — all v0.1.0 through v0.10.0 implemented, archived, and retrospectives completed
+- `persistent-evidence-recorder` (change 1/2) — **ACTIVE** — implementing FileBackedEvidenceRecorder, snapshot serialization, RecordingSession, AcquisitionJsonWriter.parse()
 
 ## v0.10.0 Change Summary
 
@@ -37,16 +37,28 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 - Change 2/2: `acquisition-paths-and-quality-gates` — **ARCHIVED** on 2026-06-13 (433 tests, 0 failures)
   - Delivered: AcquisitionReportPaths.forVersion(), AcquisitionReportWriter dual-arg constructor, RunSnapshot extension (G7-G9 fields), G7-G9 data quality gates, AcquisitionReportBridge, 9-run data acquisition test, RuntimeObservation extension (keepAliveTimeSeconds/largestPoolSize/taskCount)
 
+## v0.11.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.11.0/`
+- Requirement theme: persistent evidence recording, snapshot serialization, recording session lifecycle, live pressure sampling
+- Key insight: v0.1.0 delivered in-memory-only metrics foundation; v0.11.0 adds durability and autonomous data collection
+- Predecessor: v0.10.0 (rejection policy — completed dynamic config baseline)
+- OpenSpec changes: `openspec/changes/persistent-evidence-recorder/` and `openspec/changes/live-pressure-sampler-and-integration/`
+- Changes: `persistent-evidence-recorder` (change 1/2) → `live-pressure-sampler-and-integration` (change 2/2)
+- Status: `CHANGE_DECOMPOSITION_COMPLETE` — SR closed, 2 OpenSpec changes created with proposal/design/specs/tasks
+
 ## What Is Allowed Now
 
-- Planning for future capability versions (v0.11.0+).
+- v0.11.0 change 1/2 (`persistent-evidence-recorder`) implementation: production code, tests, git commits.
+- Planning for v0.11.0 change 2/2 (not implementation until change 1/2 is complete).
 - Documentation and retrospectives refinement.
 
 ## What Is Not Allowed Now
 
-- No new production code or tests without a new version design and `EXECUTION_AUTHORIZED` state.
+- No v0.11.0 change 2/2 production code or tests until change 1/2 is archived and change 2/2 is EXECUTION_AUTHORIZED.
+- No new production code or tests for versions beyond v0.11.0 without a new version design.
 - No modification to existing adapters or commands without design revision.
-- No new dependencies or scope expansion.
+- No new dependencies or scope expansion beyond what change 1/2 specifies.
 
 ## Future Gate Sequence
 
