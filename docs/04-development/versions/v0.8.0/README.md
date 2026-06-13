@@ -4,7 +4,7 @@
 
 - Version name: `v0.8.0`
 - Authoring date: `2026-06-12`
-- Status: `IMPLEMENTED`
+- Status: `IMPLEMENTED` (retrospective published: `docs/08-retrospectives/2026-06-13-v0.8.0-real-data-acquisition-retrospective.md`)
 - Current phase: `IMPLEMENTED`
 - Authoritative branch: `claude_master`
 
@@ -60,4 +60,4 @@ See `decision-log.md` for the full decision record.
 
 ## Next Step
 
-`ARCHIVE` — both changes implemented and verified. Proceed to archive changes and then v0.8.0 retrospective.
+`COMPLETE` — changes archived, specimen synced, retrospective published. Ready for next version planning.
