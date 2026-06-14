@@ -205,6 +205,15 @@ Schema 强制规则：
 - 实现 review 必查项：检查引入包装器的 getter 方法返回值类型是否与"未包装前"一致。对 `assertSame`/`assertInstanceOf` 断言的影响必须在实现记录或 review 中明确说明。
 - 调用链下游如果通过 `unwrap()` 获取包装器后再次传递给构造器（如 `ExecutorRebuildStrategy`），必须改用对外 getter 获取原始对象。
 
+**静态工厂方法修改规则**（v0.13.0 复盘 P1 驱动）：
+
+- 修改既有 `public static` 工厂方法的内部行为时：
+  - **禁止修改原方法的输出语义**：如果新行为改变了任何字段的输出值（包括从 `absent()`→`present()`、从默认值→实际值），必须使用重载方法而非修改原方法。
+  - **原方法签名和行为必须保持不变**：原方法的所有现有调用方（包括测试）必须不经修改即可通过。
+  - **重载方法通过新增参数可选地启用新行为**：如 `fromExecutor(ManagedExecutor, Instant)` → 新增 `fromExecutor(ManagedExecutor, Instant, SystemCpuProbe)`。
+  - **测试覆盖双向**：原方法测试验证行为不变，重载方法测试验证新行为正确。
+- 实现 review 必查项：对每个被修改的 `public static` 方法，运行所有现有调用方的测试（包括其他包的测试），确认零回归。若任何现有测试需要修改才能通过 → P1 finding。
+
 ### 6. Implementation Review Gate
 
 目标：独立检查实现是否满足需求和设计。
@@ -264,6 +273,14 @@ Schema 强制规则：
   - **并发计数类**：对多线程争用下的允许/拒绝计数的 `assertEquals(exactCount, ...)` → 替换为 `assertTrue(actual >= 1 && actual <= maxAllowed)`。
   - **同步门禁类**：对 `synchronized` 方法门禁在极端争用时的精确通过数断言 → 替换为区间断言。
 - 新增并发测试 review 必查项：检查 `java.util.concurrent` 相关断言中是否存在 `assertEquals` 依赖线程时序的用法。若存在且无重试/区间保护 → P2 finding。
+
+**优先级/排序测试断言规则**（v0.13.0 复盘 P3 驱动）：
+
+- 涉及优先级、排序、状态机转换的测试断言必须针对**具体期望值**，不得使用候选集合：
+  - `assertEquals(expectedState, actualState)` ✓ — 明确断言期望状态
+  - `assertTrue(actual == A || actual == B)` ✗ — 无法证明优先级/排序逻辑正确
+  - 例外：当且仅当多个输出在语义上等价（如两个不同策略可能产生相同评分时），可使用 `assertTrue(actual >= expected)` 或区间断言
+- 测试 review 必查项：对涉及优先级链（如 `PressureState` 枚举序）、排序输出（如 `PolicyRanker.rank()` 返回值）、状态机转换的测试，检查是否存在 `assertTrue(A || B)` 形式。若存在且无语义等价理由 → P2 finding。
 
 ### 8. Acceptance Precheck / Archive
 
