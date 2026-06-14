@@ -1,6 +1,7 @@
 package com.zhiwu.dynamicthreadpollermanager.experiment.metrics;
 
 import com.zhiwu.dynamicthreadpollermanager.experiment.executor.ManagedExecutor;
+import com.zhiwu.dynamicthreadpollermanager.experiment.probe.SystemCpuProbe;
 
 import java.time.Instant;
 import java.util.LinkedHashMap;
@@ -88,6 +89,29 @@ public final class RuntimeObservation {
                 MetricValue.present(executor.getQueueSize()),
                 MetricValue.present(executor.getCompletedTaskCount()),
                 MetricValue.absent(),
+                MetricValue.present(executor.getKeepAliveTime(TimeUnit.SECONDS)),
+                MetricValue.present(executor.getLargestPoolSize()),
+                MetricValue.present(executor.getTaskCount()));
+    }
+
+    public static RuntimeObservation fromExecutor(
+            ManagedExecutor executor, Instant timestamp, SystemCpuProbe cpuProbe) {
+
+        MetricValue<Double> cpu = MetricValue.absent();
+        if (cpuProbe != null) {
+            double cpuLoad = cpuProbe.sampleProcessCpuLoad();
+            if (cpuLoad >= 0) {
+                cpu = MetricValue.present(cpuLoad);
+            }
+        }
+
+        return new RuntimeObservation(
+                timestamp,
+                MetricValue.present(executor.getActiveCount()),
+                MetricValue.present(executor.getPoolSize()),
+                MetricValue.present(executor.getQueueSize()),
+                MetricValue.present(executor.getCompletedTaskCount()),
+                cpu,
                 MetricValue.present(executor.getKeepAliveTime(TimeUnit.SECONDS)),
                 MetricValue.present(executor.getLargestPoolSize()),
                 MetricValue.present(executor.getTaskCount()));

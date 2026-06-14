@@ -4,10 +4,10 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `VERSION_DESIGN_DRAFT` for `v0.12.0` — baseline comparison experiment framework.
+- `VERSION_DESIGN_DRAFT` for `v0.13.0` — pressure classification and policy scoring.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.1.0` through `v0.11.0` are implemented and archived.
-- `v0.12.0` version design in progress; implementation not yet authorized.
+- `v0.1.0` through `v0.12.0` are implemented and archived.
+- `v0.13.0` version baseline created; implementation not yet authorized.
 
 ## Reading Order
 

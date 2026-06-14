@@ -2,17 +2,24 @@
 
 ## Authoritative Status
 
-- Current stage: `ARCHIVED` — v0.12.0 both changes archived
-- Current authorized work type: `NONE` — no active implementation
+- Current stage: `EXECUTION_AUTHORIZED` — v0.13.0 both changes ready for implementation
+- Current authorized work type: `IMPLEMENTATION` — Java implementation authorized
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`
+- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `VERSION_DESIGN_DRAFT`
 - OpenSpec capability changes: 20 implemented + archived
 - Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present; 708 tests pass with 0 failures (1 pre-existing flaky)
 
 ## Active Authorized Changes
 
-- (none — v0.12.0 changes archived)
+- (none — v0.13.0 changes implemented, pending archive)
+
+## v0.13.0 Change Summary
+
+| Change | Name | Status | Tests |
+|---|---|---|---|
+| 1/2 | pressure-classification-engine | IMPLEMENTED (2026-06-14) | 749 pass |
+| 2/2 | policy-scoring-and-cpu-probe | IMPLEMENTED (2026-06-14) | 774 pass |
 
 ## v0.12.0 Change Summary
 
@@ -76,12 +83,24 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 ## What Is Allowed Now
 
 - Documentation and retrospectives refinement.
-- Planning for v0.13.0 or subsequent versions (requires version design first).
+- v0.13.0 implementation — both OpenSpec changes created, execution authorized.
+- v0.13.0 version design refinement.
 
 ## What Is Not Allowed Now
 
-- No new production code or tests without a new version design and EXECUTION_AUTHORIZED status.
+- No new production code or tests without completing SR → change decomposition → EXECUTION_AUTHORIZED.
 - No modification to existing adapters or commands without design revision.
+
+## v0.13.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.13.0/`
+- Requirement theme: pressure state classification, trend-based classifier, policy scoring, policy ranking, CPU utilization probe
+- Key insight: the system can already sample pressure and compare executors (v0.12.0), but cannot classify pressure states or score which policy best handles a given state — v0.13.0 adds the diagnostic layer required before adaptive closed-loop adjustment (v0.14.0)
+- Predecessor: v0.12.0 (baseline comparison experiment framework)
+- Current phase: `IMPLEMENTED` — both changes implemented and verified
+- Status: `IMPLEMENTED`
+- OpenSpec changes: TBD after change decomposition
+- Candidate changes: `pressure-classification-engine` (change 1/2) → `policy-scoring-and-cpu-probe` (change 2/2)
 
 ## v0.12.0 Plan
 
