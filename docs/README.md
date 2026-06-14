@@ -4,10 +4,10 @@ This repository now uses a numbered documentation hub to carry project facts, ar
 
 ## Current Stage
 
-- `VERSION_DESIGN_DRAFT` for `v0.11.0` — persistent metrics recording and live sampling.
+- `VERSION_DESIGN_DRAFT` for `v0.12.0` — baseline comparison experiment framework.
 - Authoritative source: `docs/00-project/current-state.md`.
-- `v0.1.0` through `v0.10.0` are implemented and archived.
-- `v0.11.0` version design in progress; implementation not yet authorized.
+- `v0.1.0` through `v0.11.0` are implemented and archived.
+- `v0.12.0` version design in progress; implementation not yet authorized.
 
 ## Reading Order
 

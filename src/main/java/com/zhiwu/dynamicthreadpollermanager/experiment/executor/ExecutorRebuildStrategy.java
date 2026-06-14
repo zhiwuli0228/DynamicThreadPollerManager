@@ -79,7 +79,7 @@ public final class ExecutorRebuildStrategy {
                     keepAliveMs, TimeUnit.MILLISECONDS,
                     new LinkedBlockingQueue<>(command.targetQueueCapacity()),
                     oldTpe.getThreadFactory(),
-                    oldTpe.getRejectedExecutionHandler());
+                    oldExecutor.getRejectionPolicy());
         } catch (Exception e) {
             long durationMs = Duration.between(startTime, clock.get()).toMillis();
             return new RebuildResult(

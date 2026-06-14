@@ -129,6 +129,16 @@ public final class AcquisitionReportPaths {
                 .resolve(sessionMetadataFileName(runId));
     }
 
+    public static String comparisonReportFileName(String comparisonId) {
+        return requireSafeRunId(comparisonId, "comparisonId") + ".json"
+                .replace(".json", "-comparison.json");
+    }
+
+    public static Path comparisonReportFile(Path outputRoot, String comparisonId) {
+        return outputRoot.resolve("outputs/reports/v0.12.0")
+                .resolve(comparisonReportFileName(comparisonId));
+    }
+
     private static String requireSafeRunId(String runId, String name) {
         Objects.requireNonNull(runId, name + " must not be null");
         if (runId.isBlank()) {

@@ -18,6 +18,7 @@ public final class ScenarioRunOutcome {
     private final long totalWorkUnits;
     private final int evidenceCount;
     private final RunState finalState;
+    private final long rejectedTaskCount;
 
     public ScenarioRunOutcome(String runId,
                               String scenarioId,
@@ -26,6 +27,18 @@ public final class ScenarioRunOutcome {
                               long totalWorkUnits,
                               int evidenceCount,
                               RunState finalState) {
+        this(runId, scenarioId, policyId, completedStepCount, totalWorkUnits,
+                evidenceCount, finalState, 0L);
+    }
+
+    public ScenarioRunOutcome(String runId,
+                              String scenarioId,
+                              String policyId,
+                              int completedStepCount,
+                              long totalWorkUnits,
+                              int evidenceCount,
+                              RunState finalState,
+                              long rejectedTaskCount) {
         this.runId = Objects.requireNonNull(runId, "runId must not be null");
         this.scenarioId = Objects.requireNonNull(scenarioId, "scenarioId must not be null");
         this.policyId = Objects.requireNonNull(policyId, "policyId must not be null");
@@ -38,10 +51,14 @@ public final class ScenarioRunOutcome {
         if (evidenceCount < 0) {
             throw new IllegalArgumentException("evidenceCount must be non-negative, was " + evidenceCount);
         }
+        if (rejectedTaskCount < 0) {
+            throw new IllegalArgumentException("rejectedTaskCount must be non-negative, was " + rejectedTaskCount);
+        }
         this.finalState = Objects.requireNonNull(finalState, "finalState must not be null");
         this.completedStepCount = completedStepCount;
         this.totalWorkUnits = totalWorkUnits;
         this.evidenceCount = evidenceCount;
+        this.rejectedTaskCount = rejectedTaskCount;
     }
 
     public String runId() {
@@ -72,6 +89,10 @@ public final class ScenarioRunOutcome {
         return finalState;
     }
 
+    public long rejectedTaskCount() {
+        return rejectedTaskCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,6 +100,7 @@ public final class ScenarioRunOutcome {
                 && completedStepCount == that.completedStepCount
                 && totalWorkUnits == that.totalWorkUnits
                 && evidenceCount == that.evidenceCount
+                && rejectedTaskCount == that.rejectedTaskCount
                 && runId.equals(that.runId)
                 && scenarioId.equals(that.scenarioId)
                 && policyId.equals(that.policyId)
@@ -88,12 +110,12 @@ public final class ScenarioRunOutcome {
     @Override
     public int hashCode() {
         return Objects.hash(runId, scenarioId, policyId, completedStepCount,
-                totalWorkUnits, evidenceCount, finalState);
+                totalWorkUnits, evidenceCount, finalState, rejectedTaskCount);
     }
 
     @Override
     public String toString() {
-        return "ScenarioRunOutcome{runId='%s', scenarioId='%s', policyId='%s', completedStepCount=%d, totalWorkUnits=%d, evidenceCount=%d, finalState=%s}"
-                .formatted(runId, scenarioId, policyId, completedStepCount, totalWorkUnits, evidenceCount, finalState);
+        return "ScenarioRunOutcome{runId='%s', scenarioId='%s', policyId='%s', completedStepCount=%d, totalWorkUnits=%d, evidenceCount=%d, rejectedTaskCount=%d, finalState=%s}"
+                .formatted(runId, scenarioId, policyId, completedStepCount, totalWorkUnits, evidenceCount, rejectedTaskCount, finalState);
     }
 }

@@ -50,6 +50,9 @@ public class ManagedExecutor implements AutoCloseable {
 
     // ----- Common -----
     private final ThreadMode threadMode;
+    private final java.util.concurrent.atomic.AtomicLong rejectedTaskCount;
+    private volatile RejectedExecutionHandler platformRejectionPolicy;
+    private volatile RejectedExecutionHandler virtualRejectionPolicyOriginal;
 
     // ============================================================
     // PLATFORM constructors (unchanged API)
@@ -88,9 +91,15 @@ public class ManagedExecutor implements AutoCloseable {
                     "Virtual thread factories are not supported in platform constructors. "
                     + "Use ManagedExecutor.virtual() instead.");
         }
+        this.rejectedTaskCount = new java.util.concurrent.atomic.AtomicLong(0);
+        this.platformRejectionPolicy = rejectionHandler;
+        RejectedExecutionHandler countingHandler = (Runnable r, ThreadPoolExecutor executor) -> {
+            rejectedTaskCount.incrementAndGet();
+            rejectionHandler.rejectedExecution(r, executor);
+        };
         this.platformExecutor = new ThreadPoolExecutor(
                 corePoolSize, maxPoolSize, keepAliveTime, unit,
-                workQueue, threadFactory, rejectionHandler);
+                workQueue, threadFactory, countingHandler);
         this.platformQueueCapacity = workQueue.remainingCapacity() + workQueue.size();
         this.threadMode = ThreadMode.PLATFORM;
 
@@ -115,12 +124,18 @@ public class ManagedExecutor implements AutoCloseable {
         this.platformQueueCapacity = queueCapacity;
         this.threadMode = ThreadMode.VIRTUAL;
 
+        this.rejectedTaskCount = new java.util.concurrent.atomic.AtomicLong(0);
+        this.virtualRejectionPolicyOriginal = rejectionHandler;
+        RejectedExecutionHandler virtualCountingHandler = (Runnable r, ThreadPoolExecutor executor) -> {
+            rejectedTaskCount.incrementAndGet();
+            rejectionHandler.rejectedExecution(r, executor);
+        };
         this.virtualExecutor = Executors.newVirtualThreadPerTaskExecutor();
         this.semaphore = new Semaphore(maxConcurrency);
         this.pendingQueue = queueCapacity > 0
                 ? new LinkedBlockingQueue<>(queueCapacity)
                 : new LinkedBlockingQueue<>();
-        this.virtualRejectionHandler = rejectionHandler;
+        this.virtualRejectionHandler = virtualCountingHandler;
         this.virtualCompletedTaskCount = new AtomicLong(0);
         this.virtualSubmittedTaskCount = new AtomicLong(0);
         this.peakConcurrency = new AtomicInteger(0);
@@ -342,6 +357,10 @@ public class ManagedExecutor implements AutoCloseable {
         return threadMode;
     }
 
+    public long getRejectedTaskCount() {
+        return rejectedTaskCount.get();
+    }
+
     // ============================================================
     // setters
     // ============================================================
@@ -390,18 +409,28 @@ public class ManagedExecutor implements AutoCloseable {
 
     public RejectedExecutionHandler getRejectionPolicy() {
         if (threadMode == ThreadMode.PLATFORM) {
-            return platformExecutor.getRejectedExecutionHandler();
+            return platformRejectionPolicy;
         }
-        return virtualRejectionHandler;
+        return virtualRejectionPolicyOriginal;
     }
 
     public void setRejectionPolicy(RejectedExecutionHandler newPolicy) {
         Objects.requireNonNull(newPolicy, "rejectionPolicy must not be null");
         if (threadMode == ThreadMode.PLATFORM) {
-            platformExecutor.setRejectedExecutionHandler(newPolicy);
+            platformRejectionPolicy = newPolicy;
+            RejectedExecutionHandler countingHandler = (Runnable r, ThreadPoolExecutor executor) -> {
+                rejectedTaskCount.incrementAndGet();
+                newPolicy.rejectedExecution(r, executor);
+            };
+            platformExecutor.setRejectedExecutionHandler(countingHandler);
             return;
         }
-        virtualRejectionHandler = newPolicy;
+        virtualRejectionPolicyOriginal = newPolicy;
+        RejectedExecutionHandler countingHandler = (Runnable r, ThreadPoolExecutor executor) -> {
+            rejectedTaskCount.incrementAndGet();
+            newPolicy.rejectedExecution(r, executor);
+        };
+        virtualRejectionHandler = countingHandler;
     }
 
     // ============================================================

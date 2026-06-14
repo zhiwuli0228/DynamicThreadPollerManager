@@ -122,6 +122,7 @@ public final class ManagedExecutorScenarioRunner {
         }
 
         // Phase 4: lifecycle closeout
+        long rejected = executor.getRejectedTaskCount();
         coordinator.stopRun(run.runId());
         ExperimentRun finalized = coordinator.finalizeRun(run.runId());
 
@@ -147,7 +148,8 @@ public final class ManagedExecutorScenarioRunner {
                 plan.steps().size(),
                 plan.totalWorkUnits(),
                 recorded.size(),
-                finalized.state());
+                finalized.state(),
+                rejected);
     }
 
     private int taskCountFor(ScenarioProfile profile, int stepIndex, ManagedExecutorConfig config) {

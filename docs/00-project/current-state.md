@@ -2,17 +2,24 @@
 
 ## Authoritative Status
 
-- Current stage: `ARCHIVED` — v0.11.0 both changes archived
+- Current stage: `ARCHIVED` — v0.12.0 both changes archived
 - Current authorized work type: `NONE` — no active implementation
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.11.0` are `IMPLEMENTED`
-- OpenSpec capability changes: 18 implemented + archived
-- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present on the main working branch; 646 tests pass with 0 failures
+- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`
+- OpenSpec capability changes: 20 implemented + archived
+- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present; 708 tests pass with 0 failures (1 pre-existing flaky)
 
 ## Active Authorized Changes
 
-- (none — v0.11.0 changes archived)
+- (none — v0.12.0 changes archived)
+
+## v0.12.0 Change Summary
+
+| Change | Name | Status | Tests |
+|---|---|---|---|
+| 1/2 | baseline-catalog-and-comparison-runner | ARCHIVED (2026-06-14) | 697 pass |
+| 2/2 | comparison-report-and-end-to-end-verification | ARCHIVED (2026-06-14) | 707 pass |
 
 ## v0.10.0 Change Summary
 
@@ -69,12 +76,24 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 ## What Is Allowed Now
 
 - Documentation and retrospectives refinement.
-- Planning for v0.12.0 or subsequent versions (requires version design first).
+- Planning for v0.13.0 or subsequent versions (requires version design first).
 
 ## What Is Not Allowed Now
 
 - No new production code or tests without a new version design and EXECUTION_AUTHORIZED status.
 - No modification to existing adapters or commands without design revision.
+
+## v0.12.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.12.0/`
+- Requirement theme: baseline comparison experiment framework — catalog, comparable runner, normalized metrics, comparison report
+- Key insight: the system can already run baseline and managed executors independently; v0.12.0 adds the comparison layer that runs the same workload against both and produces side-by-side delta reports
+- Predecessor: v0.11.0 (persistent evidence recording and live sampling)
+- OpenSpec changes: archived to `openspec/changes/archive/2026-06-14-baseline-catalog-and-comparison-runner/` and `openspec/changes/archive/2026-06-14-comparison-report-and-end-to-end-verification/`
+- Changes: `baseline-catalog-and-comparison-runner` (change 1/2) → `comparison-report-and-end-to-end-verification` (change 2/2)
+- Status: `ARCHIVED` — 708 tests passing, 0 new failures
+- Main specs synced: 5 new specs (baseline-executor-catalog, normalized-comparison-metrics, comparable-scenario-runner, managed-executor-rejection-counting, comparison-report-artifact) + 3 modified specs
+- Retrospective: pending
 
 ## Future Gate Sequence
 

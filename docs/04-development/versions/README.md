@@ -4,11 +4,10 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- Eleven version packages exist: `v0.1.0` through `v0.11.0`.
-- `v0.1.0` through `v0.10.0` are `IMPLEMENTED`.
-- `v0.11.0` is `DRAFT` — version design in progress (persistent metrics recording and live sampling).
-- All 16 capability changes have been implemented and archived; 535 tests pass with 0 failures.
-- Both v0.10.0 changes (`rejection-policy-command-and-adapter` and `rejection-policy-end-to-end-verification`) are archived (2026-06-13).
+- Twelve version packages exist: `v0.1.0` through `v0.12.0`.
+- `v0.1.0` through `v0.11.0` are `IMPLEMENTED` / `ARCHIVED`.
+- `v0.12.0` is `DRAFT` — version design in progress (baseline comparison experiment framework).
+- All 18 capability changes have been implemented and archived; 646 tests pass with 0 failures.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

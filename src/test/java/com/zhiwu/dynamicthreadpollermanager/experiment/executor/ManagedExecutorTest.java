@@ -177,7 +177,7 @@ class ManagedExecutorTest {
     void getRejectionPolicyDelegatesToTpe() {
         executor = new ManagedExecutor(2, 4, 60, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(10));
-        assertSame(executor.unwrap().getRejectedExecutionHandler(),
+        assertInstanceOf(ThreadPoolExecutor.AbortPolicy.class,
                 executor.getRejectionPolicy());
     }
 
@@ -187,7 +187,7 @@ class ManagedExecutorTest {
                 new LinkedBlockingQueue<>(10));
         executor.setRejectionPolicy(new ThreadPoolExecutor.DiscardPolicy());
         assertInstanceOf(ThreadPoolExecutor.DiscardPolicy.class,
-                executor.unwrap().getRejectedExecutionHandler());
+                executor.getRejectionPolicy());
     }
 
     @Test
