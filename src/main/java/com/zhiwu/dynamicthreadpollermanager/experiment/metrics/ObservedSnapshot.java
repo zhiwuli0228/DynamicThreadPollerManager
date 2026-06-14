@@ -45,11 +45,29 @@ public final class ObservedSnapshot {
 
     @SuppressWarnings("unchecked")
     public static ObservedSnapshot fromMap(Map<String, Object> map) {
-        String runId = (String) map.get("runId");
+        Objects.requireNonNull(map, "map must not be null");
+        Object runIdObj = map.get("runId");
+        if (!(runIdObj instanceof String runId)) {
+            throw new IllegalArgumentException(
+                    "map must contain String 'runId', got "
+                            + (runIdObj == null ? "null" : runIdObj.getClass().getSimpleName()));
+        }
+        Object snapshotObj = map.get("snapshot");
+        if (!(snapshotObj instanceof Map)) {
+            throw new IllegalArgumentException(
+                    "map must contain Map 'snapshot', got "
+                            + (snapshotObj == null ? "null" : snapshotObj.getClass().getSimpleName()));
+        }
+        Object observationObj = map.get("observation");
+        if (!(observationObj instanceof Map)) {
+            throw new IllegalArgumentException(
+                    "map must contain Map 'observation', got "
+                            + (observationObj == null ? "null" : observationObj.getClass().getSimpleName()));
+        }
         PressureSnapshot snapshot = PressureSnapshot.fromMap(
-                (Map<String, Object>) map.get("snapshot"));
+                (Map<String, Object>) snapshotObj);
         RuntimeObservation observation = RuntimeObservation.fromMap(
-                (Map<String, Object>) map.get("observation"));
+                (Map<String, Object>) observationObj);
         return new ObservedSnapshot(runId, snapshot, observation);
     }
 

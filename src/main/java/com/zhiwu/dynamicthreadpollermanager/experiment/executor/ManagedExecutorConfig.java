@@ -30,6 +30,11 @@ public record ManagedExecutorConfig(
             throw new IllegalArgumentException(
                     "maximumPoolSize must be >= corePoolSize, was " + maximumPoolSize);
         }
+        if (maximumPoolSize > ManagedExecutor.MAX_POOL_SIZE) {
+            throw new IllegalArgumentException(
+                    "maximumPoolSize must be <= " + ManagedExecutor.MAX_POOL_SIZE
+                            + ", was " + maximumPoolSize);
+        }
         if (queueCapacity < 0) {
             throw new IllegalArgumentException("queueCapacity must be non-negative, was " + queueCapacity);
         }

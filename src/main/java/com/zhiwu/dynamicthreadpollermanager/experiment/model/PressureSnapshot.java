@@ -67,14 +67,31 @@ public final class PressureSnapshot {
     }
 
     public static PressureSnapshot fromMap(Map<String, Object> map) {
-        Instant timestamp = Instant.parse((String) map.get("timestamp"));
-        int activeThreads = ((Number) map.get("activeThreads")).intValue();
-        int poolSize = ((Number) map.get("poolSize")).intValue();
-        int queueSize = ((Number) map.get("queueSize")).intValue();
-        long completedTaskCount = ((Number) map.get("completedTaskCount")).longValue();
-        double cpuUtilization = ((Number) map.get("cpuUtilization")).doubleValue();
+        Objects.requireNonNull(map, "map must not be null");
+        Object timestampObj = map.get("timestamp");
+        if (!(timestampObj instanceof String ts)) {
+            throw new IllegalArgumentException(
+                    "map must contain String 'timestamp', got "
+                            + (timestampObj == null ? "null" : timestampObj.getClass().getSimpleName()));
+        }
+        Instant timestamp = Instant.parse(ts);
+        int activeThreads = requireNumber(map, "activeThreads").intValue();
+        int poolSize = requireNumber(map, "poolSize").intValue();
+        int queueSize = requireNumber(map, "queueSize").intValue();
+        long completedTaskCount = requireNumber(map, "completedTaskCount").longValue();
+        double cpuUtilization = requireNumber(map, "cpuUtilization").doubleValue();
         return new PressureSnapshot(timestamp, activeThreads, poolSize,
                 queueSize, completedTaskCount, cpuUtilization);
+    }
+
+    private static Number requireNumber(Map<String, Object> map, String key) {
+        Object value = map.get(key);
+        if (!(value instanceof Number num)) {
+            throw new IllegalArgumentException(
+                    "map must contain Number '" + key + "', got "
+                            + (value == null ? "null" : value.getClass().getSimpleName()));
+        }
+        return num;
     }
 
     @Override

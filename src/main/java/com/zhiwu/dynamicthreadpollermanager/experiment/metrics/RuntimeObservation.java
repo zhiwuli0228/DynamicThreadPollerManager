@@ -109,7 +109,14 @@ public final class RuntimeObservation {
 
     @SuppressWarnings("unchecked")
     public static RuntimeObservation fromMap(Map<String, Object> map) {
-        Instant timestamp = Instant.parse((String) map.get("timestamp"));
+        Objects.requireNonNull(map, "map must not be null");
+        Object timestampObj = map.get("timestamp");
+        if (!(timestampObj instanceof String ts)) {
+            throw new IllegalArgumentException(
+                    "map must contain String 'timestamp', got "
+                            + (timestampObj == null ? "null" : timestampObj.getClass().getSimpleName()));
+        }
+        Instant timestamp = Instant.parse(ts);
         return new RuntimeObservation(
                 timestamp,
                 metricValueFromMap(map, "activeThreads", Integer.class),
@@ -136,12 +143,31 @@ public final class RuntimeObservation {
     @SuppressWarnings("unchecked")
     private static <T> MetricValue<T> metricValueFromMap(
             Map<String, Object> map, String key, Class<T> targetType) {
-        Map<String, Object> mvMap = (Map<String, Object>) map.get(key);
-        String status = (String) mvMap.get("status");
+        Object mvObj = map.get(key);
+        if (!(mvObj instanceof Map)) {
+            throw new IllegalArgumentException(
+                    "map must contain Map '" + key + "', got "
+                            + (mvObj == null ? "null" : mvObj.getClass().getSimpleName()));
+        }
+        Map<String, Object> mvMap = (Map<String, Object>) mvObj;
+        Object statusObj = mvMap.get("status");
+        if (!(statusObj instanceof String status)) {
+            throw new IllegalArgumentException(
+                    "'" + key + "' must contain String 'status', got "
+                            + (statusObj == null ? "null" : statusObj.getClass().getSimpleName()));
+        }
         if ("ABSENT".equals(status)) {
             return MetricValue.absent();
         }
         Object rawValue = mvMap.get("value");
+        if (rawValue == null) {
+            throw new IllegalArgumentException(
+                    "'" + key + "' with status PRESENT must have a non-null 'value'");
+        }
+        if (!(rawValue instanceof Number)) {
+            throw new IllegalArgumentException(
+                    "'" + key + "' value must be a Number, got " + rawValue.getClass().getSimpleName());
+        }
         T typedValue;
         if (targetType == Long.class) {
             typedValue = targetType.cast(((Number) rawValue).longValue());

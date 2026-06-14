@@ -22,6 +22,9 @@ import java.util.function.Supplier;
 
 public final class ManagedExecutorScenarioRunner {
 
+    private static final java.util.logging.Logger LOG =
+            java.util.logging.Logger.getLogger(ManagedExecutorScenarioRunner.class.getName());
+
     private final ExperimentCoordinator coordinator;
     private final ScenarioPlanner planner;
     private final PressureSampler sampler;
@@ -190,8 +193,8 @@ public final class ManagedExecutorScenarioRunner {
     private void tryStop(String runId) {
         try {
             coordinator.stopRun(runId);
-        } catch (RuntimeException ignored) {
-            // best-effort cleanup
+        } catch (RuntimeException e) {
+            LOG.fine("best-effort stopRun failed for " + runId + ": " + e.getMessage());
         }
     }
 

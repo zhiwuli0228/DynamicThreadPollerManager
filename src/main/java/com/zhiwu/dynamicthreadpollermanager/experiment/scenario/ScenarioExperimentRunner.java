@@ -22,6 +22,9 @@ import java.util.function.Supplier;
  */
 public final class ScenarioExperimentRunner {
 
+    private static final java.util.logging.Logger LOG =
+            java.util.logging.Logger.getLogger(ScenarioExperimentRunner.class.getName());
+
     private final ExperimentCoordinator coordinator;
     private final ScenarioPlanner planner;
     private final BaselineWorkloadExecutor baselineExecutor;
@@ -95,8 +98,8 @@ public final class ScenarioExperimentRunner {
     private void tryStop(String runId) {
         try {
             coordinator.stopRun(runId);
-        } catch (RuntimeException ignored) {
-            // Run may already be in a terminal state or missing; nothing to do.
+        } catch (RuntimeException e) {
+            LOG.fine("best-effort stopRun failed for " + runId + ": " + e.getMessage());
         }
     }
 

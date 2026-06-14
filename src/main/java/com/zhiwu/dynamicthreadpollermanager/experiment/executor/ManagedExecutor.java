@@ -24,6 +24,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class ManagedExecutor implements AutoCloseable {
 
+    /**
+     * Practical upper bound for pool size and concurrency to prevent
+     * accidental resource exhaustion.
+     */
+    public static final int MAX_POOL_SIZE = 10_000;
+
     // ----- PLATFORM mode fields -----
     private final ThreadPoolExecutor platformExecutor;
     private final int platformQueueCapacity;
@@ -68,6 +74,10 @@ public class ManagedExecutor implements AutoCloseable {
         if (maxPoolSize < corePoolSize) {
             throw new IllegalArgumentException(
                     "maxPoolSize must be >= corePoolSize, was " + maxPoolSize);
+        }
+        if (maxPoolSize > MAX_POOL_SIZE) {
+            throw new IllegalArgumentException(
+                    "maxPoolSize must be <= " + MAX_POOL_SIZE + ", was " + maxPoolSize);
         }
         if (keepAliveTime < 0) {
             throw new IllegalArgumentException("keepAliveTime must be >= 0, was " + keepAliveTime);
@@ -128,6 +138,10 @@ public class ManagedExecutor implements AutoCloseable {
         Objects.requireNonNull(rejectionHandler, "rejectionHandler must not be null");
         if (maxConcurrency < 1) {
             throw new IllegalArgumentException("maxConcurrency must be >= 1, was " + maxConcurrency);
+        }
+        if (maxConcurrency > MAX_POOL_SIZE) {
+            throw new IllegalArgumentException(
+                    "maxConcurrency must be <= " + MAX_POOL_SIZE + ", was " + maxConcurrency);
         }
         if (queueCapacity < 0) {
             throw new IllegalArgumentException("queueCapacity must be non-negative, was " + queueCapacity);
@@ -348,7 +362,7 @@ public class ManagedExecutor implements AutoCloseable {
         adjustSemaphore(maximumPoolSize);
     }
 
-    private void adjustSemaphore(int newMaxConcurrency) {
+    private synchronized void adjustSemaphore(int newMaxConcurrency) {
         if (newMaxConcurrency < 1) {
             throw new IllegalArgumentException(
                     "concurrency must be >= 1, was " + newMaxConcurrency);

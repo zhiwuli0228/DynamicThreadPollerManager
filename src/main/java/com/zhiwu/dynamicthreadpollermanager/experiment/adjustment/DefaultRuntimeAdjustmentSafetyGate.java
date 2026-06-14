@@ -20,7 +20,8 @@ import java.util.Objects;
  * </ol>
  *
  * <p>The gate keeps a per-instance, single-run history. A new run
- * should use a fresh gate instance.
+ * should use a fresh gate instance. This class is thread-safe:
+ * {@code evaluate} and {@code recordApplied} are synchronized.
  */
 public final class DefaultRuntimeAdjustmentSafetyGate implements RuntimeAdjustmentSafetyGate {
 
@@ -43,7 +44,7 @@ public final class DefaultRuntimeAdjustmentSafetyGate implements RuntimeAdjustme
     }
 
     @Override
-    public SafetyGateDecision evaluate(ScaleAdjustmentCommand command,
+    public synchronized SafetyGateDecision evaluate(ScaleAdjustmentCommand command,
                                        ExecutorStateSnapshot currentState,
                                        ReadinessAssessment readiness) {
         Objects.requireNonNull(command, "command must not be null");
@@ -102,7 +103,7 @@ public final class DefaultRuntimeAdjustmentSafetyGate implements RuntimeAdjustme
     }
 
     @Override
-    public void recordApplied(SafetyGateDecision decision) {
+    public synchronized void recordApplied(SafetyGateDecision decision) {
         Objects.requireNonNull(decision, "decision must not be null");
         if (decision.outcome() != SafetyGateDecision.Outcome.ALLOW) {
             return;
@@ -117,11 +118,11 @@ public final class DefaultRuntimeAdjustmentSafetyGate implements RuntimeAdjustme
         lastAppliedTargetSize = command.targetPoolSize();
     }
 
-    public int appliedAdjustmentsForRun() {
+    public synchronized int appliedAdjustmentsForRun() {
         return appliedAdjustmentsForRun;
     }
 
-    public int cooldownRemaining() {
+    public synchronized int cooldownRemaining() {
         return cooldownRemaining;
     }
 

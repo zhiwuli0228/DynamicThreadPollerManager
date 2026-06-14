@@ -27,27 +27,28 @@ public class ExperimentCoordinator {
     }
 
     public ExperimentRun startRun(String runId) {
-        ExperimentRun run = getRun(runId);
-        validateTransition(run, RunState.RUNNING);
-        ExperimentRun updated = run.withState(RunState.RUNNING);
-        runs.put(runId, updated);
-        return updated;
+        return transition(runId, RunState.RUNNING);
     }
 
     public ExperimentRun stopRun(String runId) {
-        ExperimentRun run = getRun(runId);
-        validateTransition(run, RunState.STOPPED);
-        ExperimentRun updated = run.withState(RunState.STOPPED);
-        runs.put(runId, updated);
-        return updated;
+        return transition(runId, RunState.STOPPED);
     }
 
     public ExperimentRun finalizeRun(String runId) {
-        ExperimentRun run = getRun(runId);
-        validateTransition(run, RunState.FINALIZED);
-        ExperimentRun updated = run.withState(RunState.FINALIZED);
-        runs.put(runId, updated);
-        return updated;
+        return transition(runId, RunState.FINALIZED);
+    }
+
+    private ExperimentRun transition(String runId, RunState targetState) {
+        ExperimentRun[] result = new ExperimentRun[1];
+        runs.compute(runId, (key, existing) -> {
+            if (existing == null) {
+                throw new IllegalArgumentException("Run not found: " + runId);
+            }
+            validateTransition(existing, targetState);
+            result[0] = existing.withState(targetState);
+            return result[0];
+        });
+        return result[0];
     }
 
     public ExperimentRun getRun(String runId) {

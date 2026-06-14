@@ -79,21 +79,33 @@ class QueueResizeSafetyGateTest {
 
     @Test
     void denyShrinkWhenQueueDepthExceedsNewCapacity() {
-        // Fill queue with 5 tasks
-        QueueResizeCommand cmd = new QueueResizeCommand(3, "shrink below depth");
-        // Queue is empty by default, so this should pass. We test the
-        // gate logic: the gate checks queue depth at evaluation time.
-        // For a queue with depth 0, SHRINK to 3 is fine.
+        // Fill queue with blocking tasks so queue depth > target capacity
+        java.util.concurrent.CountDownLatch blocker = new java.util.concurrent.CountDownLatch(1);
+        // core=2, max=4, so 4 threads will be busy; next tasks go to queue
+        for (int i = 0; i < 7; i++) {
+            executor.submit(() -> {
+                try { blocker.await(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+            });
+        }
+        // Wait for tasks to be queued
+        try { Thread.sleep(200); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+
+        int queueDepth = executor.getQueueSize();
+        assertTrue(queueDepth > 0, "precondition: queue must have items");
+
+        // Target capacity is less than current queue depth
+        QueueResizeCommand cmd = new QueueResizeCommand(1, "shrink below depth");
         EvaluationResult result = gate.evaluate(cmd, executor);
-        assertEquals(GateResult.PERMIT, result.result());
+        assertEquals(GateResult.DENY, result.result());
+        assertTrue(result.reason().contains("current queue depth"));
+
+        blocker.countDown(); // unblock tasks for cleanup
     }
 
     @Test
-    void denyShrinkWhenQueueDepthExceedsNewCapacity_blockedCheck() {
-        // Submit tasks to fill the queue, then check
-        // Since tasks are blocking, we use queue size
-        QueueResizeCommand cmd = new QueueResizeCommand(1, "aggressive shrink");
-        // Queue is empty, so SHRINK to 1 is permitted
+    void permitShrinkWhenQueueDepthWithinNewCapacity() {
+        // Queue is empty, shrink is fine
+        QueueResizeCommand cmd = new QueueResizeCommand(3, "shrink to 3");
         EvaluationResult result = gate.evaluate(cmd, executor);
         assertEquals(GateResult.PERMIT, result.result());
     }
