@@ -99,7 +99,7 @@ SR 必填内容：
 - 非范围再次声明；
 - 对弱实现 agent 足够明确的任务切分。
 
-SR 伪代码强制验证规则（v0.9.0 复盘 P1/P2/P4 驱动）：
+SR 伪代码强制验证规则（v0.9.0 复盘 P1/P2/P4 驱动，v0.12.0 复盘扩展）：
 
 - SR 中任何组件伪代码引用已有类型（类、接口、record、enum）时，**必须先读取该类型的实际源码**，确认构造器签名、方法签名、泛型参数、工厂方法行为与伪代码一致。
 - 至少需要验证的引用点：
@@ -109,6 +109,24 @@ SR 伪代码强制验证规则（v0.9.0 复盘 P1/P2/P4 驱动）：
   - 方法参数类型（如 `ReadinessSummary`、`ExecutorStateSnapshot`）→ 确认实际类型而非假设类型。
 - 如果一个类型有多个重载，伪代码必须明确使用哪个重载，并在注释中标注"已验证 API 签名"。
 - SR review 的必查项新增一条：随机抽取伪代码中的 3 个 API 调用点，读取实际源码验证签名匹配。若发现不一致 → P1 finding。
+
+**序列化方向强制检查**（v0.12.0 复盘 P3 驱动）：
+- SR 伪代码中出现序列化/反序列化调用时，必须验证方向性正确：
+  - `render(Object)` → 对象到字符串（序列化）
+  - `parse(String)` → 字符串到对象（反序列化）
+  - `toMap()` → 对象到 Map（序列化）
+  - `fromMap(Map)` → Map 到对象（反序列化）
+- SR review 必查项：对比伪代码中序列化/反序列化方法名与源码实际 API 是否方向一致。若 `fromMap()` 路径调用 `render()` 或 `writeXxx()` 路径调用 `parse()` → P1 finding。
+
+**Record 反序列化 null 兼容性检查**（v0.12.0 复盘 P2 驱动）：
+- SR 中定义 record 类型且包含 `fromMap()` 方法时，必须检查 compact constructor 的 `requireNonNull` 是否与反序列化路径兼容。
+- 规则：`fromMap()` 无法从持久化表示重建的字段（如需要运行时上下文的 `ScenarioRunOutcome`、`ManagedExecutorConfig`）必须在 compact constructor 中允许 null，或在 `fromMap()` 中提供合法的默认值。
+- SR review 必查项：对每个包含 `fromMap()` 的 record 类型，追踪 `fromMap()` 调用链中所有 `requireNonNull` 字段是否能够从反序列化输入填充。若存在不可填充的非空字段 → P1 finding。
+
+**跨类型转换边界值检查**（v0.12.0 复盘 P4 驱动）：
+- SR 中定义跨类型转换方法（如 `XxxPreset.toYyyPreset()`）时，必须列出源类型和目标类型的合法值域差异表。
+- 对每个值域不重叠的字段，必须在转换方法中给出明确的映射规则（默认值、最近合法值、或抛出异常）。
+- SR review 必查项：随机抽取 1 个转换方法，对照源类型和目标类型的构造器/工厂方法参数约束，验证边界值（最小值、最大值、哨兵值如 -1/0）的映射结果。若存在未处理的边界值 → P1 finding。
 
 Change 分解独立验证规则（v0.9.0 复盘 P3 驱动）：
 
@@ -178,6 +196,15 @@ Schema 强制规则：
 - 未引入未授权依赖或范围扩张；
 - 不得直接跳到 archive。
 
+**Handler/包装器引入规则**（v0.12.0 复盘 P1 驱动）：
+
+- 当对现有方法返回值引入包装层（如 `RejectedExecutionHandler` 包装器、InputStream 装饰器）时：
+  - **对外 getter 返回原始对象**：`getXxx()` 返回原始未包装对象，而非包装器。
+  - **内部委托给包装器**：包装后的对象仅用于框架/库内部（如传递给 TPE 构造器）。
+  - **setter 必须同时维护两份引用**：`setXxx(newValue)` 必须同时更新原始引用和重新生成包装器。
+- 实现 review 必查项：检查引入包装器的 getter 方法返回值类型是否与"未包装前"一致。对 `assertSame`/`assertInstanceOf` 断言的影响必须在实现记录或 review 中明确说明。
+- 调用链下游如果通过 `unwrap()` 获取包装器后再次传递给构造器（如 `ExecutorRebuildStrategy`），必须改用对外 getter 获取原始对象。
+
 ### 6. Implementation Review Gate
 
 目标：独立检查实现是否满足需求和设计。
@@ -229,6 +256,14 @@ Schema 强制规则：
 - 覆盖矩阵证明关键 IR/SR/Spec 场景均有测试或明确残余风险；
 - 测试评审 findings 已处置并闭环；
 - 明确允许进入验收前反向核查。
+
+**并发测试稳定性规则**（v0.12.0 复盘 P5 驱动）：
+
+- 依赖线程调度时序的断言不得使用精确相等（`assertEquals(expected, actual)`），必须使用区间断言或条件等待：
+  - **线程状态类**：对 `ThreadPoolExecutor.getActiveCount()` 等近似值 API 的 `assertEquals(0, ...)` → 替换为重试循环（如 `for (int i = 0; i < N && value != expected; i++) { Thread.sleep(M); }`），或替换为 `assertTrue(value >= 0 && value <= upperBound)`。
+  - **并发计数类**：对多线程争用下的允许/拒绝计数的 `assertEquals(exactCount, ...)` → 替换为 `assertTrue(actual >= 1 && actual <= maxAllowed)`。
+  - **同步门禁类**：对 `synchronized` 方法门禁在极端争用时的精确通过数断言 → 替换为区间断言。
+- 新增并发测试 review 必查项：检查 `java.util.concurrent` 相关断言中是否存在 `assertEquals` 依赖线程时序的用法。若存在且无重试/区间保护 → P2 finding。
 
 ### 8. Acceptance Precheck / Archive
 
