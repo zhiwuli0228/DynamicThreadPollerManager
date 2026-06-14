@@ -104,6 +104,10 @@ class ManagedExecutorTest {
 
         executor.submit(() -> { /* no-op */ }).get();
 
+        // TPE state is approximate — allow brief settling time
+        for (int i = 0; i < 20 && executor.getActiveCount() > 0; i++) {
+            Thread.sleep(5);
+        }
         assertEquals(0, executor.getActiveCount());
         assertTrue(executor.getPoolSize() >= 0);
         assertEquals(0, executor.getQueueSize());
