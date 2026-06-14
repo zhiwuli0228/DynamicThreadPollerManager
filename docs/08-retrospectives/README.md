@@ -20,6 +20,7 @@
 7. `docs/08-retrospectives/2026-06-13-v0.8.0-real-data-acquisition-retrospective.md`
 8. `docs/08-retrospectives/2026-06-13-v0.9.0-queue-resize-retrospective.md`
 10. `docs/08-retrospectives/2026-06-14-v0.12.0-baseline-comparison-retrospective.md`
+11. `docs/08-retrospectives/2026-06-14-v0.13.0-pressure-classification-retrospective.md`
 
 ## 使用规则
 
