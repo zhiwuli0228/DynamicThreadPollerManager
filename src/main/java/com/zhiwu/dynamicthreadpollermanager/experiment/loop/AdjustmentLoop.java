@@ -49,6 +49,7 @@ public final class AdjustmentLoop {
 
     private final Object pauseLock = new Object();
     private volatile boolean paused = false;
+    private volatile int currentIteration = 0;
 
     public AdjustmentLoop(
             LoopConfig config,
@@ -148,6 +149,7 @@ public final class AdjustmentLoop {
         currentSession = null;
         loopThread = null;
         consecutiveOscillations = 0;
+        currentIteration = 0;
     }
 
     public LoopState getState() { return state; }
@@ -158,7 +160,7 @@ public final class AdjustmentLoop {
 
     private void runLoop(ManagedExecutor executor) {
         PressureClassification previousClassification = null;
-        int iteration = 0;
+        currentIteration = 0;
 
         ReadinessAssessment loopReadiness = new ReadinessAssessment(
                 ReadinessStatus.READY,
@@ -175,7 +177,7 @@ public final class AdjustmentLoop {
                 continue;
             }
 
-            iteration++;
+            currentIteration++;
 
             try {
                 // Step 1: sleep
@@ -195,7 +197,7 @@ public final class AdjustmentLoop {
 
                 // Step 4: skip no-op
                 if (decision.isNoOp()) {
-                    loopEvidenceRecorder.recordIteration(currentSession, iteration,
+                    loopEvidenceRecorder.recordIteration(currentSession, currentIteration,
                             decision, null, previousClassification);
                     continue;
                 }
@@ -223,7 +225,7 @@ public final class AdjustmentLoop {
 
                 // Step 9: check gate outcome
                 if (gateDecision.outcome() == SafetyGateDecision.Outcome.REJECTED) {
-                    loopEvidenceRecorder.recordIteration(currentSession, iteration,
+                    loopEvidenceRecorder.recordIteration(currentSession, currentIteration,
                             decision, null, previousClassification);
                     continue;
                 }
@@ -255,7 +257,7 @@ public final class AdjustmentLoop {
                 }
 
                 // Step 14: evidence
-                loopEvidenceRecorder.recordIteration(currentSession, iteration,
+                loopEvidenceRecorder.recordIteration(currentSession, currentIteration,
                         decision, result, beforeClass);
 
                 // Step 15: feedback calibration trigger
@@ -275,7 +277,7 @@ public final class AdjustmentLoop {
                 }
 
                 // Step 16: max iterations check
-                if (config.maxIterations() > 0 && iteration >= config.maxIterations()) {
+                if (config.maxIterations() > 0 && currentIteration >= config.maxIterations()) {
                     stop();
                     break;
                 }
@@ -284,7 +286,7 @@ public final class AdjustmentLoop {
                 Thread.currentThread().interrupt();
                 break;
             } catch (RuntimeException e) {
-                loopEvidenceRecorder.recordIteration(currentSession, iteration,
+                loopEvidenceRecorder.recordIteration(currentSession, currentIteration,
                         null, null, previousClassification);
             }
         }
@@ -297,7 +299,7 @@ public final class AdjustmentLoop {
     private LoopSession finalizeSession(LoopState finalState, String summary) {
         loopEvidenceRecorder.recordSessionEnd(currentSession);
         int adjustments = history.totalAdjustmentCount();
-        currentSession = currentSession.ended(finalState, adjustments, 0, summary);
+        currentSession = currentSession.ended(finalState, adjustments, currentIteration, summary);
         return currentSession;
     }
 
