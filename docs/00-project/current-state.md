@@ -2,17 +2,25 @@
 
 ## Authoritative Status
 
-- Current stage: `EXECUTION_AUTHORIZED` — v0.13.0 both changes ready for implementation
+- Current stage: `EXECUTION_AUTHORIZED` — v0.14.0 both changes ready for implementation
 - Current authorized work type: `IMPLEMENTATION` — Java implementation authorized
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `VERSION_DESIGN_DRAFT`
-- OpenSpec capability changes: 20 implemented + archived
-- Java implementation status: all experiment packages (foundation, metrics, scenario, policy, analysis, adjustment, acquisition, executor) are present; 708 tests pass with 0 failures (1 pre-existing flaky)
+- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `IMPLEMENTED`; `v0.14.0` is `READY_FOR_CHANGE_DECOMPOSITION`
+- OpenSpec capability changes: 23 implemented + archived (22 prior + 1 v0.14.0 change 1); 1 active (v0.14.0 change 2)
+- Authorized OpenSpec changes: `oscillation-guard-and-loop-verification` (change 2/2)
+- Java implementation status: all experiment packages present; 820 tests pass with 0 failures
 
 ## Active Authorized Changes
 
-- (none — v0.13.0 changes implemented, pending archive)
+- `oscillation-guard-and-loop-verification` (change 2/2) — EXECUTION_AUTHORIZED
+
+## v0.14.0 Change Summary
+
+| Change | Name | Status | Tests |
+|---|---|---|---|
+| 1/2 | adaptive-loop-core | ARCHIVED (2026-06-16) | 820 pass |
+| 2/2 | oscillation-guard-and-loop-verification | PENDING | — |
 
 ## v0.13.0 Change Summary
 
@@ -20,6 +28,17 @@
 |---|---|---|---|
 | 1/2 | pressure-classification-engine | IMPLEMENTED (2026-06-14) | 749 pass |
 | 2/2 | policy-scoring-and-cpu-probe | IMPLEMENTED (2026-06-14) | 774 pass |
+
+## v0.14.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.14.0/`
+- Requirement theme: autonomous closed-loop adjustment, oscillation detection, state transition model, adjustment decision orchestration, feedback-driven weight calibration
+- Key insight: v0.13.0 delivered the diagnostic layer — the system can classify pressure states and score policies, but cannot autonomously act on that diagnosis. v0.14.0 adds the actuator: a looping controller that orchestrates sample→classify→score→select→adjust→observe cycles with safety guards against oscillation and over-adjustment
+- Predecessor: v0.13.0 (pressure classification and policy scoring)
+- Current phase: `EXECUTION_AUTHORIZED` — both changes ready for implementation
+- Status: `EXECUTION_AUTHORIZED`
+- OpenSpec changes: TBD after change decomposition
+- Candidate changes: `adaptive-loop-core` (change 1/2) → `oscillation-guard-and-loop-verification` (change 2/2)
 
 ## v0.12.0 Change Summary
 
@@ -83,13 +102,15 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 ## What Is Allowed Now
 
 - Documentation and retrospectives refinement.
-- v0.13.0 implementation — both OpenSpec changes created, execution authorized.
-- v0.13.0 version design refinement.
+- v0.13.0 archive and closeout.
+- v0.14.0 implementation — both OpenSpec changes created, execution authorized.
+- v0.14.0 change decomposition refinement.
 
 ## What Is Not Allowed Now
 
-- No new production code or tests without completing SR → change decomposition → EXECUTION_AUTHORIZED.
+- No new production code or tests outside `adaptive-loop-core` and `oscillation-guard-and-loop-verification` changes.
 - No modification to existing adapters or commands without design revision.
+- No scope expansion beyond v0.14.0 SR design.
 
 ## v0.13.0 Plan
 
@@ -99,8 +120,7 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 - Predecessor: v0.12.0 (baseline comparison experiment framework)
 - Current phase: `IMPLEMENTED` — both changes implemented and verified
 - Status: `IMPLEMENTED`
-- OpenSpec changes: TBD after change decomposition
-- Candidate changes: `pressure-classification-engine` (change 1/2) → `policy-scoring-and-cpu-probe` (change 2/2)
+- OpenSpec changes: `openspec/changes/pressure-classification-engine/` and `openspec/changes/policy-scoring-and-cpu-probe/`
 
 ## v0.12.0 Plan
 
