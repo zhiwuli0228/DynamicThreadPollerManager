@@ -129,6 +129,10 @@ public final class FeedbackCalibrator {
         double highRate = highTotal > 0 ? (double) highSuccess / highTotal : 0.5;
         double lowRate = lowTotal > 0 ? (double) lowSuccess / lowTotal : 0.5;
 
+        // When all scores are identical, one group is empty and the split is
+        // meaningless — return 0.0 to avoid phantom correlation.
+        if (highTotal == 0 || lowTotal == 0) return 0.0;
+
         return highRate - lowRate;
     }
 

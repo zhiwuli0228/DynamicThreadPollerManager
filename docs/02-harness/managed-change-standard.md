@@ -130,6 +130,13 @@ SR 伪代码强制验证规则（v0.9.0 复盘 P1/P2/P4 驱动，v0.12.0 复盘�
 
 Change 分解独立验证规则（v0.9.0 复盘 P3 驱动）：
 
+**跨包方法可见性检查**（v0.14.0 change 2 复盘 P1 驱动）：
+- SR 中标注为"package-visible"的方法，必须验证其调用方是否在同一包内。若调用方在另一个包（如 `experiment.loop` 调用 `experiment.classification` 中的方法），该方法必须是 `public`。
+- SR review 必查项：对 SR 中每个新增/修改的方法，确认其声明的可见性与所有已知调用方的包归属一致。若发现不一致 → P1 finding。
+- 如果修改既有类添加包级可见方法供其他包调用，必须在 SR 中明确标注为 `public` 并说明跨包调用原因。
+
+Change 分解独立验证规则（v0.9.0 复盘 P3 驱动）：
+
 - Change 分解后，必须对每个 change 执行独立可验证性检查：
   - 该 change 是否可以独立运行 `mvn test` 并通过其范围内的测试？
   - 该 change 是否依赖另一个 change 的源码才能编译？
@@ -214,6 +221,12 @@ Schema 强制规则：
   - **测试覆盖双向**：原方法测试验证行为不变，重载方法测试验证新行为正确。
 - 实现 review 必查项：对每个被修改的 `public static` 方法，运行所有现有调用方的测试（包括其他包的测试），确认零回归。若任何现有测试需要修改才能通过 → P1 finding。
 
+**循环退出条件前置规则**（v0.14.0 change 2 复盘 P2 驱动）：
+
+- 循环体中的退出条件（如 `maxIterations` 检查、超时检查）必须放在循环体顶部，在所有 `continue` 路径之前，确保每次迭代必然检查。
+- 实现 review 必查项：对每个包含 `while`/`for` 循环的方法，识别所有 `continue` 语句并追踪其是否跳过了退出条件。若存在被跳过的退出条件 → P1 finding。
+- E2E 测试必须覆盖"循环体中的 continue 路径不影响退出条件"的场景（如快照为空时 loop 仍能在 maxIterations 后退出）。
+
 ### 6. Implementation Review Gate
 
 目标：独立检查实现是否满足需求和设计。
@@ -281,6 +294,15 @@ Schema 强制规则：
   - `assertTrue(actual == A || actual == B)` ✗ — 无法证明优先级/排序逻辑正确
   - 例外：当且仅当多个输出在语义上等价（如两个不同策略可能产生相同评分时），可使用 `assertTrue(actual >= expected)` 或区间断言
 - 测试 review 必查项：对涉及优先级链（如 `PressureState` 枚举序）、排序输出（如 `PolicyRanker.rank()` 返回值）、状态机转换的测试，检查是否存在 `assertTrue(A || B)` 形式。若存在且无语义等价理由 → P2 finding。
+
+**归一化算法测试策略**（v0.14.0 change 2 复盘 P3 驱动）：
+
+- 对含有归一化步骤的算法（normalize → clamp → renomalize），单元测试应聚焦于全局不变量，不应测试单维度方向性：
+  - `assertEquals(1.0, sum, 0.001)` ✓ — 权重和归一化不变量
+  - `assertTrue(weight >= min && weight <= max)` ✓ — 边界约束不变量
+  - `assertTrue(wR > originalWR)` ✗ — 归一化可能稀释单维度变动，方向性断言不可靠
+- 如需测试单维度方向性，必须确保所有其他维度的 correlation 严格为 0（各维度 score 均匀分布在 high/low 组且成功/失败率相同），并在测试注释中说明数据设计原理。
+- 测试 review 必查项：对涉及归一化的算法测试，检查是否存在孤立维度的方向性断言。若存在且未隔离其他维度相关性 → P2 finding。
 
 ### 8. Acceptance Precheck / Archive
 
