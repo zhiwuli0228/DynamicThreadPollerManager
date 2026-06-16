@@ -52,7 +52,8 @@ class AdjustmentLoopLifecycleTest {
         loop = new AdjustmentLoop(
                 config, orchestrator, classifier, evaluator, classConfig,
                 adapter, safetyGate, history, evidenceRecorder, stateMachine,
-                snapshotRecorder, clock);
+                snapshotRecorder, clock,
+                new OscillationDetector(), new FeedbackCalibrator());
     }
 
     @Test

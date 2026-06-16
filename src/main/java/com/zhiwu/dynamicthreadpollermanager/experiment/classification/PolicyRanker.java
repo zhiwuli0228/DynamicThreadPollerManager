@@ -32,6 +32,8 @@ public final class PolicyRanker {
                 .toList();
     }
 
+    public PolicyScorer scorer() { return scorer; }
+
     public Optional<PolicyScore> best(PressureClassification classification,
                                        List<ThresholdPolicyConfig> candidates) {
         List<PolicyScore> ranked = rank(classification, candidates);

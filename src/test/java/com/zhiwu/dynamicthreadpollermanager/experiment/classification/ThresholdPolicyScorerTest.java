@@ -166,4 +166,23 @@ class ThresholdPolicyScorerTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new ThresholdPolicyScorer(0.1, 0.1, 0.1, 0.1));
     }
+
+    @Test
+    void shouldWeightGettersReturnConstructorValues() {
+        ThresholdPolicyScorer customScorer = new ThresholdPolicyScorer(
+                0.35, 0.30, 0.20, 0.15);
+        assertEquals(0.35, customScorer.wResponsiveness());
+        assertEquals(0.30, customScorer.wSafety());
+        assertEquals(0.20, customScorer.wStability());
+        assertEquals(0.15, customScorer.wEfficiency());
+    }
+
+    @Test
+    void shouldDefaultWeightsMatchExpectedValues() {
+        ThresholdPolicyScorer defaultScorer = new ThresholdPolicyScorer();
+        assertEquals(0.35, defaultScorer.wResponsiveness());
+        assertEquals(0.30, defaultScorer.wSafety());
+        assertEquals(0.20, defaultScorer.wStability());
+        assertEquals(0.15, defaultScorer.wEfficiency());
+    }
 }

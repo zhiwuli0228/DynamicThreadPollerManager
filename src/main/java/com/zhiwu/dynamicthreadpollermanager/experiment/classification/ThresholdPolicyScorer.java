@@ -160,6 +160,11 @@ public final class ThresholdPolicyScorer implements PolicyScorer {
                 state.name(), policyId, composite, r, s, t, e);
     }
 
+    public double wResponsiveness() { return wResponsiveness; }
+    public double wSafety() { return wSafety; }
+    public double wStability() { return wStability; }
+    public double wEfficiency() { return wEfficiency; }
+
     private static double clamp(double v) {
         return Math.max(0.0, Math.min(1.0, v));
     }

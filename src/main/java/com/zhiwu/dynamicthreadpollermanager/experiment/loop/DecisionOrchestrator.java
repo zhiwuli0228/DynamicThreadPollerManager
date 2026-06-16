@@ -88,6 +88,8 @@ public final class DecisionOrchestrator {
                 classification, bestScore, selectedConfig, decision, rationale, Instant.now());
     }
 
+    PolicyRanker ranker() { return ranker; }
+
     private AdjustmentDecision createNoOpDecision(String reason, String runId) {
         return new AdjustmentDecision(
                 new PressureClassification(

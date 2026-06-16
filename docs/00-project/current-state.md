@@ -2,25 +2,25 @@
 
 ## Authoritative Status
 
-- Current stage: `EXECUTION_AUTHORIZED` — v0.14.0 both changes ready for implementation
-- Current authorized work type: `IMPLEMENTATION` — Java implementation authorized
+- Current stage: `ARCHIVED` — v0.14.0 both changes implemented and archived
+- Current authorized work type: `IDLE` — no active implementation authorized
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `IMPLEMENTED`; `v0.14.0` is `READY_FOR_CHANGE_DECOMPOSITION`
-- OpenSpec capability changes: 23 implemented + archived (22 prior + 1 v0.14.0 change 1); 1 active (v0.14.0 change 2)
-- Authorized OpenSpec changes: `oscillation-guard-and-loop-verification` (change 2/2)
-- Java implementation status: all experiment packages present; 820 tests pass with 0 failures
+- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `IMPLEMENTED`; `v0.14.0` is `ARCHIVED`
+- OpenSpec capability changes: 24 implemented + archived (22 prior + 2 v0.14.0); 0 active
+- Authorized OpenSpec changes: none
+- Java implementation status: all experiment packages present; 857 tests pass with 0 failures
 
 ## Active Authorized Changes
 
-- `oscillation-guard-and-loop-verification` (change 2/2) — EXECUTION_AUTHORIZED
+- None
 
 ## v0.14.0 Change Summary
 
 | Change | Name | Status | Tests |
 |---|---|---|---|
 | 1/2 | adaptive-loop-core | ARCHIVED (2026-06-16) | 820 pass |
-| 2/2 | oscillation-guard-and-loop-verification | PENDING | — |
+| 2/2 | oscillation-guard-and-loop-verification | ARCHIVED (2026-06-16) | 857 pass |
 
 ## v0.13.0 Change Summary
 
@@ -103,14 +103,14 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 
 - Documentation and retrospectives refinement.
 - v0.13.0 archive and closeout.
-- v0.14.0 implementation — both OpenSpec changes created, execution authorized.
-- v0.14.0 change decomposition refinement.
+- v0.14.0 retrospective.
+- v0.15.0 version design initiation.
 
 ## What Is Not Allowed Now
 
-- No new production code or tests outside `adaptive-loop-core` and `oscillation-guard-and-loop-verification` changes.
+- No new production code or tests outside authorized version design.
 - No modification to existing adapters or commands without design revision.
-- No scope expansion beyond v0.14.0 SR design.
+- No scope expansion beyond v0.15.0 design when initiated.
 
 ## v0.13.0 Plan
 

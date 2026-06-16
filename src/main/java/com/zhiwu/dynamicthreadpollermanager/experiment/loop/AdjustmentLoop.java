@@ -63,7 +63,9 @@ public final class AdjustmentLoop {
             LoopEvidenceRecorder loopEvidenceRecorder,
             PressureStateMachine stateMachine,
             EvidenceRecorder evidenceRecorder,
-            Supplier<Instant> clock) {
+            Supplier<Instant> clock,
+            OscillationDetector oscillationDetector,
+            FeedbackCalibrator calibrator) {
         this.config = Objects.requireNonNull(config, "config must not be null");
         this.orchestrator = Objects.requireNonNull(orchestrator, "orchestrator must not be null");
         this.classifier = Objects.requireNonNull(classifier, "classifier must not be null");
@@ -76,8 +78,8 @@ public final class AdjustmentLoop {
         this.stateMachine = Objects.requireNonNull(stateMachine, "stateMachine must not be null");
         this.evidenceRecorder = Objects.requireNonNull(evidenceRecorder, "evidenceRecorder must not be null");
         this.clock = Objects.requireNonNull(clock, "clock must not be null");
-        this.oscillationDetector = new OscillationDetector();
-        this.calibrator = new FeedbackCalibrator();
+        this.oscillationDetector = Objects.requireNonNull(oscillationDetector, "oscillationDetector must not be null");
+        this.calibrator = Objects.requireNonNull(calibrator, "calibrator must not be null");
     }
 
     // --- Lifecycle ---
@@ -183,6 +185,12 @@ public final class AdjustmentLoop {
                 // Step 1: sleep
                 Thread.sleep(config.samplingIntervalMs());
 
+                // Step 1.5: max iterations check (must be before continue paths)
+                if (config.maxIterations() > 0 && currentIteration >= config.maxIterations()) {
+                    stop();
+                    break;
+                }
+
                 // Step 2: get recent snapshots
                 List<ObservedSnapshot> allSnapshots = evidenceRecorder.snapshots(
                         currentSession.sessionId());
@@ -263,10 +271,8 @@ public final class AdjustmentLoop {
                 // Step 15: feedback calibration trigger
                 if (history.totalAdjustmentCount() > 0
                         && history.totalAdjustmentCount() % config.feedbackCalibrationWindow() == 0) {
-                    // Get current scorer via reflection-friendly approach:
-                    // calibrator reads weights from the scorer inside the ranker.
-                    // For Change 1, calibrator is a stub that returns the same scorer.
-                    ThresholdPolicyScorer currentScorer = new ThresholdPolicyScorer();
+                    ThresholdPolicyScorer currentScorer =
+                            (ThresholdPolicyScorer) orchestrator.ranker().scorer();
                     ThresholdPolicyScorer newScorer = calibrator.calibrate(
                             history, currentScorer, config.feedbackCalibrationWindow());
                     if (newScorer != currentScorer) {
@@ -274,12 +280,6 @@ public final class AdjustmentLoop {
                                 classifier, new PolicyRanker(newScorer),
                                 evaluator, classifierConfig);
                     }
-                }
-
-                // Step 16: max iterations check
-                if (config.maxIterations() > 0 && currentIteration >= config.maxIterations()) {
-                    stop();
-                    break;
                 }
 
             } catch (InterruptedException e) {
