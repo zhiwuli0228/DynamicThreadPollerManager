@@ -1,10 +1,96 @@
 schema: superspec
 
 context: |
-  Project: DynamicThreadPollerManager, an exploratory Spring Boot demo for dynamic thread-pool management.
-  Baseline: Java 21, Maven, Spring Boot 4.0.6 at project initialization.
-  Delivery model: Codex/ChatGPT design approved changes; Claude Code implements and verifies approved tasks.
-  Scope boundary: initial capabilities are single-node and in-memory; Redis, Kafka, database, frontend, authentication and distributed execution require explicit later changes.
-  Architecture: api -> application -> domain; infrastructure supplies concrete integrations; domain must not depend on transport DTOs or infrastructure clients.
-  Engineering: JUnit 5 and Mockito; no PowerMock; each functional change includes tests; no unrelated refactoring.
-  Reference: read docs/harness/project-harness.md for durable project rules.
+  Project: DynamicThreadPollerManager, a Java 21 and Spring Boot exploratory project.
+  Authoritative branch: claude_master.
+  Current execution authority is dynamic and MUST be read from
+  docs/00-project/current-state.md at runtime. Do not rely on any
+  stage label embedded in this config file.
+  Current state source of truth: docs/00-project/current-state.md.
+  Documentation context hub: docs/README.md.
+
+  Document authority boundaries:
+  - docs/00-project/ holds facts, current state, glossary, and roadmap.
+  - docs/01-architecture/ holds living architecture and future ADR space.
+  - docs/02-harness/ holds governance, context, execution, and verification rules.
+  - docs/03-openspec/ holds lifecycle and version-to-change authorization rules.
+  - docs/04-development/versions/ is reserved for future version design packages.
+  - docs/05-domain/ holds domain vocabulary and exploration boundaries.
+  - docs/06-operations/ is reserved for operational notes.
+  - docs/07-templates/ holds version, ADR, and change templates.
+  - docs/99-archive/ holds historical bootstrap and retired framework materials.
+  - Historical, retired or rejected material is non-authoritative and must not be treated as current authorization.
+
+  Current prohibitions:
+  - No unreviewed capability expansion may be created.
+  - No openspec/specs/** may be populated with unimplemented behavior.
+  - No Java source, test or dependency change may be introduced without a reviewed change.
+  - Archived V1 or implementation mission material must not be executed.
+
+  Future authorization sequence:
+  - Version design must first be explicitly authorized and created under docs/04-development/versions/<version>/.
+  - Only a version design with status READY_FOR_CHANGE_DECOMPOSITION or EXECUTION_AUTHORIZED may authorize openspec/changes/** creation.
+  - Implemented behavior enters openspec/specs/** only after verified delivery and archive/synchronization.
+
+rules:
+  schema:
+    - "New capability changes MUST use `schema: superspec`; do not create new changes with `schema: spec-driven`."
+    - "If an existing historical change is already pinned to `schema: spec-driven`, do not tell agents to use `/opsx:continue` for `finalize`; hand-author the closeout receipt and record the compatibility reason."
+    - "Any agent creating or continuing a change MUST read `openspec/changes/<name>/.openspec.yaml` before deciding the next workflow command."
+  brainstorm:
+    - When current stage is DOCUMENT_FRAMEWORK_CONSTRUCTION_ONLY, restrict work to documentation-framework governance and do not propose, create or execute a capability change.
+    - Do not use archived, rejected or historical task material as current authorization.
+  proposal:
+    - A capability proposal is forbidden unless it references an authorizing version design path and a status of READY_FOR_CHANGE_DECOMPOSITION or EXECUTION_AUTHORIZED.
+    - Reject any proposal that treats roadmap or architecture target material as implementation authorization.
+  design:
+    - Long-lived architecture changes must identify whether an ADR and an update to docs/01-architecture/ are required.
+  specs:
+    - Define observable and testable scenarios only for approved and implemented behavior.
+  tasks:
+    - Keep tasks within approved scope; do not include unapproved middleware, frontend, authentication, or unrelated refactoring.
+  plan:
+    - Include verification commands, scope checks, and the autonomous continuation rule before implementation completion.
+  apply:
+    - Implement only approved tasks and read the relevant documentation before work begins.
+    - Do not create or expand capability scope without a reviewed change.
+  verify:
+    - Confirm file scope, validation results, and absence of unapproved dependency changes.
+    - Reject verification if requirement wording and implementation semantics diverge.
+    - Reject verification if tests prove lifecycle shape but not the semantic intent of the requirement.
+    - Record any blocked evidence honestly.
+    - |
+      The verify phase MUST execute, and record results for, all of the following minimum checks before any PASS or PASS_WITH_WARNINGS verdict is allowed:
+      1. `openspec validate --all --json` is fully green (every item `"valid": true`).
+      2. Every synced main spec under `openspec/specs/<capability>/spec.md` contains both `## Purpose` and `## Requirements` headers.
+      3. `docs/00-project/current-state.md`, `openspec list --json`, and the actual worktree state describe the same change (active vs archived).
+      4. `git status --short` (or an equivalent) was actually executed, not inferred, and the output is recorded.
+      5. `scripts/openspec-archive-guard.ps1 -Mode pre-finalize -ChangeName <name>` exited with status 0.
+    - Reject verification if any of the five minimum checks above is missing, skipped, or unrecorded.
+    - Reject verification if requirement wording and implementation semantics diverge.
+    - Reject verification if tests prove lifecycle shape but not the semantic intent of the requirement.
+    - Reject verification if worktree cleanliness, commit status, or sync state is only inferred instead of executed.
+  finalize:
+    - After verified implementation in a future authorized stage, record whether implemented behavior was synchronized to openspec/specs/** and whether architecture or ADR updates were required.
+    - Do not finalize if docs/00-project/current-state.md has not been synchronized to the actual repository state.
+    - Do not finalize if the archive receipt or verification report claims stronger semantics than the implementation actually provides.
+    - |
+      Archive completion is only satisfied when the following four states agree; a missing or divergent state is a hard fail and `mv openspec/changes/<name> openspec/changes/archive/...` alone is never sufficient:
+      1. An archive directory exists at `openspec/changes/archive/<date>-<name>/` and contains the change's artifacts.
+      2. Every delta capability has a synced main spec at `openspec/specs/<capability>/spec.md` containing both `## Purpose` and `## Requirements`.
+      3. `docs/00-project/current-state.md` no longer lists the archived change as an active authorized change and no longer declares `Current stage: EXECUTION_AUTHORIZED`.
+      4. The worktree state (tracked + untracked) is consistent with the archived state — `git status --short` either is empty or contains only items that current-state authorizes.
+    - |
+      The finalize phase MUST execute, and record results for, all of the following minimum checks before any archive receipt is written:
+      1. `openspec validate --all --json` is fully green.
+      2. The active change directory no longer exists under `openspec/changes/<name>/`.
+      3. The archive directory exists under `openspec/changes/archive/`.
+      4. The synced main spec contains `## Purpose` and `## Requirements`.
+      5. `docs/00-project/current-state.md` does not still list the change as active and does not still declare `EXECUTION_AUTHORIZED`.
+      6. `openspec list --json` does not still reference the change.
+    - Do not finalize or archive if `scripts/openspec-archive-guard.ps1 -Mode post-archive -ChangeName <name>` exits non-zero after state/spec synchronization.
+    - Do not treat moving files into `openspec/changes/archive/**` as sufficient; main spec validity, current-state synchronization, repository cleanliness, and list absence are separate required checks.
+    - After archive, immediately update `docs/00-project/current-state.md` so it no longer declares `EXECUTION_AUTHORIZED` or the archived change as active.
+    - After archive, immediately update the relevant version status document so it matches the archived and synchronized repository state.
+    - Never claim archive completion while `openspec list --json` and `docs/00-project/current-state.md` disagree about whether a change is active.
+    - Restore the original branch or workspace after finalize so the repository returns to the pre-change branch state.

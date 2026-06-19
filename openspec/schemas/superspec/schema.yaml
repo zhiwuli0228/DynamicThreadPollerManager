@@ -223,12 +223,22 @@ artifacts:
          `"valid": true`. If any item fails, record the issues and
          return to fix the underlying artifact before proceeding.
 
-      2. **Task completion**: Confirm every checkbox in tasks.md is
+      2. **Archive guard precheck**: Run
+         `scripts/openspec-archive-guard.ps1 -Mode pre-finalize -ChangeName <name>`
+         before declaring PASS. This check is mandatory. It validates:
+         - current-state still authorizes the active change,
+         - the active change directory still exists,
+         - `openspec validate --all --json` is green,
+         - `openspec list --json` still references the active change.
+         If the guard fails, verify MUST fail. There is no lenient
+         mode for the pre-finalize guard.
+
+      3. **Task completion**: Confirm every checkbox in tasks.md is
          `- [x]`. For any `- [ ]` remaining, document the reason
          (e.g. manual / out-of-scope / blocked) and whether it blocks
          archive.
 
-      3. **Delta spec sync state**: For each directory under
+      4. **Delta spec sync state**: For each directory under
          `openspec/changes/<name>/specs/`, compare against the
          corresponding `openspec/specs/<capability>/spec.md` and
          record one of:
@@ -236,13 +246,27 @@ artifacts:
          - ✗ Needs sync (list the capabilities)
          - N/A (no delta specs produced)
 
-      4. **Design/specs coherence**: Spot-check that design.md
+         For any synced main spec, explicitly verify that the file
+         contains both `## Purpose` and `## Requirements`. If either
+         header is missing, verify MUST fail.
+
+      5. **Design/specs coherence**: Spot-check that design.md
          decisions reference or align with the requirements listed
          in specs/. Record any drift as a warning (non-blocking).
 
-      5. **Implementation signal**: Confirm all code changes are
+      6. **Implementation signal**: Confirm all code changes are
          committed (no unstaged files in the worktree). Cite the
-         commit range if known.
+         commit range if known. Also confirm that
+         `docs/00-project/current-state.md`, `openspec list --json`,
+         and the actual worktree state tell the same story.
+
+         The five minimum checks enumerated in `openspec/config.yaml`
+         under the `verify:` rules are mandatory and each MUST be
+         recorded with its actual command output (or guard exit
+         status) in verify.md. Skipping any of them is grounds for
+         an immediate FAIL — the gate is enforced by the
+         `openspec-archive-guard.ps1` script, which exits non-zero
+         on the first violation.
 
       Recommended convergence loop:
       - PASS → /opsx:continue advances to the finalize artifact, which
@@ -375,7 +399,33 @@ artifacts:
 
          git branch -d "$WORKTREE_BRANCH"
 
-      8. Write finalize.md per templates/finalize.md to
+      8. Before writing finalize.md, run the post-archive guard after
+         delta spec sync and state synchronization:
+
+         `scripts/openspec-archive-guard.ps1 -Mode post-archive -ChangeName <change-name>`
+
+         This is a blocking gate with NO lenient mode. The script
+         hard-fails on the first disagreement. Do not proceed if any
+         of the following disagrees with the post-archive reality:
+         - `openspec validate --all --json` is not fully green,
+         - the active change directory still exists at
+           `openspec/changes/<name>/`,
+         - the archive directory is missing at
+           `openspec/changes/archive/<date>-<name>/`,
+         - the synced main spec is missing `## Purpose` or
+           `## Requirements` at `openspec/specs/<capability>/spec.md`,
+         - `docs/00-project/current-state.md` still lists the change
+           as active or still declares
+           `Current stage: EXECUTION_AUTHORIZED`,
+         - `openspec list --json` still references the change,
+         - `git status --short` is non-empty (worktree not clean).
+           A dirty worktree at this point means archive artifacts,
+           governance edits, and/or implementation files are sitting
+           uncommitted — the canonical archive-residual bug. There is
+           no -RequireClean switch; the cleanliness check is
+           unconditional.
+
+      9. Write finalize.md per templates/finalize.md to
          openspec/changes/<change-name>/finalize.md. Required values
          for the git-side closeout:
          - Outcome: `pr-updated`
@@ -392,12 +442,12 @@ artifacts:
          - Next step: per templates/finalize.md `pr-updated` bullet
            (archive → push → merge sequence).
 
-      9. Commit the receipt on the feature branch:
+      10. Commit the receipt on the feature branch:
 
          git add openspec/changes/<change-name>/finalize.md
          git commit -m "docs(openspec): finalize receipt for <change-name>"
 
-      10. Push the feature branch:
+      11. Push the feature branch:
 
           git push origin "$FEATURE_BRANCH"
           # If a PR already exists for this branch, it auto-updates
@@ -406,7 +456,7 @@ artifacts:
           # the remote tracking branch — step 11 below will offer to
           # open a PR.
 
-      11. Offer to open a code-review PR (interactive prompt). This
+      12. Offer to open a code-review PR (interactive prompt). This
           step makes finalize the SDLC-natural moment to open the PR
           when the team didn't open one for spec pre-review:
 
@@ -466,14 +516,14 @@ artifacts:
             `PR comment status: skipped (no PR)` in finalize.md.
             Skip step 12.
 
-      12. Run the comment-posting subroutine (see "Code-reviewer
+      13. Run the comment-posting subroutine (see "Code-reviewer
           onboarding comment subroutine" below). Update the
           `PR comment status` field in finalize.md with the result
           and amend the receipt commit (or add a follow-up commit
           and push) so finalize.md is accurate. Non-blocking — on
           subroutine failure, record `failed: <reason>` and continue.
 
-      Recommended (non-blocking): before step 8, write a short
+      Recommended (non-blocking): before step 9, write a short
       retrospective.md in the change directory. Six suggested
       sections: Wins, Misses, Plan deviations, Skill/workflow
       compliance, Surprises, Promote candidates. Evidence first,
@@ -629,9 +679,10 @@ artifacts:
       comment exists on any PR that exists at finalize completion,
       even outside the canonical automation.
 
-      Once finalize.md exists, the change is git-clean and ready
-      for /opsx:archive. See docs/workflow-details.md Phase 6
-      (Archival) for the golden path.
+      Once finalize.md exists, the change is only ready for
+      `/opsx:archive` if the post-archive guard is green and the
+      repository state is internally consistent. "Files moved into
+      archive" alone is never sufficient.
     requires:
       - verify
 
