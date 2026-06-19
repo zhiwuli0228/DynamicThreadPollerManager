@@ -78,7 +78,7 @@
 
 ## 3. Time-Based Cooldown Safety Gate
 
-- [ ] 3.1 Time-Based Cooldown Safety Gate
+- [x] 3.1 Time-Based Cooldown Safety Gate
 
 ### 3.1 Create TimeBasedCooldownSafetyGate class
   - Implement `RuntimeAdjustmentSafetyGate` interface
@@ -116,7 +116,7 @@
 
 ## 4. Anti-Oscillation Guard
 
-- [ ] 4.1 Anti-Oscillation Guard
+- [x] 4.1 Anti-Oscillation Guard
 
 ### 4.1 Add ANTI_OSCILLATION_ACTIVE to AdjustmentFailureCode
   - Add new enum constant `ANTI_OSCILLATION_ACTIVE`
@@ -157,7 +157,7 @@
 
 ## 5. Complex Scenario Validation Report
 
-- [ ] 5.1 Complex Scenario Validation Report
+- [x] 5.1 Complex Scenario Validation Report
 
 ### 5.1 Create ComplexScenarioReport record
   - Fields: `reportId`, `scenarioId`, `seed`, `scenarioConfig`, `adjustmentCount`, `blockedCount`, `rollbackCount`, `rollbackSuccessRate`, `recoveryTimeMs`, `p95LatencyMs`, `p99LatencyMs`, `rejectionCount`, `queueDepthDelta`, `throughputDelta`, `decisionWindows`, `generatedAt`
@@ -193,7 +193,7 @@
 
 ## 6. v0.15 Risk Fixes
 
-- [ ] 6.1 v0.15 Risk Fixes
+- [x] 6.1 v0.15 Risk Fixes
 
 ### 6.1 Fix ClosedLoopValidationRunner.computeSignificance()
   - Replace proxy array generation (`mean + Math.random() * noise`) with real snapshot arrays from `InMemoryEvidenceRecorder.snapshots(runId)`
@@ -238,7 +238,7 @@
 
 ## 7. Integration Tests
 
-- [ ] 7.1 Integration Tests
+- [x] 7.1 Integration Tests
 
 ### 7.1 Complex scenario end-to-end tests
   - Test: BURST profile end-to-end with report generation
@@ -254,7 +254,7 @@
 
 ## 8. Verification
 
-- [ ] 8.1 Verification
+- [x] 8.1 Verification
 
   - 8.1 Run focused and full configured quality gates
   - 8.2 Verify protected API, dependency, scope, and traceability constraints

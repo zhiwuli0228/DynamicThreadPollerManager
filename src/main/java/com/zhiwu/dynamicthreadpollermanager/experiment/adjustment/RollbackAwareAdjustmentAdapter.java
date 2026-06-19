@@ -121,7 +121,8 @@ public final class RollbackAwareAdjustmentAdapter implements ExecutorAdjustmentA
                 preSnapshot.corePoolSize(),
                 "rollback: degradation detected after " + originalCommand.commandId(),
                 "rollback:" + originalCommand.sourceDecisionRef(),
-                clock);
+                clock,
+                true);
 
         ExecutorStateSnapshot currentState = delegate.currentState();
         ReadinessAssessment readiness = new ReadinessAssessment(

@@ -41,6 +41,7 @@ public final class AdjustmentLoop {
     // Change 2 components — stubbed in Change 1
     private final OscillationDetector oscillationDetector;
     private final FeedbackCalibrator calibrator;
+    private final AntiOscillationGuard antiOscillationGuard;
 
     private volatile LoopState state = LoopState.IDLE;
     private LoopSession currentSession;
@@ -65,7 +66,8 @@ public final class AdjustmentLoop {
             EvidenceRecorder evidenceRecorder,
             Supplier<Instant> clock,
             OscillationDetector oscillationDetector,
-            FeedbackCalibrator calibrator) {
+            FeedbackCalibrator calibrator,
+            AntiOscillationGuard antiOscillationGuard) {
         this.config = Objects.requireNonNull(config, "config must not be null");
         this.orchestrator = Objects.requireNonNull(orchestrator, "orchestrator must not be null");
         this.classifier = Objects.requireNonNull(classifier, "classifier must not be null");
@@ -80,6 +82,7 @@ public final class AdjustmentLoop {
         this.clock = Objects.requireNonNull(clock, "clock must not be null");
         this.oscillationDetector = Objects.requireNonNull(oscillationDetector, "oscillationDetector must not be null");
         this.calibrator = Objects.requireNonNull(calibrator, "calibrator must not be null");
+        this.antiOscillationGuard = antiOscillationGuard;
     }
 
     // --- Lifecycle ---
@@ -225,6 +228,17 @@ public final class AdjustmentLoop {
                 // Step 7: build command
                 ScaleAdjustmentCommand command = decision.toCommand(
                         executor, currentSession.sessionId(), clock);
+
+                // Step 7.5: anti-oscillation guard (between oscillation check and safety gate)
+                if (antiOscillationGuard != null) {
+                    SafetyGateDecision guardDecision = antiOscillationGuard.evaluate(
+                            decision, history, command.isEmergencyRollback());
+                    if (!guardDecision.isAllowed()) {
+                        loopEvidenceRecorder.recordIteration(currentSession, currentIteration,
+                                decision, null, previousClassification);
+                        continue;
+                    }
+                }
 
                 // Step 8: safety gate
                 ExecutorStateSnapshot executorState = adapter.currentState();

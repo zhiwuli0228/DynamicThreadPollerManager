@@ -28,6 +28,7 @@ public final class ScaleAdjustmentCommand {
     private final String reason;
     private final String sourceDecisionRef;
     private final Instant createdAt;
+    private final boolean emergencyRollback;
 
     /**
      * Package-private constructor. The {@link #create} factory is
@@ -43,7 +44,8 @@ public final class ScaleAdjustmentCommand {
                            int targetPoolSize,
                            String reason,
                            String sourceDecisionRef,
-                           Instant createdAt) {
+                           Instant createdAt,
+                           boolean emergencyRollback) {
         this.commandId = commandId;
         this.runId = runId;
         this.decisionTimestamp = decisionTimestamp;
@@ -52,6 +54,7 @@ public final class ScaleAdjustmentCommand {
         this.reason = reason;
         this.sourceDecisionRef = sourceDecisionRef;
         this.createdAt = createdAt;
+        this.emergencyRollback = emergencyRollback;
     }
 
     /**
@@ -87,7 +90,43 @@ public final class ScaleAdjustmentCommand {
         }
         String id = "%s:%s:%d->%d".formatted(runId, decisionTimestamp, currentPoolSize, targetPoolSize);
         return new ScaleAdjustmentCommand(id, runId, decisionTimestamp,
-                currentPoolSize, targetPoolSize, reason, sourceDecisionRef, clock.get());
+                currentPoolSize, targetPoolSize, reason, sourceDecisionRef, clock.get(), false);
+    }
+
+    /**
+     * Build an executable command with a deterministic {@code commandId}
+     * and explicit emergency rollback flag. Emergency rollback commands
+     * bypass cooldown and anti-oscillation guards.
+     */
+    public static ScaleAdjustmentCommand create(String runId,
+                                                Instant decisionTimestamp,
+                                                int currentPoolSize,
+                                                int targetPoolSize,
+                                                String reason,
+                                                String sourceDecisionRef,
+                                                Supplier<Instant> clock,
+                                                boolean emergencyRollback) {
+        Objects.requireNonNull(runId, "runId must not be null");
+        if (runId.isBlank()) {
+            throw new IllegalArgumentException("runId must not be blank");
+        }
+        Objects.requireNonNull(decisionTimestamp, "decisionTimestamp must not be null");
+        Objects.requireNonNull(clock, "clock must not be null");
+        requireNonBlank(reason, "reason");
+        requireNonBlank(sourceDecisionRef, "sourceDecisionRef");
+        if (currentPoolSize < 0) {
+            throw new IllegalArgumentException("currentPoolSize must be >= 0, was " + currentPoolSize);
+        }
+        if (targetPoolSize < 0) {
+            throw new IllegalArgumentException("targetPoolSize must be >= 0, was " + targetPoolSize);
+        }
+        if (currentPoolSize == targetPoolSize) {
+            throw new IllegalArgumentException(
+                    "currentPoolSize equals targetPoolSize; use noOp() for no-op commands");
+        }
+        String id = "%s:%s:%d->%d".formatted(runId, decisionTimestamp, currentPoolSize, targetPoolSize);
+        return new ScaleAdjustmentCommand(id, runId, decisionTimestamp,
+                currentPoolSize, targetPoolSize, reason, sourceDecisionRef, clock.get(), emergencyRollback);
     }
 
     /**
@@ -130,7 +169,7 @@ public final class ScaleAdjustmentCommand {
         }
         String id = "%s:%s:%d->%d".formatted(runId, decisionTimestamp, currentPoolSize, targetPoolSize);
         return new ScaleAdjustmentCommand(id, runId, decisionTimestamp,
-                currentPoolSize, targetPoolSize, reason, sourceDecisionRef, clock.get());
+                currentPoolSize, targetPoolSize, reason, sourceDecisionRef, clock.get(), false);
     }
 
     public String commandId() {
@@ -163,6 +202,10 @@ public final class ScaleAdjustmentCommand {
 
     public Instant createdAt() {
         return createdAt;
+    }
+
+    public boolean isEmergencyRollback() {
+        return emergencyRollback;
     }
 
     public boolean isNoOp() {

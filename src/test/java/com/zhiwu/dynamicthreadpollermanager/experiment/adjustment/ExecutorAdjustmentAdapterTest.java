@@ -102,7 +102,7 @@ class ExecutorAdjustmentAdapterTest {
         // package-private raw constructor to bypass create()'s positive check.
         ScaleAdjustmentCommand invalid = new ScaleAdjustmentCommand(
                 "run-1:2026-06-05T10:00:00Z:4->0", "run-1", T0, 4, 0,
-                "below minimum", "policy-1:0", T0);
+                "below minimum", "policy-1:0", T0, false);
         AdjustmentResult result = probe.apply(invalid);
         assertEquals(AdjustmentStatus.REJECTED, result.status());
         assertSame(AdjustmentFailureCode.INVALID_COMMAND, result.failureCode());

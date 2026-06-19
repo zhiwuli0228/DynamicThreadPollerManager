@@ -1,6 +1,7 @@
 package com.zhiwu.dynamicthreadpollermanager.experiment.coordination;
 
 import com.zhiwu.dynamicthreadpollermanager.experiment.adjustment.RuntimeAdjustmentSafetyGate;
+import com.zhiwu.dynamicthreadpollermanager.experiment.executor.AtomicDeletionSafety;
 import com.zhiwu.dynamicthreadpollermanager.experiment.analysis.ReadinessAssessment;
 import com.zhiwu.dynamicthreadpollermanager.experiment.analysis.ReadinessStatus;
 import com.zhiwu.dynamicthreadpollermanager.experiment.classification.ClassifierConfig;
@@ -11,6 +12,7 @@ import com.zhiwu.dynamicthreadpollermanager.experiment.executor.ManagedExecutor;
 import com.zhiwu.dynamicthreadpollermanager.experiment.executor.ManagedExecutorAdjustmentAdapter;
 import com.zhiwu.dynamicthreadpollermanager.experiment.loop.AdjustmentHistory;
 import com.zhiwu.dynamicthreadpollermanager.experiment.loop.AdjustmentLoop;
+import com.zhiwu.dynamicthreadpollermanager.experiment.loop.AntiOscillationGuard;
 import com.zhiwu.dynamicthreadpollermanager.experiment.loop.DecisionOrchestrator;
 import com.zhiwu.dynamicthreadpollermanager.experiment.loop.FeedbackCalibrator;
 import com.zhiwu.dynamicthreadpollermanager.experiment.loop.LoopConfig;
@@ -61,13 +63,14 @@ public final class GroupLoopOrchestrator {
             EvidenceRecorder evidenceRecorder,
             Supplier<Instant> clock,
             OscillationDetector oscillationDetector,
-            FeedbackCalibrator calibrator) {
+            FeedbackCalibrator calibrator,
+            AntiOscillationGuard antiOscillationGuard) {
     }
 
     public Map<String, LoopSession> startAll(
             Map<String, LoopComponents> componentsByExecutor) {
 
-        ExecutorRegistry registry = new ExecutorRegistry(null);
+        ExecutorRegistry registry = new ExecutorRegistry(new AtomicDeletionSafety());
         Map<String, LoopSession> sessions = new LinkedHashMap<>();
         for (Map.Entry<String, ManagedExecutor> entry : group.getMembers().entrySet()) {
             String name = entry.getKey();
@@ -107,7 +110,8 @@ public final class GroupLoopOrchestrator {
                     comps.evidenceRecorder(),
                     comps.clock(),
                     comps.oscillationDetector(),
-                    comps.calibrator());
+                    comps.calibrator(),
+                    comps.antiOscillationGuard());
 
             loops.put(name, loop);
             sessions.put(name, loop.start(executor));

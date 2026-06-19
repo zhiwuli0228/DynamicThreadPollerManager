@@ -6,8 +6,16 @@ import com.zhiwu.dynamicthreadpollermanager.experiment.classification.PressureCl
 import java.util.List;
 
 /**
- * Records evidence for each loop iteration. Change 1 provides a stub;
- * Change 2 provides a concrete implementation.
+ * Records evidence for each loop iteration.
+ *
+ * <h3>Thread-safety contract</h3>
+ * Implementations of this interface MUST be safe for concurrent use.
+ * {@code recordIteration()} may be called from the loop thread while
+ * {@code getIterationEvidence()} is called concurrently from reporting
+ * or monitoring threads. {@code recordSessionStart()} and
+ * {@code recordSessionEnd()} may be called during lifecycle transitions
+ * that overlap with iteration recording. Callers may safely invoke any
+ * combination of methods from any number of threads.
  */
 public interface LoopEvidenceRecorder {
 

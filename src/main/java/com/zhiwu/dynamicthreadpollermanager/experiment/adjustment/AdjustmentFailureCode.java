@@ -28,5 +28,7 @@ public enum AdjustmentFailureCode {
     /** Group coordinator rejected the adjustment due to budget exhaustion. */
     COORDINATION_REJECTED,
     /** Group coordinator capped the adjustment due to partial budget availability. */
-    COORDINATION_CAPPED
+    COORDINATION_CAPPED,
+    /** Anti-oscillation guard is active and blocked the non-emergency adjustment. */
+    ANTI_OSCILLATION_ACTIVE
 }

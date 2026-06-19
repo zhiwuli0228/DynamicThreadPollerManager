@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -107,7 +108,7 @@ class ClosedLoopValidationRunnerTest {
                 30_000, 0, "steady");
 
         List<StatisticalSignificance> tests = ClosedLoopValidationRunner
-                .computeSignificance(cl, sp, bl);
+                .computeSignificance(cl, sp, bl, new LinkedHashMap<>());
 
         assertEquals(14, tests.size());
         long significant = tests.stream()
@@ -146,7 +147,7 @@ class ClosedLoopValidationRunnerTest {
                 List.of(policy), policy, 30_000, 5, 1000);
 
         ClosedLoopValidationRunner runner = new ClosedLoopValidationRunner();
-        ValidationRunResult result = runner.runBaselineMode(scenario);
+        ValidationRunResult result = runner.runBaselineMode(scenario, new LinkedHashMap<>());
 
         assertEquals(ValidationMode.BASELINE, result.mode());
         assertTrue(result.snapshotCount() >= 5,
@@ -166,7 +167,7 @@ class ClosedLoopValidationRunnerTest {
                 List.of(policy), policy, 30_000, 5, 1000);
 
         ClosedLoopValidationRunner runner = new ClosedLoopValidationRunner();
-        ValidationRunResult result = runner.runStaticPolicyMode(scenario);
+        ValidationRunResult result = runner.runStaticPolicyMode(scenario, new LinkedHashMap<>());
 
         assertEquals(ValidationMode.STATIC_POLICY, result.mode());
         assertEquals(0, result.adjustmentCount());
@@ -183,7 +184,7 @@ class ClosedLoopValidationRunnerTest {
                 List.of(policy), policy, 30_000, 5, 1000);
 
         ClosedLoopValidationRunner runner = new ClosedLoopValidationRunner();
-        ValidationRunResult result = runner.runClosedLoopMode(scenario);
+        ValidationRunResult result = runner.runClosedLoopMode(scenario, new LinkedHashMap<>());
 
         assertEquals(ValidationMode.CLOSED_LOOP, result.mode());
         assertEquals(7, result.metrics().size());
