@@ -22,6 +22,8 @@
 10. `docs/08-retrospectives/2026-06-14-v0.12.0-baseline-comparison-retrospective.md`
 11. `docs/08-retrospectives/2026-06-14-v0.13.0-pressure-classification-retrospective.md`
 12. `docs/08-retrospectives/2026-06-16-v0.14.0-adaptive-loop-core-retrospective.md`
+13. `docs/08-retrospectives/2026-06-19-v0.15.0-multi-executor-coordination-retrospective.md`
+14. `docs/08-retrospectives/2026-06-20-v0.16.0-complex-workload-and-retrospective.md`
 
 ## 使用规则
 
