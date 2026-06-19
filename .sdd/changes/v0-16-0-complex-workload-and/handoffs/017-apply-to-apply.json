@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "handoff_id": "017-apply-to-apply",
+  "run_id": "20260619113145-d68a61d1",
+  "change_id": "v0-16-0-complex-workload-and",
+  "completed_stage": "apply",
+  "next_stage": "apply",
+  "objective": "# v0.16.0 Complex Workload and Rollback Verification\n\n基于当前 v0.15.0 已实现的多执行器协调、闭环控制和三模式验证能力，完成 v0.16.0 的设计、实现、测试、独立审查、验证与归档。\n\n## 版本目标\n\n系统必须能够在可重复的复杂工作负载下验证闭环控制的稳定性和失败恢复能力，并以真实观测数据证明 cooldown、rollback 和 anti-oscillation 控制有效。\n\n## 范围内能力\n\n1. 建立可重复的复杂工作负载场景模型，至少支持：\n   - burst；\n   - long-tail；\n   - mixed CPU/IO；\n   - downstream-blocked。\n2. 场景必须具有确定性输入或显式随机种子，并能够被现有场景执行/验证基础设施复用。\n3. 为闭环调整增加可验证的 rollback 语义：\n   - 记录调整前状态；\n   - 当调整后关键指标恶化或调整失败时恢复到安全状态；\n   - rollback 必须经过现有 safety gate；\n   - rollback 结果和失败原因必须进入 evidence。\n4. 为连续调整增加 cooldown 控制：\n   - cooldown 期间禁止同一执行器的非紧急重复调整；\n   - 紧急安全回滚不能被 cooldown 阻止；\n   - 时间来源必须可注入，测试不能依赖不确定的真实 sleep。\n5. 扩展 anti-oscillation 验证：\n   - 在复杂场景下检测反复扩缩、资源 ping-pong 和回滚震荡；\n   - 达到阈值时必须阻止进一步非安全调整并记录原因。\n6. 生成复杂场景验证报告，至少包含：\n   - 场景标识、种子和配置；\n   - 调整、阻止和 rollback 次数；\n   - rollback 成功率；\n   - 恢复时间；\n   - p95/p99 延迟、拒绝数、队列深度和吞吐变化；\n   - 每个关键决策前后的真实观测窗口。\n7. 修复或纳入与该版本直接相关的 v0.15 遗留风险：\n   - 统计显著性必须使用真实逐观测配对样本，禁止通过均值加随机噪声生成代理数组；\n   - 并发采样和闭环写入使用的 evidence recorder 必须具有明确线程安全语义；\n   - GroupLoopOrchestrator 不得通过空 ExecutorRegistry 构造运行链路；\n   - 为 CoordinatedAdjustmentAdapter 和 GroupLoopOrchestrator 补充独立行为测试。\n\n## 非范围\n\n- 不实现跨 JVM 或分布式协调；\n- 不新增外部依赖；\n- 不修改 Maven 构建依赖或 Java 版本；\n- 不实现前端、数据库、消息队列、认证或外部监控集成；\n- 不进行多维度同时调整；\n- 不实现策略自动生成。\n\n## 强制工程约束\n\n- 保持现有公共 API 兼容；如必须扩展，优先新增重载或新类型，禁止破坏既有调用方；\n- 修改既有类型前必须读取真实源码并验证构造器、方法签名、返回类型和可见性；\n- 使用 Java 21、现有 Maven/JUnit 体系，不添加依赖；\n- 遵循最小一致变更、单一职责、明确失败语义和不可变快照原则；\n- 新行为必须使用自动化测试证明；\n- 并发测试必须使用可控时钟、latch、barrier 或条件等待，禁止以固定 sleep 证明正确性；\n- 不允许删除或弱化既有测试；\n- 全量 `mvn test` 必须通过，不能只验证新增测试；\n- 每个 OpenSpec Requirement 必须包含 SHALL/MUST 和可测试 Scenario；\n- 最终必须完成独立代码审查、OpenSpec 验证、main spec 同步、归档、复盘和交付报告。\n\n## 验收结果\n\n交付必须证明：\n\n1. 四类复杂工作负载都可重复执行；\n2. 至少一个可控恶化场景触发 rollback 并恢复到原安全状态；\n3. cooldown 能阻止过密调整但不阻止紧急 rollback；\n4. anti-oscillation 能阻断复杂场景中的持续震荡；\n5. 报告完全基于真实采样数据；\n6. 公共 API、依赖清单和构建配置未被破坏；\n7. 既有测试与新增测试全部通过。",
+  "repository": {
+    "commit_before_checkpoint": "abb19706ab41750b4b71b70d6978d9eaf7040454",
+    "changed_files": [
+      "openspec/changes/v0-16-0-complex-workload-and/tasks.md",
+      "src/main/java/com/zhiwu/dynamicthreadpollermanager/experiment/scenario/DeterministicScenarioPlanner.java",
+      "src/test/java/com/zhiwu/dynamicthreadpollermanager/experiment/scenario/DeterministicScenarioPlannerTest.java"
+    ]
+  },
+  "artifacts": {
+    "openspec/changes/v0-16-0-complex-workload-and/.openspec.yaml": "6220479ddc62f5a83026a871c847f7c270fc90f4c465b0de2e8ccabf79f33147",
+    "openspec/changes/v0-16-0-complex-workload-and/brainstorm.md": "5f1a30a07a2168b8c41a2df5337a08e58f69743f88db17ed107dd7ca267c6d85",
+    "openspec/changes/v0-16-0-complex-workload-and/design.md": "c8c8c7f7436c8d0fe5009a7d5ff4940e935d2193762bf923b85ff09b877283c2",
+    "openspec/changes/v0-16-0-complex-workload-and/plan.md": "bb8e7ea8a460d11648d5142f4b6c251ac061f54555c9254e93c05f585c6b5a09",
+    "openspec/changes/v0-16-0-complex-workload-and/proposal.md": "554dac7e1e23a2d3f36b13a8f259e1c4207a2530d8812749e3d9efc2323cb45a",
+    "openspec/changes/v0-16-0-complex-workload-and/tasks.md": "6a4c778e49508e5c77017741f1ddeed9a1a606ed6d12348950ceb75ef78119a0",
+    "openspec/changes/v0-16-0-complex-workload-and/specs/anti-oscillation-guard/spec.md": "759ad46da796e4b8c8aa5261d37ac64e8ab5d30f2a02aa9320b81cbdbd77b4d3",
+    "openspec/changes/v0-16-0-complex-workload-and/specs/complex-scenario-profiles/spec.md": "c30e2acba6a9640c72a5ab9163a7f29014029eb809964d9d001f21cb2993c359",
+    "openspec/changes/v0-16-0-complex-workload-and/specs/complex-scenario-report/spec.md": "60b9a2cc975be423cb1e1a7d346f89c5d4daad14fc863b22894cfa30a222205b",
+    "openspec/changes/v0-16-0-complex-workload-and/specs/rollback-aware-adjustment/spec.md": "8946452c4b93cf093964bc16d3d878494ccf6c201e08ddae9f6c7607c28ca1a2",
+    "openspec/changes/v0-16-0-complex-workload-and/specs/time-based-cooldown/spec.md": "7b9f5274d248d89d0b7b9ed5299e7c925bf938b2c1f868c66215984b1301865e",
+    "openspec/changes/v0-16-0-complex-workload-and/specs/v0-15-risk-fixes/spec.md": "364229615da3abba5feb5e78a26c83da7140a278b2502bed911a17b01812caa5"
+  },
+  "evidence": [
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "path": ".sdd/evidence/apply-16-gate-0.log"
+    },
+    {
+      "command": [
+        ".\\mvnw.cmd",
+        "-DskipTests",
+        "test-compile"
+      ],
+      "exit_code": 0,
+      "path": ".sdd/evidence/apply-16-gate-1.log"
+    }
+  ],
+  "blocking_findings": [],
+  "residual_risks": [],
+  "next_action": "execute_stage",
+  "created_at": "2026-06-19T09:03:21+00:00"
+}

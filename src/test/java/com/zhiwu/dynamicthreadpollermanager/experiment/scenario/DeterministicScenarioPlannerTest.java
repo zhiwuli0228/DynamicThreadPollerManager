@@ -79,4 +79,126 @@ class DeterministicScenarioPlannerTest {
 
         assertNotEquals(planner.plan(a), planner.plan(b));
     }
+
+    @Test
+    void longTailWithSeedDivisibleBy3ProducesSpikeSteps() {
+        ScenarioDefinition definition = new ScenarioDefinition(
+                "long-tail-spike", ScenarioProfile.LONG_TAIL, 6L, 4, 100, "");
+
+        ScenarioPlan plan = planner.plan(definition);
+
+        assertEquals(4, plan.stepCount());
+        for (ScenarioStep step : plan.steps()) {
+            assertEquals(600, step.workUnits());
+            assertEquals(0L, step.plannedDelayMillis());
+        }
+    }
+
+    @Test
+    void longTailWithSeedNotDivisibleBy3ProducesBaseSteps() {
+        ScenarioDefinition definition = new ScenarioDefinition(
+                "long-tail-base", ScenarioProfile.LONG_TAIL, 7L, 4, 100, "");
+
+        ScenarioPlan plan = planner.plan(definition);
+
+        assertEquals(4, plan.stepCount());
+        for (ScenarioStep step : plan.steps()) {
+            assertEquals(100, step.workUnits());
+            assertEquals(0L, step.plannedDelayMillis());
+        }
+    }
+
+    @Test
+    void longTailPlanIsDeterministicAcrossInvocations() {
+        ScenarioDefinition definition = new ScenarioDefinition(
+                "long-tail-det", ScenarioProfile.LONG_TAIL, 6L, 4, 100, "");
+
+        ScenarioPlan first = planner.plan(definition);
+        ScenarioPlan second = planner.plan(definition);
+
+        assertEquals(first, second);
+    }
+
+    @Test
+    void mixedCpuIoAlternatesCpuAndIoSteps() {
+        ScenarioDefinition definition = new ScenarioDefinition(
+                "mixed", ScenarioProfile.MIXED_CPU_IO, 0L, 4, 50, "");
+
+        ScenarioPlan plan = planner.plan(definition);
+
+        assertEquals(4, plan.stepCount());
+        assertEquals(150, plan.steps().get(0).workUnits());
+        assertEquals(0L, plan.steps().get(0).plannedDelayMillis());
+        assertEquals(50, plan.steps().get(1).workUnits());
+        assertEquals(100L, plan.steps().get(1).plannedDelayMillis());
+        assertEquals(150, plan.steps().get(2).workUnits());
+        assertEquals(0L, plan.steps().get(2).plannedDelayMillis());
+        assertEquals(50, plan.steps().get(3).workUnits());
+        assertEquals(100L, plan.steps().get(3).plannedDelayMillis());
+    }
+
+    @Test
+    void mixedCpuIoPlanIsDeterministicAcrossInvocations() {
+        ScenarioDefinition definition = new ScenarioDefinition(
+                "mixed-det", ScenarioProfile.MIXED_CPU_IO, 7L, 8, 50, "");
+
+        ScenarioPlan first = planner.plan(definition);
+        ScenarioPlan second = planner.plan(definition);
+
+        assertEquals(first, second);
+    }
+
+    @Test
+    void downstreamBlockedUsesConstantWorkWithHighDelay() {
+        ScenarioDefinition definition = new ScenarioDefinition(
+                "blocked", ScenarioProfile.DOWNSTREAM_BLOCKED, 0L, 3, 200, "");
+
+        ScenarioPlan plan = planner.plan(definition);
+
+        assertEquals(3, plan.stepCount());
+        for (ScenarioStep step : plan.steps()) {
+            assertEquals(200, step.workUnits());
+            assertEquals(2000L, step.plannedDelayMillis());
+        }
+    }
+
+    @Test
+    void downstreamBlockedPlanIsDeterministicAcrossInvocations() {
+        ScenarioDefinition definition = new ScenarioDefinition(
+                "blocked-det", ScenarioProfile.DOWNSTREAM_BLOCKED, 99L, 6, 200, "");
+
+        ScenarioPlan first = planner.plan(definition);
+        ScenarioPlan second = planner.plan(definition);
+
+        assertEquals(first, second);
+    }
+
+    @Test
+    void differentSeedsProduceDifferentLongTailPlansWhenSeedMod3Differs() {
+        ScenarioDefinition defA = new ScenarioDefinition(
+                "lt-a", ScenarioProfile.LONG_TAIL, 3L, 4, 100, "");
+        ScenarioDefinition defB = new ScenarioDefinition(
+                "lt-b", ScenarioProfile.LONG_TAIL, 4L, 4, 100, "");
+
+        ScenarioPlan planA = planner.plan(defA);
+        ScenarioPlan planB = planner.plan(defB);
+
+        for (ScenarioStep step : planA.steps()) {
+            assertEquals(600, step.workUnits());
+        }
+        for (ScenarioStep step : planB.steps()) {
+            assertEquals(100, step.workUnits());
+        }
+        assertNotEquals(planA, planB);
+    }
+
+    @Test
+    void sameSeedProducesIdenticalPlansForDownstreamBlocked() {
+        ScenarioDefinition defA = new ScenarioDefinition(
+                "db", ScenarioProfile.DOWNSTREAM_BLOCKED, 99L, 3, 200, "");
+        ScenarioDefinition defB = new ScenarioDefinition(
+                "db", ScenarioProfile.DOWNSTREAM_BLOCKED, 99L, 3, 200, "");
+
+        assertEquals(planner.plan(defA), planner.plan(defB));
+    }
 }
