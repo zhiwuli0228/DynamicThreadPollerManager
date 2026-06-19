@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec python3 "$(dirname "$0")/.sdd/bin/sdd.py" --project "$(dirname "$0")" "$@"
