@@ -196,7 +196,7 @@ class GroupLoopOrchestratorTest {
                         loopConfig, decisionOrchestrator, classifier, evaluator,
                         classConfig, safetyGate, history, loopEvidenceRecorder,
                         stateMachine, evidenceRecorder, clock, oscillationDetector,
-                        calibrator);
+                        calibrator, null);
 
         Map<String, GroupLoopOrchestrator.LoopComponents> result = new HashMap<>();
         result.put(executorName, comps);

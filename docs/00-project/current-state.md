@@ -3,12 +3,12 @@
 ## Authoritative Status
 
 - Current stage: `IDLE` — no active authorized changes
-- Current authorized work type: `NONE` — all v0.15.0 changes archived
+- Current authorized work type: `NONE` — v0.16.0 design documentation completed; no execution authorized
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `IMPLEMENTED`; `v0.14.0` is `ARCHIVED`; `v0.15.0` is `ARCHIVED`
+- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `IMPLEMENTED`; `v0.14.0` is `ARCHIVED`; `v0.15.0` is `ARCHIVED`; `v0.16.0` is `SR_CLOSED` (design documents complete; code implemented via SDD experiment, not yet through standard process)
 - OpenSpec capability changes: 28 implemented + archived; 0 active
-- Java implementation status: all experiment packages present; 945 tests pass with 0 failures (857 existing + 88 new)
+- Java implementation status: all experiment packages present; 1057 tests pass with 0 failures (945 existing + 112 new v0.16.0)
 
 ## Active Authorized Changes
 
@@ -103,11 +103,25 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 - OpenSpec change: `openspec/changes/archive/2026-06-14-parallel-test-execution/`
 - Main spec synced: `openspec/specs/parallel-test-execution-config/spec.md`
 
+## v0.16.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.16.0/`
+- Requirement theme: complex workload scenarios (LONG_TAIL, MIXED_CPU_IO, DOWNSTREAM_BLOCKED), rollback-aware adjustment with degradation detection, time-based cooldown safety gate, anti-oscillation guard, complex scenario validation reports, v0.15 risk fixes (statistical significance, null safety, thread safety documentation, behavioral tests)
+- Key insight: v0.15.0 proved multi-executor closed-loop coordination works under simple workloads; v0.16.0 hardens the system with rollback capability, time-based (not counter-based) cooldown, sustained-oscillation blocking, and complex workload profiles that stress real-world conditions
+- Predecessor: v0.15.0 (multi-executor coordination and closed-loop cross-validation)
+- Current phase: `SR_CLOSED` — IR and SR design phases complete per managed-change-standard
+- Status: `SR_CLOSED` — 12 design documents (README, objectives-and-scope, decision-log, 10-ir through 23-sr-closure-verification); business code implemented (35 Java files, +3805/-57 lines); 112 new tests all pass
+- Development approach: code implemented via SDD experiment on `sdd_test` branch; business code cherry-picked to `claude_master`; design documents created post-implementation as "as-built" documentation following standard IR→SR process
+- Known P1 deviation: `TimeBasedCooldownSafetyGate` cooldown key uses `command.runId()` not executor name — documented in SR §9 with fix plan
+- OpenSpec changes: not yet created (code implemented outside standard process)
+- Next step: retrospective or standard-process OpenSpec change decomposition if re-execution desired
+
 ## What Is Allowed Now
 
 - Documentation and retrospectives refinement.
 - v0.13.0 archive and closeout.
-- v0.16.0 version design when a new design is authorized.
+- v0.16.0 design documentation closeout and retrospective.
+- Future version design when authorized.
 
 ## What Is Not Allowed Now
 

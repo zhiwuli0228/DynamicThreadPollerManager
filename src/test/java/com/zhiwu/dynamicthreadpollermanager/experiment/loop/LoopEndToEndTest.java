@@ -68,7 +68,7 @@ class LoopEndToEndTest {
                 config, orchestrator, classifier, evaluator, classConfig,
                 adapter, safetyGate, history, loopEvidenceRecorder, stateMachine,
                 evidenceRecorder, clock,
-                new OscillationDetector(), new FeedbackCalibrator());
+                new OscillationDetector(), new FeedbackCalibrator(), null);
     }
 
     @AfterEach
@@ -172,7 +172,7 @@ class LoopEndToEndTest {
                 ClassifierConfig.defaults(),
                 adapter, safetyGate, history, loopEvidenceRecorder, stateMachine,
                 evidenceRecorder, clock,
-                alwaysOscillate, new FeedbackCalibrator());
+                alwaysOscillate, new FeedbackCalibrator(), null);
 
         for (int i = 0; i < 2; i++) {
             executor.submit(() -> {
@@ -242,7 +242,7 @@ class LoopEndToEndTest {
                 ClassifierConfig.defaults(),
                 adapter, safetyGate, history, loopEvidenceRecorder, stateMachine,
                 evidenceRecorder, clock,
-                alwaysOscillate, new FeedbackCalibrator());
+                alwaysOscillate, new FeedbackCalibrator(), null);
 
         for (int i = 0; i < 2; i++) {
             executor.submit(() -> {
