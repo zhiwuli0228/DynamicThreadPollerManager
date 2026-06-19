@@ -32,7 +32,7 @@
 
 ## 2. Rollback-Aware Adjustment Adapter
 
-- [ ] 2.1 Rollback-Aware Adjustment Adapter
+- [x] 2.1 Rollback-Aware Adjustment Adapter
 
 ### 2.1 Create RollbackAwareAdjustmentAdapter class
   - Implement `ExecutorAdjustmentAdapter` interface
