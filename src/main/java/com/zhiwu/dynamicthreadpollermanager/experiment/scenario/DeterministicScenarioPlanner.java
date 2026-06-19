@@ -36,6 +36,8 @@ public final class DeterministicScenarioPlanner implements ScenarioPlanner {
             case STEADY -> baseWorkUnits;
             case RAMP -> baseWorkUnits + index;
             case BURST -> (index % 3 == 0) ? baseWorkUnits * 3 : baseWorkUnits;
+            case LONG_TAIL, MIXED_CPU_IO, DOWNSTREAM_BLOCKED ->
+                    throw new UnsupportedOperationException("Profile " + profile + " not yet implemented");
         };
     }
 }

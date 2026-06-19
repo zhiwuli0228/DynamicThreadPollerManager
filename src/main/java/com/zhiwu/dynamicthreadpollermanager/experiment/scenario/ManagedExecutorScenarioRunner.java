@@ -158,6 +158,8 @@ public final class ManagedExecutorScenarioRunner {
             case STEADY -> 2;
             case RAMP -> Math.min(2 + stepIndex, cap);
             case BURST -> (stepIndex % 3 == 0) ? 6 : 2;
+            case LONG_TAIL, MIXED_CPU_IO, DOWNSTREAM_BLOCKED ->
+                    throw new UnsupportedOperationException("Profile " + profile + " not yet implemented");
         };
     }
 

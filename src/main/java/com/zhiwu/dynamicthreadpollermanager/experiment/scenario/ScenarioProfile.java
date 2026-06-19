@@ -8,5 +8,8 @@ package com.zhiwu.dynamicthreadpollermanager.experiment.scenario;
 public enum ScenarioProfile {
     STEADY,
     RAMP,
-    BURST
+    BURST,
+    LONG_TAIL,
+    MIXED_CPU_IO,
+    DOWNSTREAM_BLOCKED
 }

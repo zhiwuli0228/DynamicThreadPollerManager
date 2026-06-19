@@ -210,6 +210,10 @@ public final class AcquisitionDataQualityValidator {
                                 + " snapshots with queueSize > 0, minimum 2");
                     }
                     break;
+                case LONG_TAIL:
+                case MIXED_CPU_IO:
+                case DOWNSTREAM_BLOCKED:
+                    break; // validation rules for new profiles not yet defined
             }
         }
         if (queuePressureOk && !failed.contains(GATE_QUEUE_PRESSURE)) {
