@@ -2,20 +2,24 @@
 
 ## Authoritative Status
 
-- Current stage: `ARCHIVED` — v0.14.0 both changes implemented and archived
-- Current authorized work type: `IDLE` — no active implementation authorized
+- Current stage: `IDLE` — no active authorized changes
+- Current authorized work type: `NONE` — all v0.15.0 changes archived
 - Authoritative branch: `claude_master`
 - Source of truth for execution authority: this file
-- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `IMPLEMENTED`; `v0.14.0` is `ARCHIVED`
-- OpenSpec capability changes: 24 implemented + archived (22 prior + 2 v0.14.0); 0 active
-- Authorized OpenSpec changes: none
-- Java implementation status: all experiment packages present; 857 tests pass with 0 failures
+- Version design status: `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`; `v0.13.0` is `IMPLEMENTED`; `v0.14.0` is `ARCHIVED`; `v0.15.0` is `ARCHIVED`
+- OpenSpec capability changes: 28 implemented + archived; 0 active
+- Java implementation status: all experiment packages present; 945 tests pass with 0 failures (857 existing + 88 new)
 
 ## Active Authorized Changes
 
-- None
+- (none — all changes archived 2026-06-19)
 
-## v0.14.0 Change Summary
+## v0.15.0 Change Summary
+
+| Change | Name | Status | Tests |
+|---|---|---|---|
+| 1/2 | multi-executor-coordination | ARCHIVED (2026-06-19) | 57 pass |
+| 2/2 | closed-loop-validation-and-evidence | ARCHIVED (2026-06-19) | 31 pass |
 
 | Change | Name | Status | Tests |
 |---|---|---|---|
@@ -103,14 +107,28 @@ Retrospective: `docs/08-retrospectives/2026-06-13-v0.10.0-rejection-policy-retro
 
 - Documentation and retrospectives refinement.
 - v0.13.0 archive and closeout.
-- v0.14.0 retrospective.
-- v0.15.0 version design initiation.
+- v0.16.0 version design when a new design is authorized.
 
 ## What Is Not Allowed Now
 
 - No new production code or tests outside authorized version design.
 - No modification to existing adapters or commands without design revision.
-- No scope expansion beyond v0.15.0 design when initiated.
+- No scope expansion beyond authorized version design.
+
+## v0.15.0 Retrospective
+
+- `docs/08-retrospectives/2026-06-19-v0.15.0-multi-executor-coordination-retrospective.md`
+
+## v0.15.0 Plan
+
+- Version design documents: `docs/04-development/versions/v0.15.0/`
+- Requirement theme: multi-executor group coordination, resource budgeting, adjustment priority, closed-loop cross-validation (closed-loop vs static-policy vs baseline)
+- Key insight: v0.14.0 proved a single executor can run closed-loop adjustment autonomously; v0.15.0 extends this to multiple executors sharing a resource budget, with priority-based conflict resolution, and provides empirical evidence through cross-validation that closed-loop outperforms alternatives
+- Predecessor: v0.14.0 (adaptive closed-loop adjustment — single executor)
+- Current phase: `READY_FOR_EXECUTION` — 2 OpenSpec changes created, ready for EXECUTION_AUTHORIZED
+- Status: `VERSION_DESIGN_DRAFT`
+- OpenSpec changes: TBD after change decomposition
+- Candidate changes: `multi-executor-coordination` (change 1/2) → `closed-loop-validation-and-evidence` (change 2/2)
 
 ## v0.13.0 Plan
 

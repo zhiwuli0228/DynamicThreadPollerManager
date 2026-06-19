@@ -293,8 +293,8 @@ class ManagedExecutorAdjustmentAdapterTest {
     }
 
     @Test
-    void adjustmentFailureCodeShouldHaveNineConstants() {
-        assertEquals(9, AdjustmentFailureCode.values().length);
+    void adjustmentFailureCodeShouldHaveRequiredConstants() {
+        assertEquals(11, AdjustmentFailureCode.values().length);
     }
 
     // --- afterState verification ---

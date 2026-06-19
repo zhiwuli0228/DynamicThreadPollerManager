@@ -4,11 +4,11 @@ This folder is reserved for version design packages.
 
 ## Current Status
 
-- Fourteen version packages exist: `v0.1.0` through `v0.14.0`.
-- `v0.1.0` through `v0.12.0` are `IMPLEMENTED` / `ARCHIVED`.
-- `v0.13.0` is `IMPLEMENTED` — both changes implemented (774 tests pass).
-- `v0.14.0` is `IR_DRAFT` — IR requirement draft created, IR review pending.
-- 22 capability changes have been implemented and archived; 774 tests pass with 0 failures.
+- Fifteen version packages exist: `v0.1.0` through `v0.15.0`.
+- `v0.1.0` through `v0.13.0` are `IMPLEMENTED` / `ARCHIVED`.
+- `v0.14.0` is `ARCHIVED` — both changes implemented and verified (857 tests pass).
+- `v0.15.0` is `ARCHIVED` — both changes implemented and verified (945 tests pass).
+- 28 capability changes have been implemented and archived; 945 tests pass with 0 failures.
 - See `docs/00-project/current-state.md` for the authoritative execution status.
 
 ## Lifecycle

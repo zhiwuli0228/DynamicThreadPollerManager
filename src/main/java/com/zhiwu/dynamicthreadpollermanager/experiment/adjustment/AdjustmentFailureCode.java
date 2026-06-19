@@ -24,5 +24,9 @@ public enum AdjustmentFailureCode {
     /** Adapter does not support the requested adjustment type. */
     UNSUPPORTED,
     /** Target executor not found in the registry. */
-    EXECUTOR_NOT_FOUND
+    EXECUTOR_NOT_FOUND,
+    /** Group coordinator rejected the adjustment due to budget exhaustion. */
+    COORDINATION_REJECTED,
+    /** Group coordinator capped the adjustment due to partial budget availability. */
+    COORDINATION_CAPPED
 }
